@@ -1,0 +1,50 @@
+fragment ArtikelParts on Artikel {
+  __typename
+  title
+  subtitle
+  heroImage
+  category
+  author
+  publishDate
+  readTime
+  body
+}
+
+fragment ZielParts on Ziel {
+  __typename
+  title
+  subtitle
+  heroImage
+  region
+  country
+  priceFrom
+  bestTime
+  highlights {
+    __typename
+    title
+    description
+    image
+  }
+  body
+}
+
+fragment DealParts on Deal {
+  __typename
+  title
+  image
+  destination
+  price
+  originalPrice
+  discount
+  stars
+  bookingUrl
+  expiresAt
+  body
+}
+
+fragment SettingsParts on Settings {
+  __typename
+  logo
+  siteTitle
+  siteDescription
+}
