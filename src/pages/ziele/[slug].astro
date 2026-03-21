@@ -1,0 +1,352 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import MobileNav from "../../components/MobileNav.astro";
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: "mauritius" } },
+  ];
+}
+
+const { slug } = Astro.params;
+---
+
+<Layout title="Die Magie von Mauritius">
+  <Header />
+  <MobileNav />
+
+  <main class="pb-20 md:pb-0">
+    <!-- ============================================ -->
+    <!-- SECTION 1: DESTINATION HERO                  -->
+    <!-- ============================================ -->
+    <section class="relative h-[870px] overflow-hidden flex items-end">
+      <div class="absolute inset-0 bg-primary/20 z-10"></div>
+      <img
+        src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80"
+        alt="Mauritius"
+        class="absolute inset-0 w-full h-full object-cover scale-105"
+      />
+      <div class="relative z-20 max-w-7xl mx-auto px-6 w-full pb-32">
+        <div class="max-w-3xl">
+          <h1 class="font-headline font-black text-6xl md:text-8xl text-on-primary tracking-tighter mb-6 leading-[0.9]">
+            Die Magie von<br /><span class="text-[#E64415]">Mauritius.</span>
+          </h1>
+          <p class="font-body text-xl md:text-2xl text-on-primary/90 italic max-w-xl border-l-2 border-[#E64415] pl-6">
+            Wo t&uuml;rkisfarbene Lagunen auf vulkanische Gipfel treffen und die Seele atmen lernt.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SECTION 2: CONTENT GRID                      -->
+    <!-- ============================================ -->
+    <div class="-mt-20 relative z-30 max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+        <!-- ======================================== -->
+        <!-- MAIN COLUMN                              -->
+        <!-- ======================================== -->
+        <div class="lg:col-span-8">
+
+          <!-- A) Booking Widget -->
+          <div class="bg-white/80 backdrop-blur-[20px] p-8 rounded shadow-2xl mb-16">
+            <h2 class="font-headline font-bold text-xl tracking-tight text-primary mb-6">
+              Reisen nach Mauritius finden
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div>
+                <label class="block text-[10px] uppercase tracking-widest font-bold text-primary/60 font-headline mb-2">Ziel</label>
+                <input type="text" value="Mauritius" class="w-full bg-neutral-100 border-none font-headline text-sm p-3 rounded" readonly />
+              </div>
+              <div>
+                <label class="block text-[10px] uppercase tracking-widest font-bold text-primary/60 font-headline mb-2">Zeitraum</label>
+                <input type="text" placeholder="Datum w&auml;hlen" class="w-full bg-neutral-100 border-none font-headline text-sm p-3 rounded" />
+              </div>
+              <div>
+                <label class="block text-[10px] uppercase tracking-widest font-bold text-primary/60 font-headline mb-2">Reisende</label>
+                <input type="text" value="2 Erwachsene" class="w-full bg-neutral-100 border-none font-headline text-sm p-3 rounded" readonly />
+              </div>
+              <div class="flex items-end">
+                <button class="w-full bg-[#E64415] text-white py-4 font-headline font-bold text-[10px] tracking-widest uppercase rounded hover:bg-[#d13d12] transition-colors">
+                  Suchen
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- B) Featured Article Card -->
+          <div class="group cursor-pointer mb-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div class="overflow-hidden rounded">
+                <img
+                  src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80"
+                  alt="Le Morne"
+                  class="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div class="flex flex-col justify-center">
+                <p class="text-[10px] uppercase tracking-widest font-bold text-[#E64415] font-headline mb-3">Geheimtipp</p>
+                <h3 class="font-headline font-extrabold text-4xl tracking-tighter text-on-surface leading-tight mb-4">
+                  Le Morne: Wo die Zeit stehen bleibt.
+                </h3>
+                <p class="font-body text-on-surface-variant italic leading-relaxed mb-6">
+                  Am Fu&szlig;e des UNESCO-Welterbes Le Morne Brabant erstreckt sich einer der sch&ouml;nsten Str&auml;nde des Indischen Ozeans. Hier verschmelzen Geschichte, Natur und eine zeitlose Gelassenheit zu einem Erlebnis, das man nicht vergisst.
+                </p>
+                <a href="#" class="inline-flex items-center gap-2 font-headline text-sm font-bold text-on-surface">
+                  <span class="border-b-2 border-[#E64415]">Artikel lesen</span>
+                  <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- C) Hotel Offers Grid -->
+          <div class="border-t border-neutral-200 pt-12 mb-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <!-- Hotel Card 1 -->
+              <div class="group rounded overflow-hidden bg-white shadow-md">
+                <div class="relative overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80"
+                    alt="Shangri-La Le Touessrok"
+                    class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <span class="absolute top-4 right-4 bg-[#E64415] text-white font-headline font-bold text-[10px] tracking-widest uppercase px-4 py-2 rounded-full">
+                    Top Angebot
+                  </span>
+                </div>
+                <div class="p-6">
+                  <div class="flex items-center gap-0.5 mb-2">
+                    <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
+                    <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
+                    <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
+                    <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
+                    <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
+                  </div>
+                  <h4 class="font-headline font-bold text-lg text-on-surface mb-1">Shangri-La Le Touessrok</h4>
+                  <p class="font-body text-on-surface-variant text-sm italic mb-4">
+                    Legendres Luxusresort an der Ostkste mit Privatstrand, Weltklasse-Spa und zwei Gourmet-Restaurants.
+                  </p>
+                  <div class="flex items-baseline gap-2 mb-1">
+                    <span class="font-headline text-2xl font-black text-on-surface">ab 2.890 &euro; p.P.</span>
+                  </div>
+                  <p class="font-body text-on-surface-variant text-sm mb-4">7 N&auml;chte &middot; All Inclusive</p>
+                  <button class="w-full bg-primary text-on-primary py-3 font-headline font-bold text-[10px] tracking-widest uppercase rounded hover:bg-primary-container transition-colors">
+                    Verf&uuml;gbarkeit pr&uuml;fen
+                  </button>
+                </div>
+              </div>
+
+              <!-- Hotel Card 2 -->
+              <div class="group rounded overflow-hidden bg-white shadow-md">
+                <div class="relative overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80"
+                    alt="LUX* Grand Baie"
+                    class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div class="p-6">
+                  <div class="flex items-center gap-0.5 mb-2">
+                    <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
+                    <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
+                    <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
+                    <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
+                    <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
+                  </div>
+                  <h4 class="font-headline font-bold text-lg text-on-surface mb-1">LUX* Grand Baie</h4>
+                  <p class="font-body text-on-surface-variant text-sm italic mb-4">
+                    Modernes Boutique-Resort im lebhaften Norden mit Infinity-Pool, Beach Club und zeitgen&ouml;ssischem Design.
+                  </p>
+                  <div class="flex items-baseline gap-2 mb-1">
+                    <span class="font-headline text-2xl font-black text-on-surface">ab 1.990 &euro; p.P.</span>
+                  </div>
+                  <p class="font-body text-on-surface-variant text-sm mb-4">5 N&auml;chte &middot; Halbpension</p>
+                  <button class="w-full bg-primary text-on-primary py-3 font-headline font-bold text-[10px] tracking-widest uppercase rounded hover:bg-primary-container transition-colors">
+                    Verf&uuml;gbarkeit pr&uuml;fen
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- D) Editorial Quote Block -->
+          <div class="relative py-20">
+            <!-- Background accent -->
+            <div class="absolute right-0 top-0 w-2/3 h-full bg-neutral-50 -z-10 translate-x-6"></div>
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-0 items-center">
+              <!-- Left: Image -->
+              <div class="md:col-span-7 overflow-hidden rounded">
+                <img
+                  src="https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=800&q=80"
+                  alt="Mauritius Landschaft"
+                  class="w-full h-[400px] object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                />
+              </div>
+              <!-- Right: Quote Box -->
+              <div class="md:col-span-5 md:-ml-20 bg-white p-12 shadow-xl relative z-10">
+                <span class="material-symbols-outlined text-[#E64415] text-5xl mb-6 block" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+                <blockquote class="font-body text-2xl italic text-on-surface leading-relaxed mb-6">
+                  &laquo;Mauritius wurde vor dem Paradies erschaffen, und das Paradies wurde nach Mauritius modelliert.&raquo;
+                </blockquote>
+                <p class="font-headline font-bold text-sm uppercase tracking-widest text-primary/60">
+                  Mark Twain
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ======================================== -->
+        <!-- SIDEBAR                                  -->
+        <!-- ======================================== -->
+        <div class="lg:col-span-4">
+          <div class="lg:sticky lg:top-28 space-y-8">
+
+            <!-- A) Fact Sheet Card -->
+            <div class="bg-neutral-50 p-8 rounded shadow-sm border-l-4 border-[#E64415]">
+              <h3 class="font-headline font-black text-2xl tracking-tighter text-on-surface mb-6">
+                Fakten Check
+              </h3>
+              <div class="space-y-5">
+                <!-- Beste Reisezeit -->
+                <div class="flex items-start gap-4">
+                  <span class="material-symbols-outlined text-[#E64415] text-[24px] mt-0.5">thermostat</span>
+                  <div>
+                    <p class="text-[10px] uppercase font-bold text-primary/40 font-headline tracking-widest">Beste Reisezeit</p>
+                    <p class="font-headline font-bold text-primary">Mai - Dezember</p>
+                  </div>
+                </div>
+                <!-- Flugzeit -->
+                <div class="flex items-start gap-4">
+                  <span class="material-symbols-outlined text-[#E64415] text-[24px] mt-0.5">flight</span>
+                  <div>
+                    <p class="text-[10px] uppercase font-bold text-primary/40 font-headline tracking-widest">Flugzeit</p>
+                    <p class="font-headline font-bold text-primary">ca. 11:30h</p>
+                  </div>
+                </div>
+                <!-- Tageskosten -->
+                <div class="flex items-start gap-4">
+                  <span class="material-symbols-outlined text-[#E64415] text-[24px] mt-0.5">payments</span>
+                  <div>
+                    <p class="text-[10px] uppercase font-bold text-primary/40 font-headline tracking-widest">Tageskosten</p>
+                    <p class="font-headline font-bold text-primary">120-250 &euro;</p>
+                  </div>
+                </div>
+                <!-- Sprache -->
+                <div class="flex items-start gap-4">
+                  <span class="material-symbols-outlined text-[#E64415] text-[24px] mt-0.5">translate</span>
+                  <div>
+                    <p class="text-[10px] uppercase font-bold text-primary/40 font-headline tracking-widest">Sprache</p>
+                    <p class="font-headline font-bold text-primary">Englisch, Franz&ouml;sisch, Kreol</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- B) Sidebar Deal -->
+            <div class="bg-[#E64415] text-white p-8 rounded overflow-hidden relative">
+              <!-- Decorative icon -->
+              <span class="material-symbols-outlined absolute top-0 right-0 opacity-10 text-[120px] scale-150">auto_awesome</span>
+              <div class="relative z-10">
+                <h3 class="font-headline font-black text-2xl text-white mb-4 leading-tight">
+                  Exklusiv-Deal: Mauritius Traumreise
+                </h3>
+                <p class="font-body text-white/70 italic mb-6 leading-relaxed">
+                  14 N&auml;chte im 5-Sterne Resort mit Halbpension, Flug ab Frankfurt und privaten Transfers. Limitiert auf 20 Buchungen.
+                </p>
+                <button class="w-full bg-white text-[#E64415] py-4 font-headline font-bold text-[10px] tracking-widest uppercase rounded hover:bg-neutral-100 transition-colors">
+                  Jetzt entdecken
+                </button>
+              </div>
+            </div>
+
+            <!-- C) Map Placeholder -->
+            <div class="bg-neutral-100 aspect-square rounded flex flex-col items-center justify-center gap-3">
+              <span class="material-symbols-outlined text-on-surface-variant text-[48px]">location_on</span>
+              <p class="font-headline text-sm font-bold text-on-surface-variant">Mauritius, Indischer Ozean</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- RICH 4-COLUMN FOOTER                         -->
+    <!-- ============================================ -->
+    <footer class="w-full bg-neutral-50 border-t border-neutral-200 mt-20">
+      <div class="max-w-7xl mx-auto py-16 px-8 grid grid-cols-1 md:grid-cols-4 gap-12">
+        <!-- Column 1: Branding -->
+        <div>
+          <p class="font-headline font-bold text-on-surface text-lg tracking-wide uppercase mb-3">
+            Reisewelt Editorial
+          </p>
+          <p class="font-body text-on-surface-variant text-sm leading-relaxed">
+            Kuratierte Reisemomente f&uuml;r den modernen Entdecker. Seit 2024 Ihr Kompass f&uuml;r au&szlig;ergew&ouml;hnliche Destinationen.
+          </p>
+        </div>
+
+        <!-- Column 2: Reiseziele -->
+        <div>
+          <h4 class="font-headline font-bold text-sm uppercase tracking-widest text-[#E64415] mb-4">Reiseziele</h4>
+          <nav class="flex flex-col gap-2">
+            <a href="#" class="font-headline text-sm text-on-surface-variant hover:text-on-surface transition-colors">Mauritius</a>
+            <a href="#" class="font-headline text-sm text-on-surface-variant hover:text-on-surface transition-colors">Malediven</a>
+            <a href="#" class="font-headline text-sm text-on-surface-variant hover:text-on-surface transition-colors">Santorini</a>
+            <a href="#" class="font-headline text-sm text-on-surface-variant hover:text-on-surface transition-colors">Bali</a>
+            <a href="#" class="font-headline text-sm text-on-surface-variant hover:text-on-surface transition-colors">Kyoto</a>
+          </nav>
+        </div>
+
+        <!-- Column 3: Magazin -->
+        <div>
+          <h4 class="font-headline font-bold text-sm uppercase tracking-widest text-[#E64415] mb-4">Magazin</h4>
+          <nav class="flex flex-col gap-2">
+            <a href="#" class="font-headline text-sm text-on-surface-variant hover:text-on-surface transition-colors">Geheimtipps</a>
+            <a href="#" class="font-headline text-sm text-on-surface-variant hover:text-on-surface transition-colors">Hotel Reviews</a>
+            <a href="#" class="font-headline text-sm text-on-surface-variant hover:text-on-surface transition-colors">Reiseberichte</a>
+            <a href="#" class="font-headline text-sm text-on-surface-variant hover:text-on-surface transition-colors">Packlisten</a>
+            <a href="#" class="font-headline text-sm text-on-surface-variant hover:text-on-surface transition-colors">Interviews</a>
+          </nav>
+        </div>
+
+        <!-- Column 4: Unternehmen -->
+        <div>
+          <h4 class="font-headline font-bold text-sm uppercase tracking-widest text-[#E64415] mb-4">Unternehmen</h4>
+          <nav class="flex flex-col gap-2">
+            <a href="#" class="font-headline text-sm text-on-surface-variant hover:text-on-surface transition-colors">&Uuml;ber uns</a>
+            <a href="#" class="font-headline text-sm text-on-surface-variant hover:text-on-surface transition-colors">Kontakt</a>
+            <a href="#" class="font-headline text-sm text-on-surface-variant hover:text-on-surface transition-colors">Impressum</a>
+            <a href="#" class="font-headline text-sm text-on-surface-variant hover:text-on-surface transition-colors">Datenschutz</a>
+            <a href="#" class="font-headline text-sm text-on-surface-variant hover:text-on-surface transition-colors">AGB</a>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Sub-footer -->
+      <div class="border-t border-neutral-200">
+        <div class="max-w-7xl mx-auto px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p class="font-body text-on-surface-variant text-sm">
+            &copy; {new Date().getFullYear()} SPIEGEL Reisewelt. Alle Rechte vorbehalten.
+          </p>
+          <div class="flex items-center gap-4">
+            <a href="#" class="text-on-surface-variant hover:text-on-surface transition-colors" aria-label="Instagram">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="#" class="text-on-surface-variant hover:text-on-surface transition-colors" aria-label="Facebook">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385h-3.047v-3.47h3.047v-2.642c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953h-1.513c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385c5.737-.9 10.125-5.864 10.125-11.854z"/></svg>
+            </a>
+            <a href="#" class="text-on-surface-variant hover:text-on-surface transition-colors" aria-label="Pinterest">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.372-12 12 0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146 1.124.347 2.317.535 3.554.535 6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+</Layout>

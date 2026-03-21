@@ -1,0 +1,241 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import MobileNav from "../../components/MobileNav.astro";
+
+// Static content for now - TinaCMS connection will come later
+export function getStaticPaths() {
+  return [
+    { params: { slug: "das-verborgene-blau-von-kreta" } },
+  ];
+}
+---
+
+<Layout title="Das verborgene Blau von Kreta">
+  <Header />
+
+  <main class="pb-20 md:pb-0 pt-16">
+    <!-- ============================================ -->
+    <!-- LEAD IMAGE SECTION                           -->
+    <!-- ============================================ -->
+    <section class="relative h-[800px] w-full overflow-hidden bg-neutral-100">
+      <img
+        src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=1920&q=80"
+        alt="Kreta"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+      <div class="absolute bottom-16 left-0 right-0 max-w-7xl mx-auto px-6">
+        <span class="inline-block px-3 py-1 mb-6 bg-[#E64415] text-white text-[10px] font-label font-bold tracking-widest uppercase rounded">Reportage</span>
+        <h1 class="text-white font-headline font-black text-5xl md:text-7xl lg:text-8xl tracking-tighter leading-none mb-8">Das verborgene Blau von Kreta.</h1>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- ARTICLE CONTENT                              -->
+    <!-- ============================================ -->
+    <article class="max-w-7xl mx-auto px-6 pt-24 pb-16">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+
+        <!-- Left Sidebar -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-32 lg:self-start">
+          <!-- Author Block -->
+          <div class="flex items-center gap-4 mb-6">
+            <img
+              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80"
+              alt="Elena Rossi"
+              class="w-12 h-12 rounded-full object-cover"
+            />
+            <div>
+              <p class="text-[10px] uppercase tracking-[0.2em] text-outline font-bold font-label">Autor</p>
+              <p class="font-headline font-bold">Elena Rossi</p>
+            </div>
+          </div>
+
+          <!-- Meta -->
+          <div class="border-t border-outline-variant pt-6 space-y-4">
+            <div>
+              <p class="text-[10px] uppercase tracking-[0.2em] text-outline font-bold font-label">Lesezeit</p>
+              <p class="font-headline font-bold text-sm mt-1">12 Minuten</p>
+            </div>
+            <div>
+              <p class="text-[10px] uppercase tracking-[0.2em] text-outline font-bold font-label">Ver&ouml;ffentlicht</p>
+              <p class="font-headline font-bold text-sm mt-1">14. Oktober 2024</p>
+            </div>
+          </div>
+
+          <!-- Social Buttons -->
+          <div class="flex items-center gap-3 mt-8">
+            <button class="w-10 h-10 rounded-full border border-outline-variant hover:border-[#E64415] hover:text-[#E64415] flex items-center justify-center transition-colors" aria-label="Teilen">
+              <span class="material-symbols-outlined text-[18px]">share</span>
+            </button>
+            <button class="w-10 h-10 rounded-full border border-outline-variant hover:border-[#E64415] hover:text-[#E64415] flex items-center justify-center transition-colors" aria-label="Merken">
+              <span class="material-symbols-outlined text-[18px]">bookmark</span>
+            </button>
+          </div>
+        </aside>
+
+        <!-- Article Body -->
+        <div class="lg:col-span-7 space-y-12">
+          <!-- Drop Cap Intro -->
+          <p class="drop-cap text-2xl md:text-3xl leading-[1.6] text-on-surface font-body italic">
+            Kreta ist mehr als Strand und Sonne. Abseits der touristischen Pfade verbirgt sich eine Welt aus vergessenen Schluchten, byzantinischen Kapellen und D&ouml;rfern, in denen die Zeit stillzustehen scheint.
+          </p>
+
+          <!-- Body Paragraphs -->
+          <p class="text-xl leading-relaxed text-on-surface/80">
+            Wer die S&uuml;dk&uuml;ste Kretas erkundet, betritt eine andere Welt. Hier, wo die Wei&szlig;en Berge steil ins Libysche Meer abfallen, gibt es keine Autobahnen und keine Hotelkomplexe. Stattdessen f&uuml;hren schmale Stra&szlig;en durch Schluchten, die nach wildem Thymian und Salbei duften. In Loutro, einem Dorf ohne Stra&szlig;enanschluss, erreicht man die Taverne nur per Boot oder zu Fu&szlig; &uuml;ber einen alten Maultierweg. Hier serviert Nikos, ein Fischer in dritter Generation, seinen Fang des Tages mit Olivenöl aus eigenem Anbau.
+          </p>
+
+          <p class="text-xl leading-relaxed text-on-surface/80">
+            Weiter &ouml;stlich, hinter dem Kloster Preveli, &ouml;ffnet sich ein Tal mit Palmenwäldern, das an die Karibik erinnert &ndash; w&auml;ren da nicht die byzantinischen Ruinen am Wegesrand und der Duft von frisch gebackenem Brot, der aus einem kleinen Steinhaus weht. Eine &auml;ltere Frau winkt uns herein. Sie hei&szlig;t Eleni, wie so viele hier, und besteht darauf, dass wir ihren Raki probieren, bevor wir weitergehen.
+          </p>
+
+          <p class="text-xl leading-relaxed text-on-surface/80">
+            Es sind diese Begegnungen, die Kreta so unverwechselbar machen. Nicht die Postkartenstr&auml;nde oder die minoischen Pal&auml;ste, sondern die Menschen, die mit einer Selbstverst&auml;ndlichkeit gastfreundlich sind, die man in Mitteleuropa l&auml;ngst verloren hat. In jedem Dorf gibt es ein Kafenion, in dem die M&auml;nner Backgammon spielen und der Kaffee noch auf Sand gekocht wird.
+          </p>
+
+          <!-- Pull Quote -->
+          <div class="py-16 border-y border-outline-variant">
+            <blockquote class="font-headline font-black text-4xl md:text-5xl italic text-neutral-900 leading-[1.1] tracking-tighter">
+              &bdquo;Das wahre Kreta findet man nicht am Strand, sondern in den Bergen.&ldquo;
+            </blockquote>
+          </div>
+
+          <!-- More Body Paragraphs -->
+          <p class="text-xl leading-relaxed text-on-surface/80">
+            In den Bergen oberhalb von Chania liegt Therisso, ein Dorf mit kaum hundert Einwohnern, das einst Zentrum des kretischen Widerstands war. Heute kommen die Besucher wegen der Taverne am Dorfplatz, in der Yiannis langsam geschmortes Zicklein mit Stamnagathi serviert &ndash; einem bitteren Wildkraut, das nur auf Kreta w&auml;chst. Dazu gibt es Wein aus Vidiano-Trauben, einer autochthonen Rebsorte, die fast ausgestorben w&auml;re.
+          </p>
+
+          <p class="text-xl leading-relaxed text-on-surface/80">
+            Die kretische K&uuml;che ist keine Restaurantk&uuml;che. Sie ist Ausdruck einer Lebensweise, die sich &uuml;ber Jahrtausende kaum ver&auml;ndert hat. Schnecken werden mit Rosmarin gebraten, Kalitsounia &ndash; kleine K&auml;setaschen &ndash; nach Rezepten gebacken, die von Generation zu Generation weitergegeben werden. Und &uuml;berall steht eine Flasche Oliven&ouml;l auf dem Tisch, golden und intensiv, gepresst aus Koroneiki-Oliven, die in den H&uuml;geln &uuml;ber dem Meer wachsen.
+          </p>
+
+          <p class="text-xl leading-relaxed text-on-surface/80">
+            Am Abend, zur&uuml;ck in Chania, sitzen wir am venezianischen Hafen und beobachten, wie die Sonne hinter der Leuchtturmsilhouette versinkt. Ein Stra&szlig;enmusiker spielt Lyra, das traditionelle kretische Saiteninstrument. Ein alter Mann tanzt allein, die Augen geschlossen, versunken in eine Melodie, die &auml;lter ist als alles, was wir hier sehen. In diesem Moment versteht man, warum Kazantzakis schrieb, Kreta sei keine Insel, sondern ein eigener Kontinent.
+          </p>
+
+          <!-- Booking Callout -->
+          <div class="bg-neutral-50 p-10 rounded border border-neutral-100 flex flex-col md:flex-row items-center justify-between gap-8">
+            <img
+              src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=200&q=80"
+              alt=""
+              class="w-24 h-24 overflow-hidden rounded shrink-0 grayscale hover:grayscale-0 transition-all duration-500 object-cover"
+            />
+            <div>
+              <h4 class="font-headline font-bold text-neutral-900 text-xl">Diese Reise buchen</h4>
+              <p class="font-body italic text-neutral-500 text-lg">7 Tage Kreta ab 749 &euro; inkl. Flug</p>
+            </div>
+            <a href="#" class="bg-[#E64415] text-white font-headline font-bold text-[10px] px-12 py-5 uppercase tracking-[0.2em] rounded shadow-lg shadow-[#E64415]/20 whitespace-nowrap">Jetzt buchen</a>
+          </div>
+
+          <!-- Image Gallery -->
+          <div class="grid grid-cols-2 gap-6">
+            <div class="aspect-square overflow-hidden rounded">
+              <img
+                src="https://images.unsplash.com/photo-1598971861713-54ad16a7e72e?w=800&q=80"
+                alt="Kretische Schlucht"
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
+              />
+            </div>
+            <div class="aspect-square overflow-hidden rounded">
+              <img
+                src="https://images.unsplash.com/photo-1555993539-1732b0258235?w=800&q=80"
+                alt="Venezianischer Hafen Chania"
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
+              />
+            </div>
+            <div class="aspect-square overflow-hidden rounded">
+              <img
+                src="https://images.unsplash.com/photo-1560703650-ef3e0f254ae0?w=800&q=80"
+                alt="Kretisches Dorf"
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
+              />
+            </div>
+            <div class="aspect-square overflow-hidden rounded">
+              <img
+                src="https://images.unsplash.com/photo-1504512485720-7d83a16ee930?w=800&q=80"
+                alt="Kretische K&uuml;ste"
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
+              />
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </article>
+
+    <!-- ============================================ -->
+    <!-- RELATED STORIES SECTION                      -->
+    <!-- ============================================ -->
+    <section class="bg-neutral-50 py-24 mt-12">
+      <div class="max-w-7xl mx-auto px-6">
+        <!-- Section Header -->
+        <div class="flex justify-between items-end mb-16">
+          <div>
+            <p class="text-[10px] uppercase tracking-[0.2em] text-[#E64415] font-bold font-label">Inspiration</p>
+            <h2 class="font-headline font-black text-4xl tracking-tighter">Weitere Geschichten</h2>
+          </div>
+        </div>
+
+        <!-- Story Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <!-- Card 1: Venedig -->
+          <a href="#" class="group">
+            <div class="aspect-[4/5] overflow-hidden rounded mb-5">
+              <img
+                src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=800&q=80"
+                alt="Venedig"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <p class="text-[10px] uppercase tracking-[0.2em] text-[#E64415] font-bold font-label mb-2">Italien</p>
+            <h3 class="font-headline font-bold text-xl tracking-tight group-hover:text-[#E64415] transition-colors">Venedig ohne Masken</h3>
+          </a>
+
+          <!-- Card 2: Yosemite -->
+          <a href="#" class="group">
+            <div class="aspect-[4/5] overflow-hidden rounded mb-5">
+              <img
+                src="https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&q=80"
+                alt="Yosemite"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <p class="text-[10px] uppercase tracking-[0.2em] text-[#E64415] font-bold font-label mb-2">USA</p>
+            <h3 class="font-headline font-bold text-xl tracking-tight group-hover:text-[#E64415] transition-colors">Yosemite: Die Kathedralen aus Granit</h3>
+          </a>
+
+          <!-- Card 3: Kyoto -->
+          <a href="#" class="group">
+            <div class="aspect-[4/5] overflow-hidden rounded mb-5">
+              <img
+                src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&q=80"
+                alt="Kyoto"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <p class="text-[10px] uppercase tracking-[0.2em] text-[#E64415] font-bold font-label mb-2">Japan</p>
+            <h3 class="font-headline font-bold text-xl tracking-tight group-hover:text-[#E64415] transition-colors">Kyoto: Wo die Zeit den Atem anh&auml;lt</h3>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+  <MobileNav />
+</Layout>
+
+<style>
+  .drop-cap::first-letter {
+    float: left;
+    font-size: 5rem;
+    line-height: 0.8;
+    padding-right: 0.75rem;
+    font-family: "Inter", sans-serif;
+    font-weight: 900;
+    color: #E64415;
+  }
+</style>
