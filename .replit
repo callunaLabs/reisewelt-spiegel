@@ -11,7 +11,15 @@ nodejs = "nodejs_22"
 localPort = 4321
 externalPort = 80
 
+[[ports]]
+localPort = 3000
+externalPort = 3000
+
+[env]
+TINA_CLIENT_ID = "248f0c17-48d1-4b40-a99b-cf14ded2a95c"
+TINA_TOKEN = "7cface0e04e28cd546786bfd82d3d878feb51e6e"
+
 [deployment]
-run = ["sh", "-c", "npm run build && npx serve dist -l 3000"]
+run = ["sh", "-c", "npm run start"]
 deploymentTarget = "static"
 publicDir = "dist"
