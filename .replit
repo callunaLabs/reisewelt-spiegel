@@ -1,0 +1,22 @@
+run = "npm run dev"
+entrypoint = "src/pages/index.astro"
+
+[nix]
+channel = "stable-24_05"
+
+[env]
+NODE_VERSION = "22"
+
+[deployment]
+run = ["sh", "-c", "npm run build && npx serve dist -l 3000"]
+build = ["sh", "-c", "npm install && npm run build"]
+deploymentTarget = "static"
+publicDir = "dist"
+
+[[ports]]
+localPort = 4321
+externalPort = 80
+
+[[ports]]
+localPort = 9000
+externalPort = 9000

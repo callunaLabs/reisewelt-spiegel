@@ -1,0 +1,52 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Start">
+  <section class="hero">
+    <h1>SPIEGEL Reisewelt</h1>
+    <p>Entdecken Sie die besten Reiseziele, Hotels und Reisetipps</p>
+  </section>
+
+  <section class="articles">
+    <h2>Aktuelle Artikel</h2>
+    <p class="empty">Noch keine Artikel vorhanden. Erstelle deinen ersten Artikel im <a href="/admin/index.html">CMS</a>.</p>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    text-align: center;
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: white;
+    border-radius: 8px;
+    margin-bottom: 3rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+  }
+
+  .articles h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #e64415;
+    padding-left: 1rem;
+  }
+
+  .empty {
+    color: #666;
+    font-style: italic;
+  }
+
+  .empty a {
+    color: #e64415;
+  }
+</style>
