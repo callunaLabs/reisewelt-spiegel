@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html class="light" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#E64415",
+                        "on-primary": "#ffffff",
+                        "surface": "#ffffff",
+                        "on-surface": "#171717",
+                        "surface-container": "#f5f5f5",
+                        "outline": "#737373",
+                        "outline-variant": "#e5e5e5",
+                        "secondary": "#E64415",
+                    },
+                    fontFamily: {
+                        "headline": ["Inter", "sans-serif"],
+                        "body": ["Newsreader", "serif"],
+                        "label": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 5rem;
+            line-height: 0.8;
+            padding-right: 0.75rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            color: #E64415;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/20 selection:text-primary">
+<!-- TopNavBar Shared Component -->
+<header class="fixed top-0 w-full z-50 bg-[#e64415] shadow-sm dark:shadow-none">
+<nav class="flex justify-between items-center px-6 h-16 w-full max-w-screen-2xl mx-auto">
+<div class="text-2xl font-black tracking-tighter text-[#E64415] uppercase font-headline"><img alt="Reisewelt Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0uiDi8B6yN4QXR-2BBNGBxz5ZuhgJoyCRl4q5mZeqdJ21I5Fcs6DvPves_PKpvRdYy5EDURwvlyUMjJ_gLLuOZGnlEcQQ9P86xlUB1iYXDGijh7m7IMfOGKJPqPAHoSoIC4_10HCAmfzOH55Me15jBmqrhnkDslCw_9P33OfBuDdpm0GplEp_gPs5CHxG2gTKj6KVfEGjytD_7Dd6LqWMXc8GtfjWoAU_NWyR3WGvXG4ZsKmLD_UWX2dSzQFWLmgr044VlupES9lqL0"/></div>
+<div class="hidden md:flex items-center gap-10 font-headline font-medium text-neutral-600 dark:text-neutral-400">
+<a class="text-white font-bold border-b-2 border-white pb-1" href="#">Magazin</a>
+<a class="text-white/90 hover:text-white transition-colors duration-200" href="#">Ziele</a>
+<a class="text-white/90 hover:text-white transition-colors duration-200" href="#">Deals</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-white hover:opacity-80 transition-transform scale-95 active:scale-90" data-icon="search">search</button>
+<button class="material-symbols-outlined text-white hover:opacity-80 transition-transform scale-95 active:scale-90" data-icon="menu">menu</button>
+</div>
+</nav>
+</header>
+<main class="pt-16">
+<!-- Full-width Lead Image Section -->
+<section class="relative h-[800px] w-full overflow-hidden bg-neutral-100">
+<img alt="Sun-drenched Mediterranean coastline with turquoise waters" class="w-full h-full object-cover" data-alt="Stunning aerial view of Crete turquoise coastline" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFZvnnpLQPNxtkgAC6SkfJdwjgxNNmLBnyEWkVU-Ewd47W-c4qTmVJ1GMRXms8uxq6Qp-Gm6vbfqyuvO6p9rLBkumm9lg0lProWNLQoPPOiA2tmmMaVw6If-LjSoAj11BquX3HwtFwxmlf4y6BOsM7qqjHuQQBHo9PB_3KEXdgBhh1A714oJJDzRt7Qjpy5V9cOW5Pwu98ItAnKBoDr3aVlHwPkBlTt_tdeqykaOHoN036M33oehaI9X3CgFbaush2tXroLF_KCZyv"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+<div class="absolute bottom-16 left-0 right-0 max-w-7xl mx-auto px-6">
+<div class="max-w-3xl">
+<span class="inline-block px-3 py-1 mb-6 bg-[#E64415] text-white text-[10px] font-label font-bold tracking-widest uppercase rounded">Reportage</span>
+<h1 class="text-white font-headline font-black text-5xl md:text-7xl lg:text-8xl tracking-tighter leading-none mb-8">
+                    Das verborgene Blau von Kreta.
+                </h1>
+</div>
+</div>
+</section>
+<!-- Article Content -->
+<article class="max-w-7xl mx-auto px-6 pt-24 pb-16">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+<!-- Sidebar Meta -->
+<aside class="lg:col-span-3 lg:sticky lg:top-32 self-start space-y-10">
+<div class="flex items-center gap-4">
+<img alt="Portrait of the author Elena Rossi" class="w-12 h-12 rounded-full object-cover" data-alt="Profile photo of travel writer Elena Rossi" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtqRQO-CPNYh8OLU7tApproeFNzbx1KE4PMv_LvDaJdQK2PMxfZXTNPgrkrbX4kC-iZBEhBXDC3Od4nV2_xpCrUYyBp3lUAEJaJT-d1QepYvben0T2h0HImJGiQXVA8jWzRcpKjDciGG9OhWUG8Lapcb6R7CW1JJkGCmI8E-1VfgjJ-qbawM6_KLuOLZT00TkH6xUQ_731cLFU35ivKPRj8_gvh98Hj_XFp_GERqhXhv59hKo49gKH5h4uq-ddzS_hzOTvYrvz4QJa"/>
+<div>
+<p class="font-label text-[10px] uppercase tracking-[0.2em] text-outline font-bold">Autor</p>
+<p class="font-headline font-bold text-neutral-900">Elena Rossi</p>
+</div>
+</div>
+<div class="border-t border-outline-variant pt-10 space-y-6">
+<div>
+<p class="font-label text-[10px] uppercase tracking-[0.2em] text-outline font-bold">Lesezeit</p>
+<p class="font-headline font-bold text-neutral-900">12 Minuten</p>
+</div>
+<div>
+<p class="font-label text-[10px] uppercase tracking-[0.2em] text-outline font-bold">Veröffentlicht</p>
+<p class="font-headline font-bold text-neutral-900">14. Oktober 2024</p>
+</div>
+</div>
+<div class="flex gap-4 pt-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant text-neutral-600 hover:border-primary hover:text-primary transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="share">share</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant text-neutral-600 hover:border-primary hover:text-primary transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="bookmark">bookmark</span>
+</button>
+</div>
+</aside>
+<!-- Article Body -->
+<div class="lg:col-span-7 space-y-12">
+<p class="drop-cap text-2xl md:text-3xl leading-[1.6] text-on-surface font-body italic">
+                    Es beginnt oft mit einem Licht, das anderswo auf der Welt nicht existiert. Ein hartes, fast metallisches Weiß, das sich am Mittag über die Kalksteinfelsen der Askifou-Hochebene legt und die Schatten so scharf schneidet wie ein Rasiermesser. Kreta ist kein Ort für flüchtige Blicke. Wer die Insel verstehen will, muss die Küstenstraßen verlassen und dorthin vordringen, wo der Wind nach wildem Thymian und der Einsamkeit vergangener Jahrhunderte schmeckt.
+                </p>
+<p class="text-xl leading-relaxed text-on-surface/80">
+                    In den weißen Bergen, den Lefka Ori, zeigt sich Kreta von seiner ungeschminkten Seite. Hier oben, weit weg von den All-Inclusive-Ressorts von Heraklion, pflegen die Schafhirten eine Lebensweise, die sich seit Generationen kaum verändert hat. Die Stille wird nur durch das ferne Geläut der Ziegenglocken unterbrochen, ein rhythmisches, fast hypnotisches Echo in den tiefen Schluchten.
+                </p>
+<!-- Pull Quote -->
+<div class="py-16 border-y border-outline-variant">
+<blockquote class="font-headline font-black text-4xl md:text-5xl italic text-neutral-900 leading-[1.1] tracking-tighter">
+                        "Wer Kreta wirklich sehen will, muss lernen, in der Stille zuzuhören – die Insel spricht durch ihre Steine."
+                    </blockquote>
+</div>
+<p class="text-xl leading-relaxed text-on-surface/80">
+                    Am Nachmittag führt der Weg hinunter zur Südküste. Hier, in kleinen Orten wie Loutro, die nur per Boot oder über steile Wanderpfade erreichbar sind, findet man jenes Blau, das dieser Geschichte ihren Namen gibt. Es ist ein tiefes, fast violettes Saphirblau, das am Horizont nahtlos in den Himmel übergeht.
+                </p>
+<!-- Contextual Booking Callout Updated to Red/Orange -->
+<div class="bg-neutral-50 p-10 rounded border border-neutral-100 flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="flex items-center gap-6">
+<div class="w-24 h-24 overflow-hidden rounded shrink-0 grayscale hover:grayscale-0 transition-all duration-500">
+<img alt="Boutique Hotel in Crete" class="w-full h-full object-cover" data-alt="Small boutique hotel overlooking the sea" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBktPLUjVZMYWDsK-D2rVWB-W5lilrihLjTa-wPsUEjyHIKYoLhkxd79FKPj-POt3g_K79AnveBj2dzEL2r0QOmtvFc7DxmICNnsOmj-GwHewrRIc-9QvJZct5yAEXbXGVj7cDs94dnvuEHy6hn4_rwcTsezjhSbGCRS3zFumdQNIACWXC6RjWZFlSgAhHuWgfDaXTHS47ziWO_rBpEmm5b_S1KSj9tWA3ljjnvnrIBgLyJZniJVv2ScdWO-7EMQsOhaUMYDzGhVcp-"/>
+</div>
+<div>
+<h4 class="font-headline font-bold text-neutral-900 text-xl">Diese Reise buchen</h4>
+<p class="font-body italic text-neutral-500 text-lg">7 Tage Kreta ab 749 € inkl. Flug</p>
+</div>
+</div>
+<button class="bg-[#E64415] text-white font-headline font-bold text-[10px] px-12 py-5 uppercase tracking-[0.2em] rounded transition-transform hover:scale-[1.02] active:scale-95 shadow-lg shadow-[#E64415]/20">
+                        Jetzt Entdecken
+                    </button>
+</div>
+<p class="text-xl leading-relaxed text-on-surface/80">
+                    Wenn die Sonne langsam hinter den Klippen von Elafonisi versinkt und den Sand in ein zartes Rosa taucht, versteht man, warum die Mythen hier geboren wurden. Es ist eine Landschaft, die überlebensgroß wirkt und den Reisenden dazu einlädt, sich selbst für einen Moment in ihrer Weite zu verlieren.
+                </p>
+<!-- Image Gallery -->
+<div class="grid grid-cols-2 gap-6">
+<div class="aspect-square overflow-hidden rounded bg-neutral-100">
+<img alt="Traditional Greek doorway" class="w-full h-full object-cover hover:scale-105 transition-transform duration-1000" data-alt="Rustic blue doorway in a white stone building" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLatRqBC9a4Dvq15_Yww9s3NW0KtZVmR97OXE0BSZ_xA7I1teA9rfuXyjFPpucgbE5sSr0UrzjT71b6SCUENzUwGqI2xgeV3_werpzEpPrUcBcUUbiRYpMRNS9TWbS9mBloGF1kmMyZMrcZqFPBERFBjOZgTFoGel0ZKNJAGzaSqNyOqFlDFbIpAH5lQlmTBn5KPguNIZeA_K3Mg30wp3G7UmYlWMEe3L_UeI1PAuCLmCW3j9YiQ4j6m8C8gCzPhhrnqXdrj_bcDyZ"/>
+</div>
+<div class="aspect-square overflow-hidden rounded bg-neutral-100">
+<img alt="Greek Salad with feta" class="w-full h-full object-cover hover:scale-105 transition-transform duration-1000" data-alt="Fresh mediterranean salad with feta and olives" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9EzY-h4_gP4K0mNKMar8WyW30xy0z_rQ73HQbmS8S8SgH6YOIQX8sK2Wipa8_9YiT5OR53438DGpBn1BkJ-bhl_YP-7qnUMO6j0gXCisYPiUQsv-RrTgkUii8QEiniOwugiH3irS5JdyWw_UHoHQv5x3p2CmSBFRA6xG7UAKdDwwuUmumpJNQWbgN-L_ZmDEt7LZ-OsKC8XZfJZQkCE1JWKgPyP77NYkvoOHAuRjG7tzVqRkLVUvk-ZLFSibRdJf0Rp0M38pjQZpF"/>
+</div>
+</div>
+<p class="text-xl leading-relaxed text-on-surface/80">
+                    Unsere Reise endet in einem kleinen Kafenio in Sfakia. Bei einem Glas Raki und handgemachtem Käse erzählt der Wirt Geschichten von Helden und Piraten. Hier ist die Zeit kein linearer Strahl, sondern ein Kreis, der sich immer wieder schließt. Kreta verabschiedet uns nicht mit einem Abschied, sondern mit einem Versprechen: Wer einmal hier war, wird immer ein Stück Sehnsucht im Gepäck behalten.
+                </p>
+</div>
+</div>
+</article>
+<!-- Related Stories -->
+<section class="bg-neutral-50 py-24 mt-12">
+<div class="max-w-7xl mx-auto px-6">
+<div class="flex justify-between items-end mb-16">
+<div>
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-[#E64415] font-bold">Inspiration</span>
+<h2 class="font-headline font-black text-4xl tracking-tighter text-neutral-900 mt-4">Weitere Geschichten</h2>
+</div>
+<div class="flex gap-4">
+<button class="w-12 h-12 flex items-center justify-center bg-white border border-neutral-200 text-neutral-900 hover:text-primary transition-all rounded">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center bg-white border border-neutral-200 text-neutral-900 hover:text-primary transition-all rounded">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<!-- Story Card 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] overflow-hidden mb-6 rounded bg-neutral-200">
+<img alt="Venice canals" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRUCzGus0gRWv22LWePgBMA1pvL8Gxwi5s_GX5Q8iFJtkXKpJLaBEhH4Kj8Hh2d8cHwO1nidscy-lnU56DQY-TFDYuGO9oJrq8wBuPLJiwb3eyjgppZqpec05huSX86UUOfzV1v2E8XY9sd9JDtWUg9F351EByMf_3EANF5bCMHO_C_ArqCrJSZQydMPTLMMqCoMXxIhkh6ymv1dNQSpeDvTD54-1nvgfzn9a5nsghgb8TiyK6xQ04mNfZ-C4biPiSLhxQfR-A_Hds"/>
+</div>
+<span class="font-label text-[10px] uppercase tracking-widest text-neutral-400 font-bold">Italien</span>
+<h3 class="font-headline font-bold text-xl text-neutral-900 mt-3 leading-tight group-hover:text-primary transition-colors">Venedig ohne Masken: Ein Morgen am Canale Grande.</h3>
+</div>
+<!-- Story Card 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] overflow-hidden mb-6 rounded bg-neutral-200">
+<img alt="Yosemite National Park" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrBUTFapyECSC3u718I5ubY4U6sZUnmD3dIv4ROYefRj0P0oFaYH_7-hw2Gxk_rycr8IjqOkik5jzuHOAVQ1SY_wqrWvufZvSiMQZeP49eVR6RNBCQ0tec_19cCeb6aCWSFrP9q42wy0u9y4x2ajr8MULV1mE0oWucPkRFSbWfeEEwCkmrR5I7qcst0-MJVAxjani5ptDz9vlqBO_Mv5iqo47dnXFAhAtO_wMg64kS1ZY9RXIn_85Bpziin1PrHUKZ1fLcx--Gfo2M"/>
+</div>
+<span class="font-label text-[10px] uppercase tracking-widest text-neutral-400 font-bold">USA</span>
+<h3 class="font-headline font-bold text-xl text-neutral-900 mt-3 leading-tight group-hover:text-primary transition-colors">Yosemite: Die Kathedralen aus Granit.</h3>
+</div>
+<!-- Story Card 3 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] overflow-hidden mb-6 rounded bg-neutral-200">
+<img alt="Japanese temple" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoE14a12IEiHaruAKjyYq0fnjXWFCf3p8QLDbydpkgPoydimBoZN7bnNw9ZNu--O8Ym0r_GbEfHpCHS9cWQ2lSnCi_d8xePC2XPNMIw7LOzGGwFU_Ok7AEsek4rnDCQQgxOPdvgXuP0Um_SRORfD-iGkjxKwOQTJHs1RskLJ8KWtHaXpuNZKkcNiOpz6Tf5H_81zgUNuD6wngOUoupMnXE-BiNpUmKX5Wd4F7wj3KTk_AJY6ZGLLQfbad9_iKPgRal5w8xIv10I5Ty"/>
+</div>
+<span class="font-label text-[10px] uppercase tracking-widest text-neutral-400 font-bold">Japan</span>
+<h3 class="font-headline font-bold text-xl text-neutral-900 mt-3 leading-tight group-hover:text-primary transition-colors">Kyoto: Wo die Zeit den Atem anhält.</h3>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Shared Component -->
+<footer class="w-full border-t border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950 mt-20">
+<div class="w-full py-12 px-8 flex flex-col md:flex-row justify-between items-center gap-6 max-w-7xl mx-auto">
+<div class="text-lg font-black text-neutral-900 dark:text-white font-headline uppercase"><img alt="Reisewelt Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWKFV17DUFCc995x-X912GHxDkDU9eiXoC7oytHANJ42eJ6vBRNVPi5231GmdHpUM8GL91q0txzKSu9cD8h7RrNmBYwlYZENizLVwhJTDallpaq8lWlGHAnF5rysa9_jOEzQRUdecJanE94cAhuTJbhly7o4cXU3kKovrZuBrUYduggJ_cb9LeIvAB12IxQoabIgblguDo5-L0LDLyfSfs2lIVvVNu9nRiQGwA3kyVpQ-PoH1zYhXfdIRTxkNsAB6sY5YTW6PcsUFI"/></div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="font-serif text-sm italic text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 transition-all hover:underline decoration-[#E64415]" href="#">Impressum</a>
+<a class="font-serif text-sm italic text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 transition-all hover:underline decoration-[#E64415]" href="#">Datenschutz</a>
+<a class="font-serif text-sm italic text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 transition-all hover:underline decoration-[#E64415]" href="#">AGB</a>
+<a class="font-serif text-sm italic text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 transition-all hover:underline decoration-[#E64415]" href="#">Kontakt</a>
+</div>
+<p class="font-serif text-sm italic text-neutral-400 opacity-80">
+            © 2024 Reisewelt Editorial. Alle Rechte vorbehalten.
+        </p>
+</div>
+</footer>
+<!-- BottomNavBar Shared Component (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full h-20 flex justify-around items-center px-4 pb-safe bg-white/90 dark:bg-neutral-900/90 backdrop-blur-lg shadow-2xl z-50 rounded-t-2xl">
+<div class="flex flex-col items-center justify-center text-[#E64415] bg-[#E64415]/10 rounded-xl px-3 py-1">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-sans text-[10px] font-bold uppercase tracking-widest mt-1">Entdecken</span>
+</div>
+<div class="flex flex-col items-center justify-center text-neutral-500 dark:text-neutral-400 active:bg-neutral-100 dark:active:bg-neutral-800">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-sans text-[10px] font-bold uppercase tracking-widest mt-1">Suche</span>
+</div>
+<div class="flex flex-col items-center justify-center text-neutral-500 dark:text-neutral-400 active:bg-neutral-100 dark:active:bg-neutral-800">
+<span class="material-symbols-outlined" data-icon="bookmark">bookmark</span>
+<span class="font-sans text-[10px] font-bold uppercase tracking-widest mt-1">Merkliste</span>
+</div>
+<div class="flex flex-col items-center justify-center text-neutral-500 dark:text-neutral-400 active:bg-neutral-100 dark:active:bg-neutral-800">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-sans text-[10px] font-bold uppercase tracking-widest mt-1">Profil</span>
+</div>
+</nav>
+</body></html>

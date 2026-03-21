@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html class="light" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Newsreader:ital,wght@0,400;0,600;0,700;1,400;1,600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#E64415",
+              "on-primary": "#ffffff",
+              "surface": "#ffffff",
+              "on-surface": "#121212",
+              "surface-container": "#F5F5F5",
+              "outline": "#D1D1D1",
+              "outline-variant": "#E5E5E5",
+              "secondary": "#E64415",
+              "background": "#ffffff",
+              "brand-red": "#E64415"
+            },
+            fontFamily: {
+              "headline": ["Inter", "sans-serif"],
+              "body": ["Newsreader", "serif"],
+              "label": ["Inter", "sans-serif"]
+            },
+            borderRadius: {
+              "DEFAULT": "4px",
+              "lg": "8px",
+              "xl": "12px",
+              "full": "9999px"
+            },
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #E5E5E5; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-white text-neutral-900 font-body selection:bg-brand-red/10 selection:text-brand-red">
+<!-- TopNavBar (Shared Component) -->
+<header class="fixed top-0 w-full z-50 bg-[#E64415] shadow-sm transition-all">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-screen-2xl mx-auto">
+<div class="text-2xl font-black tracking-tighter text-[#E64415] uppercase font-headline">Reisewelt</div>
+<nav class="hidden md:flex items-center gap-8 font-headline font-bold">
+<a class="text-white font-medium hover:opacity-80 transition-opacity duration-200" href="#">Magazin</a>
+<a class="text-white font-bold border-b-2 border-white pb-1" href="#">Ziele</a>
+<a class="text-white font-medium hover:opacity-80 transition-opacity duration-200" href="#">Deals</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="transition-transform scale-95 active:scale-90 duration-200">
+<span class="material-symbols-outlined text-white">search</span>
+</button>
+<button class="transition-transform scale-95 active:scale-90 duration-200">
+<span class="material-symbols-outlined text-white">menu</span>
+</button>
+</div>
+</div>
+</header>
+<div class="pt-16">
+<!-- Search Bar -->
+<div class="bg-neutral-50 border-b border-neutral-200 py-6 px-6">
+<div class="max-w-7xl mx-auto flex flex-wrap lg:flex-nowrap gap-4 items-end">
+<div class="flex-1 min-w-[200px]">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-2 font-headline">Reiseziel</label>
+<div class="relative">
+<input class="w-full bg-white border border-neutral-200 focus:border-brand-red focus:ring-0 font-headline font-semibold text-neutral-900 py-2.5 px-4 rounded" type="text" value="Mallorca, Spanien"/>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-neutral-400 text-sm">location_on</span>
+</div>
+</div>
+<div class="flex-1 min-w-[200px]">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-2 font-headline">Zeitraum</label>
+<div class="relative">
+<input class="w-full bg-white border border-neutral-200 focus:border-brand-red focus:ring-0 font-headline font-semibold text-neutral-900 py-2.5 px-4 rounded" type="text" value="12. Sep - 24. Sep"/>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-neutral-400 text-sm">calendar_month</span>
+</div>
+</div>
+<div class="flex-1 min-w-[150px]">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-2 font-headline">Reisende</label>
+<div class="relative">
+<input class="w-full bg-white border border-neutral-200 focus:border-brand-red focus:ring-0 font-headline font-semibold text-neutral-900 py-2.5 px-4 rounded" type="text" value="2 Erwachsene"/>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-neutral-400 text-sm">group</span>
+</div>
+</div>
+<button class="bg-brand-red text-white font-headline font-bold text-xs tracking-widest uppercase px-10 py-3.5 hover:bg-brand-red/90 transition-all active:scale-95 h-[46px] rounded">
+                Suchen
+            </button>
+</div>
+</div>
+<main class="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row gap-12">
+<!-- Filter Panel -->
+<aside class="w-full md:w-72 flex-shrink-0 space-y-10">
+<div>
+<h3 class="font-headline font-bold text-xl tracking-tight text-neutral-900 mb-6">Filter</h3>
+<!-- Price Slider -->
+<div class="mb-10">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-4 font-headline">Preis pro Person</label>
+<div class="h-1 bg-neutral-200 relative rounded-full">
+<div class="absolute left-1/4 right-1/4 h-full bg-brand-red"></div>
+<div class="absolute left-1/4 top-1/2 -translate-y-1/2 w-4 h-4 bg-white border-2 border-brand-red rounded-full cursor-pointer shadow-sm"></div>
+<div class="absolute right-1/4 top-1/2 -translate-y-1/2 w-4 h-4 bg-white border-2 border-brand-red rounded-full cursor-pointer shadow-sm"></div>
+</div>
+<div class="flex justify-between mt-3 text-xs font-headline font-semibold text-neutral-600">
+<span>400€</span>
+<span>1.200€</span>
+</div>
+</div>
+<!-- Stars -->
+<div class="mb-10">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-4 font-headline">Sterne-Bewertung</label>
+<div class="space-y-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="w-4 h-4 rounded-sm border-neutral-300 text-brand-red focus:ring-brand-red/20" type="checkbox"/>
+<span class="flex text-brand-red">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+</span>
+<span class="text-sm font-headline font-medium text-neutral-600 group-hover:text-neutral-900 transition-colors">5 Sterne</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="w-4 h-4 rounded-sm border-neutral-300 text-brand-red focus:ring-brand-red/20" type="checkbox"/>
+<span class="flex text-brand-red">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+</span>
+<span class="text-sm font-headline font-medium text-neutral-600 group-hover:text-neutral-900 transition-colors">4 Sterne</span>
+</label>
+</div>
+</div>
+<!-- Board Type -->
+<div class="mb-10">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-4 font-headline">Verpflegung</label>
+<div class="space-y-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 border-neutral-300 text-brand-red focus:ring-brand-red/20" name="board" type="radio"/>
+<span class="text-sm font-headline font-medium text-neutral-600 group-hover:text-neutral-900 transition-colors">All Inclusive</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="w-4 h-4 border-neutral-300 text-brand-red focus:ring-brand-red/20" name="board" type="radio"/>
+<span class="text-sm font-headline font-medium text-neutral-600 group-hover:text-neutral-900 transition-colors">Halbpension</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 border-neutral-300 text-brand-red focus:ring-brand-red/20" name="board" type="radio"/>
+<span class="text-sm font-headline font-medium text-neutral-600 group-hover:text-neutral-900 transition-colors">Frühstück</span>
+</label>
+</div>
+</div>
+<!-- Airport -->
+<div class="mb-10">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-4 font-headline">Abflughafen</label>
+<select class="w-full bg-white border border-neutral-200 rounded focus:border-brand-red focus:ring-0 font-headline font-medium text-neutral-900 text-sm py-2.5">
+<option>Berlin (BER)</option>
+<option>München (MUC)</option>
+<option>Frankfurt (FRA)</option>
+<option>Düsseldorf (DUS)</option>
+</select>
+</div>
+</div>
+</aside>
+<!-- Results Content -->
+<div class="flex-1">
+<!-- Toolbar -->
+<div class="flex justify-between items-center mb-8 pb-4 border-b border-neutral-100">
+<p class="font-body italic text-neutral-500">124 Ergebnisse für Mallorca</p>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 bg-white px-4 py-2 border border-neutral-200 hover:border-neutral-900 transition-colors active:scale-95 rounded">
+<span class="material-symbols-outlined text-sm">map</span>
+<span class="text-xs font-headline font-bold uppercase tracking-widest">Karte anzeigen</span>
+</button>
+<button class="flex items-center gap-2 bg-white px-4 py-2 border border-neutral-200 hover:border-neutral-900 transition-colors rounded">
+<span class="text-xs font-headline font-bold uppercase tracking-widest">Beliebtheit</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Result Cards -->
+<div class="grid grid-cols-1 gap-12">
+<!-- Card 1 -->
+<article class="flex flex-col lg:flex-row bg-white group border border-neutral-100 overflow-hidden transition-all duration-300 hover:shadow-xl rounded-lg">
+<div class="lg:w-2/5 relative h-72 lg:h-auto overflow-hidden">
+<img alt="Luxus Resort" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_ld5ddwGCr8SY6PcXcW2gwKFSWNINlGSMWFSdtNEdf-YhP47yAfN8YAuY-YUFkUALtdqflOMaFSZ6lvTU7WfBMqNTCVkk1XF44DhoKzn5p7ssc21n7jJt_R-e8wlrT2MzepAlrA7IzH9vpbK-etVA9KHEMuYxNgx20m9y0P1XvNVpfeiu__tyB0O_L5G_jBKddIoYFgwpUkdDRPIk6rqS9oQtoMNRUI9PdOYoPGLjZHouOAQzafJLVmAhzsVNJ-foN71etjqdlvoD"/>
+<div class="absolute top-4 left-4 bg-brand-red text-white px-3 py-1 text-[10px] font-bold font-headline uppercase tracking-widest">Bestseller</div>
+</div>
+<div class="lg:w-3/5 p-8 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h2 class="text-2xl font-headline font-black tracking-tight text-neutral-900 leading-none">Palma Sands Resort</h2>
+<div class="flex text-brand-red">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<div class="flex items-center gap-1 text-neutral-500 font-body italic mb-6">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span>Playa de Palma, Mallorca</span>
+</div>
+<p class="text-neutral-600 line-clamp-2 mb-6 font-body leading-relaxed text-lg">
+                                Erleben Sie puren Luxus direkt an der Küste. Mit einem weitläufigen Infinity-Pool, drei Gourmet-Restaurants und exklusiven Wellness-Angeboten.
+                            </p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-neutral-100 text-[10px] font-bold font-headline px-2.5 py-1 uppercase tracking-widest text-neutral-600">Flug inkl.</span>
+<span class="bg-neutral-100 text-[10px] font-bold font-headline px-2.5 py-1 uppercase tracking-widest text-neutral-600">Transfer</span>
+<span class="bg-neutral-100 text-[10px] font-bold font-headline px-2.5 py-1 uppercase tracking-widest text-neutral-600">WLAN Gratis</span>
+</div>
+</div>
+<div class="mt-8 flex items-end justify-between border-t border-neutral-100 pt-6">
+<div>
+<span class="block text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-1 font-headline">Gesamtpreis</span>
+<span class="text-3xl font-headline font-black text-brand-red">ab 849 € <span class="text-sm font-medium text-neutral-500">p.P.</span></span>
+</div>
+<button class="bg-brand-red text-white font-headline font-bold text-xs tracking-widest uppercase px-8 py-4 hover:bg-brand-red/90 transition-all active:scale-95 rounded shadow-lg shadow-brand-red/10">
+                                Details &amp; Buchen
+                            </button>
+</div>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="flex flex-col lg:flex-row bg-white group border border-neutral-100 overflow-hidden transition-all duration-300 hover:shadow-xl rounded-lg">
+<div class="lg:w-2/5 relative h-72 lg:h-auto overflow-hidden">
+<img alt="Hotel Pool" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsvZ6SArP7OEkrw566xNET1fj0FYVRzt6YFsQh-f_h_uXKwEjp1VHK0OZMYUkRMbrND5L7dp5WOTqIYJeE4tZz_iHiuF68Uw5dgBSBhSdFOx2KOiuNJ0oCPreffmHwIjpJBhxbYukfxlwkg7shEyn__9UFRg9ba5PLKyUQfXH96lsiQRVxi_C9k1F7f5OFO3pqzXsgv-unGqFPd3161ha6CTJhM6b8eeqHg3VxxCzWQ3jFYDs3JPc5Nh9cV3-Fo-ksKpLoQZEknAhc"/>
+</div>
+<div class="lg:w-3/5 p-8 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h2 class="text-2xl font-headline font-black tracking-tight text-neutral-900 leading-none">Hotel Cala d'Or</h2>
+<div class="flex text-brand-red">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<div class="flex items-center gap-1 text-neutral-500 font-body italic mb-6">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span>Cala d'Or, Mallorca</span>
+</div>
+<p class="text-neutral-600 line-clamp-2 mb-6 font-body leading-relaxed text-lg">
+                                Ein charmantes Boutique-Hotel in einer ruhigen Bucht. Perfekt für Paare, die Ruhe und authentische mediterrane Küche suchen.
+                            </p>
+</div>
+<div class="mt-8 flex items-end justify-between border-t border-neutral-100 pt-6">
+<div>
+<span class="block text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-1 font-headline">Gesamtpreis</span>
+<span class="text-3xl font-headline font-black text-brand-red">ab 625 € <span class="text-sm font-medium text-neutral-500">p.P.</span></span>
+</div>
+<button class="bg-brand-red text-white font-headline font-bold text-xs tracking-widest uppercase px-8 py-4 hover:bg-brand-red/90 transition-all active:scale-95 rounded shadow-lg shadow-brand-red/10">
+                                Details &amp; Buchen
+                            </button>
+</div>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="flex flex-col lg:flex-row bg-white group border border-neutral-100 overflow-hidden transition-all duration-300 hover:shadow-xl rounded-lg">
+<div class="lg:w-2/5 relative h-72 lg:h-auto overflow-hidden">
+<img alt="Balkon Aussicht" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANpq0IBrsOqWTkwuPdo3bpzkUEVnw0vnSAxjLbtc3r2FzmxpEhttt-SxOwQ4StOxji1hu7KUqG3KjQ5Cp23pkK8n18odn9KFuYo2OZJ5eC93fq71xguNmU-OwlODTgkmOCOFbbnyVjnFdomMoO2xhVM5N2shwGRBMz0VddyluBceuRBKnMfUDHxIpJfAFy_WqPcUbMxKEkg1LiUA2NV5lww9Og3ljABuVBKMvVqFcHt117tHDnrRmGINe3OKX0iwgBKVTYLU9efFuI"/>
+</div>
+<div class="lg:w-3/5 p-8 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h2 class="text-2xl font-headline font-black tracking-tight text-neutral-900 leading-none">Finestrat Bay Suites</h2>
+<div class="flex text-brand-red">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<div class="flex items-center gap-1 text-neutral-500 font-body italic mb-6">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span>Alcúdia, Mallorca</span>
+</div>
+<p class="text-neutral-600 line-clamp-2 mb-6 font-body leading-relaxed text-lg">
+                                Moderne Suiten mit privatem Balkon und direktem Zugang zum Sandstrand. Genießen Sie preisgekrönte Architektur und Design.
+                            </p>
+</div>
+<div class="mt-8 flex items-end justify-between border-t border-neutral-100 pt-6">
+<div>
+<span class="block text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-1 font-headline">Gesamtpreis</span>
+<span class="text-3xl font-headline font-black text-brand-red">ab 1.120 € <span class="text-sm font-medium text-neutral-500">p.P.</span></span>
+</div>
+<button class="bg-brand-red text-white font-headline font-bold text-xs tracking-widest uppercase px-8 py-4 hover:bg-brand-red/90 transition-all active:scale-95 rounded shadow-lg shadow-brand-red/10">
+                                Details &amp; Buchen
+                            </button>
+</div>
+</div>
+</article>
+</div>
+<!-- Pagination -->
+<div class="mt-16 flex justify-center items-center gap-4">
+<button class="w-10 h-10 rounded flex items-center justify-center border border-neutral-200 hover:border-brand-red hover:text-brand-red transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<div class="flex gap-2 font-headline font-bold">
+<button class="w-10 h-10 rounded bg-brand-red text-white">1</button>
+<button class="w-10 h-10 rounded border border-neutral-200 hover:border-brand-red transition-all">2</button>
+<button class="w-10 h-10 rounded border border-neutral-200 hover:border-brand-red transition-all">3</button>
+</div>
+<button class="w-10 h-10 rounded flex items-center justify-center border border-neutral-200 hover:border-brand-red hover:text-brand-red transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer (Shared Component) -->
+<footer class="w-full py-12 px-8 flex flex-col md:flex-row justify-between items-center gap-6 mt-20 bg-neutral-50 dark:bg-neutral-950 border-t border-neutral-200 dark:border-neutral-800">
+<div class="flex flex-col items-center md:items-start gap-2">
+<div class="text-lg font-black text-neutral-900 dark:text-white font-headline">REISEWELT</div>
+<p class="font-serif text-sm italic text-neutral-500">Editorial Excellence for the Modern Voyager.</p>
+</div>
+<div class="flex gap-8">
+<a class="text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 font-serif text-sm italic hover:underline transition-all" href="#">Impressum</a>
+<a class="text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 font-serif text-sm italic hover:underline transition-all" href="#">Datenschutz</a>
+<a class="text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 font-serif text-sm italic hover:underline transition-all" href="#">AGB</a>
+<a class="text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 font-serif text-sm italic hover:underline transition-all" href="#">Kontakt</a>
+</div>
+<div class="text-center md:text-right">
+<p class="font-serif text-sm italic text-neutral-500">© 2024 Reisewelt Editorial. Alle Rechte vorbehalten.</p>
+</div>
+</footer>
+<!-- BottomNavBar (Shared Component) -->
+<nav class="fixed bottom-0 left-0 w-full h-20 flex justify-around items-center px-4 pb-safe bg-white/90 dark:bg-neutral-900/90 backdrop-blur-lg shadow-2xl z-50 rounded-t-2xl md:hidden">
+<a class="text-white font-medium hover:opacity-80 transition-opacity duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">explore</span>
+<span class="font-headline text-[10px] font-bold uppercase tracking-widest mt-1">Entdecken</span>
+</a>
+<a class="text-white font-bold border-b-2 border-white pb-1" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-headline text-[10px] font-bold uppercase tracking-widest mt-1">Suche</span>
+</a>
+<a class="text-white font-medium hover:opacity-80 transition-opacity duration-200" href="#">
+<span class="material-symbols-outlined">bookmark</span>
+<span class="font-headline text-[10px] font-bold uppercase tracking-widest mt-1">Merkliste</span>
+</a>
+<a class="flex flex-col items-center justify-center text-neutral-500 dark:text-neutral-400 active:bg-neutral-100 dark:active:bg-neutral-800 rounded-xl px-3 py-1" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-headline text-[10px] font-bold uppercase tracking-widest mt-1">Profil</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+
+<html class="light" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;1,6..72,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface": "#1d1b16",
+              "secondary": "#E64415",
+              "surface-dim": "#f5f3f0",
+              "inverse-surface": "#32302a",
+              "primary": "#04122e",
+              "on-tertiary-container": "#8f8f8f",
+              "on-primary": "#ffffff",
+              "secondary-container": "#ff5a2b",
+              "on-tertiary-fixed-variant": "#464747",
+              "inverse-on-surface": "#f6f0e7",
+              "surface-container-lowest": "#ffffff",
+              "on-secondary-fixed-variant": "#881e0c",
+              "inverse-primary": "#b9c6eb",
+              "on-primary-fixed-variant": "#3a4665",
+              "primary-fixed-dim": "#b9c6eb",
+              "surface-container": "#f8f6f2",
+              "tertiary-fixed": "#e3e2e2",
+              "error-container": "#ffdad6",
+              "on-secondary-fixed": "#3f0400",
+              "surface": "#ffffff",
+              "surface-tint": "#515e7e",
+              "secondary-fixed": "#ffdad3",
+              "on-primary-fixed": "#0d1b37",
+              "primary-container": "#1a2744",
+              "error": "#ba1a1a",
+              "surface-container-low": "#faf8f5",
+              "surface-container-high": "#f3f1ed",
+              "on-background": "#1d1b16",
+              "tertiary": "#121414",
+              "on-tertiary": "#ffffff",
+              "on-tertiary-fixed": "#1b1c1c",
+              "outline-variant": "#c5c6ce",
+              "on-error-container": "#93000a",
+              "primary-fixed": "#d9e2ff",
+              "on-primary-container": "#828eb1",
+              "tertiary-container": "#272828",
+              "on-secondary": "#ffffff",
+              "outline": "#75777e",
+              "secondary-fixed-dim": "#ffb4a5",
+              "tertiary-fixed-dim": "#c7c6c6",
+              "background": "#ffffff",
+              "surface-variant": "#e7e2d9",
+              "surface-container-highest": "#e7e2d9",
+              "on-error": "#ffffff",
+              "surface-bright": "#ffffff",
+              "on-surface-variant": "#45464d",
+              "on-secondary-container": "#6e0c00"
+            },
+            fontFamily: {
+              "headline": ["Inter", "sans-serif"],
+              "body": ["Newsreader", "serif"],
+              "label": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            vertical-align: middle;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(4, 18, 46, 0.4) 0%, rgba(4, 18, 46, 0) 50%, rgba(4, 18, 46, 0.6) 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-secondary/30 selection:text-on-surface">
+<!-- TopNavBar (Shared Component) -->
+<header class="fixed top-0 w-full z-50 bg-[#E64415] shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-screen-2xl mx-auto">
+<div class="h-8">
+<img alt="Reisewelt Logo" class="h-full w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0uiDi8B6yN4QXR-2BBNGBxz5ZuhgJoyCRl4q5mZeqdJ21I5Fcs6DvPves_PKpvRdYy5EDURwvlyUMjJ_gLLuOZGnlEcQQ9P86xlUB1iYXDGijh7m7IMfOGKJPqPAHoSoIC4_10HCAmfzOH55Me15jBmqrhnkDslCw_9P33OfBuDdpm0GplEp_gPs5CHxG2gTKj6KVfEGjytD_7Dd6LqWMXc8GtfjWoAU_NWyR3WGvXG4ZsKmLD_UWX2dSzQFWLmgr044VlupES9lqL0"/>
+</div>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="font-headline text-white font-bold border-b-2 border-white pb-1" href="#">Magazin</a>
+<a class="font-headline font-medium text-white/90 hover:text-white transition-colors duration-200" href="#">Ziele</a>
+<a class="font-headline font-medium text-white/90 hover:text-white transition-colors duration-200" href="#">Deals</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="p-2 text-white hover:text-white/80 transition-colors scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="p-2 text-white hover:text-white/80 transition-colors scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-16">
+<!-- Hero Section -->
+<section class="relative h-[870px] w-full overflow-hidden">
+<div class="absolute inset-0">
+<img alt="Hero Travel" class="w-full h-full object-cover" data-alt="Kristallklares türkisfarbenes Wasser an einem einsamen weißen Sandstrand" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAC_IdHgpVvrzZ4TF73_kc1di4p2mKUUlU2S3gf9mRzlnHBoY0Jnhx78w15XgfYAZdlRzKFjx4cqA5Fmz7kRSyxtbFZMUf3D17-y1yol1X6L9rYPnNZrA3q39oBe63hJA18iscpTUGeSEQo0Wm0yKNj5fIPezAy2WZ4Bs4Z79D3SWYpyjbx-V4o93f2Ug03oswmY9tvJXSVhR4zakJFwotHi6wLVBrRrhH9kqO7XvM7bTZ6im7aBK24nt5IfK4X74XZfQ3ThGBoPvVL"/>
+<div class="absolute inset-0 hero-gradient"></div>
+</div>
+<div class="relative h-full max-w-7xl mx-auto px-6 flex flex-col justify-center items-start">
+<h1 class="font-headline text-5xl md:text-8xl font-black text-on-primary max-w-3xl leading-[0.9] tracking-tighter mb-8">
+                Die Kunst des Ankommens.
+            </h1>
+<p class="font-body italic text-xl md:text-3xl text-on-primary/90 max-w-xl">
+                Kuratierte Reisemomente für den modernen Entdecker.
+            </p>
+</div>
+<!-- Booking Widget -->
+<div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-full max-w-6xl px-6 z-30">
+<div class="glass-panel p-2 md:p-3 grid grid-cols-1 md:grid-cols-5 gap-2 items-center rounded-lg shadow-[0_32px_64px_rgba(0,0,0,0.12)]">
+<div class="px-4 py-3 bg-neutral-100/50 rounded-sm">
+<label class="block font-headline font-bold text-[10px] uppercase tracking-widest text-primary/60 mb-1">Wohin?</label>
+<input class="w-full bg-transparent border-none p-0 focus:ring-0 text-primary font-headline font-semibold placeholder:text-primary/30" placeholder="Ziel suchen..." type="text"/>
+</div>
+<div class="px-4 py-3 bg-neutral-100/50 rounded-sm">
+<label class="block font-headline font-bold text-[10px] uppercase tracking-widest text-primary/60 mb-1">Zeitraum</label>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-primary/40">calendar_today</span>
+<span class="text-primary font-headline font-semibold text-sm">Datum wählen</span>
+</div>
+</div>
+<div class="px-4 py-3 bg-neutral-100/50 rounded-sm">
+<label class="block font-headline font-bold text-[10px] uppercase tracking-widest text-primary/60 mb-1">Reisende</label>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-primary/40">group</span>
+<span class="text-primary font-headline font-semibold text-sm">2 Erwachsene</span>
+</div>
+</div>
+<div class="px-4 py-3 bg-neutral-100/50 rounded-sm">
+<label class="block font-headline font-bold text-[10px] uppercase tracking-widest text-primary/60 mb-1">Reiseart</label>
+<select class="w-full bg-transparent border-none p-0 focus:ring-0 text-primary font-headline font-semibold appearance-none">
+<option>Premium Hotel</option>
+<option>Private Villa</option>
+<option>Cruise</option>
+</select>
+</div>
+<button class="h-full bg-secondary hover:bg-secondary-container transition-colors text-on-secondary font-headline font-bold text-sm tracking-widest uppercase py-4 md:py-0 px-8 rounded-sm active:scale-95 duration-150">
+                    Suchen
+                </button>
+</div>
+</div>
+</section>
+<!-- Trending Destinations -->
+<section class="mt-40 mb-24 overflow-hidden">
+<div class="max-w-7xl mx-auto px-6 mb-12 flex justify-between items-end">
+<div>
+<h2 class="font-headline text-4xl font-black tracking-tighter text-primary">Trends.</h2>
+<p class="font-body italic text-lg text-on-surface-variant">Die meistgesuchten Ziele der Saison.</p>
+</div>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-full border border-outline-variant/30 flex items-center justify-center hover:bg-secondary hover:text-on-secondary transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-full border border-outline-variant/30 flex items-center justify-center hover:bg-secondary hover:text-on-secondary transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="flex gap-8 overflow-x-auto pb-12 px-6 no-scrollbar snap-x max-w-7xl mx-auto">
+<!-- Trend Card 1 -->
+<div class="min-w-[320px] snap-start group cursor-pointer">
+<div class="relative h-[450px] overflow-hidden rounded-sm mb-4">
+<img alt="Santorini" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKecadR0NqrhMNzRpFfzLgyK32koN5ssfBPn9D9TO4UMmkqExutDx0uETzYew237F_l0cZUPxdsXjrt0j4IA8yf7RQBvdqYlTX-yS81ZFvKK1hCR0q-RysD8Hb5X2WfnBHOJ2-t8HTuHXr9ELCODgH403IXJFCcb8nDe-zhLYA7jsKJPm6NO4iQZOvUszlNUwHFha_wvl4PDFv3R0Y5k9bpBkoo_3egGPtyTo7AKk7DJMDw61aAZ_v8g4_hBmtsMpAag1dh-EMuTrb"/>
+<div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-headline font-bold uppercase tracking-widest text-[#E64415]">01</div>
+</div>
+<h3 class="font-headline text-2xl font-black tracking-tight text-primary">Santorini, Griechenland</h3>
+<p class="font-body italic text-on-surface-variant">Ägäische Träume in Weiß &amp; Blau</p>
+</div>
+<!-- Trend Card 2 -->
+<div class="min-w-[320px] snap-start group cursor-pointer">
+<div class="relative h-[450px] overflow-hidden rounded-sm mb-4">
+<img alt="Agra" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1ZGQT09Sy6doSbZA0A6-t393OcAwt2wmuKwlzEZ1jY0eHHGyqIt1bHmPPjgyU-0PaUHAd5k0HzDmWFBHqUAM-cdLgv67Gdfeg6pQ2bbCrrhivEY_j_gU3YczxtSLPfVIzQCrKxgO1lUIUWQNOO9ut44tIkvnKWlXeZKQLB-Qdxf2jvoM1y-6RWezTLchBm8SW3hgyAFDD6pHx7hacj1ylFtpsfPWa6gB_VF1xY3Uswr2cVCi7n1qbFb9O4e0nv9kQAfNTxwO-5ToT"/>
+<div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-headline font-bold uppercase tracking-widest text-[#E64415]">02</div>
+</div>
+<h3 class="font-headline text-2xl font-black tracking-tight text-primary">Agra, Indien</h3>
+<p class="font-body italic text-on-surface-variant">Ein Monument ewiger Liebe</p>
+</div>
+<!-- Trend Card 3 -->
+<div class="min-w-[320px] snap-start group cursor-pointer">
+<div class="relative h-[450px] overflow-hidden rounded-sm mb-4">
+<img alt="Bali" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBR5al9CACmpHmfAlUlMkrcdPZvT-A-ucpGYhLMB3-XBmL9HqcmEVvwEzfHSYSKqAcJUMaWU_sRZhSzdKg2UPaNmLYY_98T-QXBk-McanIbauPTGHK7BnITU9pQ-zexX-MHlVbCFnOJqfrIGjkTK7rBRjauSepsKpjIEeqg-wHSWSq0wKxHc7MrmeL9ibEfXRuBagTAHH73y2qAJoONxE5W7KJ4BmsrGW3WPgRJinByG9Xi972YaWX5TtqH0ZPnpWtN6unjIsOcCwHV"/>
+<div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-headline font-bold uppercase tracking-widest text-[#E64415]">03</div>
+</div>
+<h3 class="font-headline text-2xl font-black tracking-tight text-primary">Ubud, Bali</h3>
+<p class="font-body italic text-on-surface-variant">Spirituelles Herz im Dschungel</p>
+</div>
+<!-- Trend Card 4 -->
+<div class="min-w-[320px] snap-start group cursor-pointer">
+<div class="relative h-[450px] overflow-hidden rounded-sm mb-4">
+<img alt="Kyoto" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAE1_9n0rFlDb3VUmKOVStNclH99W9WSrE3gF3saItx_Qlg0-wYpOT7I6D09q-hJPg1NzNZlNG4krWvue5-vgph1F8pae4115Out28uX6PJ20k8CIv-RJI2RPk7PwlhW-Afy9MZKVfyU2aeuJwv0GBLGfY8IAbsgMnQMYvTPL_ZmyhMuuY0_Xqt6FidouM0w-Adm-69VdfEfsw69ewc2UFcvRPKvvHC0DwqVX9-Ws35bXf8gcuo9M93TJepC-mE3nykFlqIgzq05Tk6"/>
+<div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-headline font-bold uppercase tracking-widest text-[#E64415]">04</div>
+</div>
+<h3 class="font-headline text-2xl font-black tracking-tight text-primary">Kyoto, Japan</h3>
+<p class="font-body italic text-on-surface-variant">Tradition trifft Moderne</p>
+</div>
+</div>
+</section>
+<!-- Curated Grid -->
+<section class="bg-surface-container-low py-24">
+<div class="max-w-7xl mx-auto px-6">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+<div class="md:col-span-5 sticky top-32">
+<h2 class="font-headline text-5xl md:text-6xl font-black tracking-tighter text-primary mb-6 leading-tight">Ziele der Sehnsucht.</h2>
+<p class="font-body text-xl text-on-surface-variant mb-12 leading-relaxed italic">
+                        Wir haben die Welt nach den außergewöhnlichsten Orten durchkämmt. Jede Destination ist handverlesen und erzählt ihre ganz eigene Geschichte von Luxus und Entschleunigung.
+                    </p>
+<a class="inline-flex items-center gap-4 font-headline font-bold text-sm tracking-widest uppercase text-secondary group" href="#">
+                        Alle Ziele entdecken
+                        <span class="w-12 h-[2px] bg-secondary group-hover:w-16 transition-all"></span>
+</a>
+</div>
+<div class="md:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-sm overflow-hidden group">
+<div class="h-80 overflow-hidden relative">
+<img alt="Alps" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMOq3EbHCzirFl90yEf3j5Dgg6fP5KfOV9BB5iXwrFPWAByglUTaStBXBd_kIIVEGQFIxUhvru-6MeNWH4bMWAjYSk3GmsY1pLApGzFuBpruuKm2OfjUSY47PJxcNO5YBv5r-mX7FB2UM10UDgEmxDTzwv1VBW78IA3N-kJrC6R2FRrdzhgRKvXcZdVWbYUHlwuUtnnUHKsfoxhRQvqSTW7QHKTmVatrkI6bRhtRuFLZHQphJlZ63Q78BZ6NdBQbYxr0FXpuy0Ucnd"/>
+<div class="absolute bottom-4 right-4 glass-panel px-4 py-2 font-headline font-bold text-sm text-[#E64415]">ab 899 €</div>
+</div>
+<div class="p-8">
+<h3 class="font-headline text-xl font-black text-primary mb-2">Alpine Hideaways</h3>
+<p class="font-body text-sm text-on-surface-variant italic">Österreich &amp; Schweiz</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-sm overflow-hidden group translate-y-12">
+<div class="h-80 overflow-hidden relative">
+<img alt="Maldives" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAq8vFmy5ioL2iFiPO2T8Vh6DpS4nwwzA3mqEvvDFT5RXyjzoQgNt_xxCs9fNyahIK9tf7PTCI7QcKtLF4BLj5MiJbBqVnPVONyAb0oXRlRlfYBBaobL_pEDRahu_wvsLs8QYP9piA9F8Am0vMQDI26lgu_TihmQzjSNPXA7aTCtViqM03Rn1kls0EPN9p8V3i6EFI9CWXp_CAej64TQB9_iRoqUmUvpT-bZYdIYzji219vZDfjWnqBQDddQdTdwHBYeBKUYmM5v5BR"/>
+<div class="absolute bottom-4 right-4 glass-panel px-4 py-2 font-headline font-bold text-sm text-[#E64415]">ab 2.499 €</div>
+</div>
+<div class="p-8">
+<h3 class="font-headline text-xl font-black text-primary mb-2">Private Islands</h3>
+<p class="font-body text-sm text-on-surface-variant italic">Malediven</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-sm overflow-hidden group">
+<div class="h-80 overflow-hidden relative">
+<img alt="Dubai" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCcegis8U3roBTJdn2LA3eKIAIDuE82RcoKwPosMaJ_vZct7TM950gwDHBjfjGyWoiIEYZkmU0OGD21p3ymJCHL8KyTAOZspAR1PO46CTCWr-MD2US3_yEQaph5YJiEyyZTaxntHbOC5nCAERuyYVgE6vcpWlWOBh6tDjq08BsPH1FJ0_2p-kp0DOxLhf6ZUDjyv7ur4mPTUUS6IHF4FgshszY5lp2FJdiT8ksxEPaxPyoMcp1SjAT43CjdgNN-UQP1NK4tysrTVkX"/>
+<div class="absolute bottom-4 right-4 glass-panel px-4 py-2 font-headline font-bold text-sm text-[#E64415]">ab 1.200 €</div>
+</div>
+<div class="p-8">
+<h3 class="font-headline text-xl font-black text-primary mb-2">Urban Oasis</h3>
+<p class="font-body text-sm text-on-surface-variant italic">Dubai, VAE</p>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest rounded-sm overflow-hidden group translate-y-12">
+<div class="h-80 overflow-hidden relative">
+<img alt="Amalfi" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLXM0VlNahBzIgaT8ALkSrG8QLSgwHTpgZRGkEKIn771MTJKEcQ3EQWKqXSmFzY82OowoiDJHYspD-Ayh1Lo7XmTJYxCaw5B1YyIZ_FZVwXYTvsyz0f8hSTI9lXWNG0FvSFgnCITLYMaApxQigEJ3qDryTOzZ2KKtPUrxLK6c0U0cHmhv-4_c8bXAoxKX2I5zolS3yhzsiro81dPaQ-m4otuVuwUXp6T12GoNxuSSC20_NLiWvQeM9M4i8lcEkUPBMX7thHBF2xnG_"/>
+<div class="absolute bottom-4 right-4 glass-panel px-4 py-2 font-headline font-bold text-sm text-[#E64415]">ab 1.599 €</div>
+</div>
+<div class="p-8">
+<h3 class="font-headline text-xl font-black text-primary mb-2">Coastal Elegance</h3>
+<p class="font-body text-sm text-on-surface-variant italic">Amalfiküste, Italien</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Editor's Picks Editorial Strip -->
+<section class="py-32">
+<div class="max-w-7xl mx-auto px-6">
+<div class="relative flex flex-col md:flex-row items-center gap-16">
+<div class="w-full md:w-1/2 relative">
+<div class="absolute -top-12 -left-12 font-headline font-black text-[120px] text-primary/5 select-none pointer-events-none">EDITS</div>
+<img alt="Paris Coffee" class="w-full aspect-[4/5] object-cover rounded-sm shadow-2xl relative z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIXb7_i40iWiQCLRjw6Fhl6QLgxhW7thq3bbcssbVqjo-tC9GuOpZ552Qeo8xOTiEu9ztEhMW93jZI9LVunUqVIXF7csKxqMEBHoHLa6nYirxDoiUUOaTYG7CEKvhWqznAerAkZD8fhsGG8ZlOZ01YQcBnIlp5q81ZvzXF_b4E4GvUMi-oEwqx3QFunV9Hxmb0M7eV-amOsHSWFhgpGZJImzvlBCNE8oKblIQqHbaqkEcXOIsVDcv7TpyM59a6hgXwWtZ060Z_vsTX"/>
+<div class="hidden md:block absolute -bottom-8 -right-8 w-64 h-64 bg-surface-container overflow-hidden z-20 shadow-xl">
+<img alt="Paris Detail" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-DK6egsYFfx0gS8_LnxYK84pDAcwbFJHKbmQckbHLrKWl-QGbz38Stl9AXySJZQrrsLKDG3RsTCpJEIC2T6_PyLgivoWbvIGul1DjGmupcR-UPjuSRRSLQAuWbj9dVqsKYp0cx8URoQrYQuLV3POY34yWvvT34pUNJVh_YKtOqofq_CTX-f2W3qtYBPTafuHtUNXs_am5SZrtgCI4zBWN5nYxIHY2x550u_rvAzmeJJWC5D4Xqqey15ZktSD7Ni2ke4NX0St9WKWS"/>
+</div>
+</div>
+<div class="w-full md:w-1/2">
+<h4 class="font-headline font-bold text-sm tracking-[0.2em] uppercase text-secondary mb-6">Editor's Choice</h4>
+<h2 class="font-headline text-5xl font-black text-primary mb-8 leading-tight tracking-tighter">72 Stunden in Paris: Ein Guide für Genießer.</h2>
+<p class="font-body text-lg text-on-surface-variant leading-relaxed mb-8 italic">
+                        Vergessen Sie den Louvre. Wir führen Sie zu den versteckten Ateliers von Belleville, den intimsten Weinbars des Marais und jenen Orten, an denen die Stadt der Lichter noch immer leise flüstert. Entdecken Sie Paris durch die Augen unserer Redakteure.
+                    </p>
+<div class="flex items-center gap-8">
+<div class="flex flex-col">
+<span class="font-headline font-black text-3xl text-primary">12</span>
+<span class="font-headline font-bold text-[10px] uppercase tracking-widest text-on-surface-variant">Hotspots</span>
+</div>
+<div class="w-[1px] h-12 bg-outline-variant/30"></div>
+<div class="flex flex-col">
+<span class="font-headline font-black text-3xl text-primary">03</span>
+<span class="font-headline font-bold text-[10px] uppercase tracking-widest text-on-surface-variant">Viertel</span>
+</div>
+<div class="w-[1px] h-12 bg-outline-variant/30"></div>
+<button class="font-headline font-bold text-sm tracking-widest uppercase text-primary underline underline-offset-8 decoration-secondary decoration-2">Artikel lesen</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Deals der Woche -->
+<section class="py-24 bg-primary text-on-primary">
+<div class="max-w-7xl mx-auto px-6">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+<div>
+<h2 class="font-headline text-5xl font-black tracking-tighter mb-4">Deals der Woche.</h2>
+<p class="font-body italic text-xl text-on-primary-container">Exklusive Angebote, nur für kurze Zeit.</p>
+</div>
+<div class="flex items-center gap-4 font-headline text-sm font-bold tracking-widest uppercase">
+                    Endet in: <span class="bg-secondary-container px-4 py-2 text-on-secondary-container rounded-sm">02d : 14h : 45m</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<!-- Deal Card 1 -->
+<div class="bg-primary-container group p-4 rounded-sm flex flex-col">
+<div class="relative h-48 overflow-hidden rounded-sm mb-6">
+<img alt="Maldives Deal" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAocIPpaGCpUQeXWyue9cTOWKz-8j47GaGQEYOwQwE9LL1HD3QQ7NoFclNFJ7baN-JG4e36sx95EJA8Et238yzzlD1Dl-VoqclMGNxIhCcQc92djWhWf5kj5vBT4SIO_4M_QGAHuWTfjih8kWgxPOHa2fZ6bVnwL8qh3YeGVim_jdi86aiSSStHnudR7hqiJvdqRtOciOFbfTZ8K7D4fzY1S_HRZbCGwkluvpycf-_crZK7gZJsYkuyn9zsSLbr3IcpXlYVWX9nAxWa"/>
+<div class="absolute top-2 left-2 bg-secondary text-on-secondary px-3 py-1 font-headline font-bold text-[10px] uppercase tracking-widest">-35%</div>
+</div>
+<div class="flex gap-1 mb-2">
+<span class="material-symbols-outlined text-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<h3 class="font-headline text-xl font-bold mb-4">Soneva Fushi Resort</h3>
+<div class="mt-auto flex flex-col gap-4">
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-black">€ 3.490</span>
+<span class="text-on-primary-container line-through text-sm">€ 5.200</span>
+</div>
+<button class="w-full bg-secondary hover:bg-secondary-container text-on-secondary py-3 font-headline font-bold text-[10px] uppercase tracking-widest transition-colors active:scale-95 duration-150">Jetzt buchen</button>
+</div>
+</div>
+<!-- Deal Card 2 -->
+<div class="bg-primary-container group p-4 rounded-sm flex flex-col">
+<div class="relative h-48 overflow-hidden rounded-sm mb-6">
+<img alt="Rome Deal" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBk_a591F-uqWnx-vsBY1HtHEaQZrsH-kuuqzUu2B5jIJdg6CpXBrvMNcJ4UVMCA-znv_nhjJdV2U47Xp0_tCcHEk7iCQk19d0v9zX6ShJce0YuWJDh6cw85SXy94YnMyhyhP2CkwizSA6WQ3aEXvnmV_VZEhUQEI0WgS9lYeO1vaqx5qtE9CnGvXBdOQlt877k36evFAD-mqzPTWazDGWdOptbvmpfbAoKN13uF5xD5hiLHuSNMGLiyJD9qHVkBXFS1cT3eVKJcOr7"/>
+<div class="absolute top-2 left-2 bg-secondary text-on-secondary px-3 py-1 font-headline font-bold text-[10px] uppercase tracking-widest">-20%</div>
+</div>
+<div class="flex gap-1 mb-2">
+<span class="material-symbols-outlined text-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-on-primary-container text-sm">star</span>
+</div>
+<h3 class="font-headline text-xl font-bold mb-4">Hotel de Russie</h3>
+<div class="mt-auto flex flex-col gap-4">
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-black">€ 1.150</span>
+<span class="text-on-primary-container line-through text-sm">€ 1.450</span>
+</div>
+<button class="w-full bg-secondary hover:bg-secondary-container text-on-secondary py-3 font-headline font-bold text-[10px] uppercase tracking-widest transition-colors active:scale-95 duration-150">Jetzt buchen</button>
+</div>
+</div>
+<!-- Deal Card 3 -->
+<div class="bg-primary-container group p-4 rounded-sm flex flex-col">
+<div class="relative h-48 overflow-hidden rounded-sm mb-6">
+<img alt="Sahara Deal" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArEuCdzYORggapavGUYq7JFjPSKLYbMQ5nGi3zrp9SUlr2NEMhs4bSRSOwifa0HEUbi6RHVcAghoruaY1JPJmZxtnefCruX5LBHOBCpdlJmYNaPCNZ9BJhSml7i7wP7vbYWCstjeMITPPB0AV0a9-SO6JuuAIyPw-r6rkvEeLmBSkyRFnTx1h_t9Nx80eZ-eSSu6E5XHh-RzQ3-h2Vm3dpZUi6GZB5y4euKjnTME-A0qrusPacG1qqbO8NNKHPXaly5ZDLRQY7Jfwc"/>
+<div class="absolute top-2 left-2 bg-secondary text-on-secondary px-3 py-1 font-headline font-bold text-[10px] uppercase tracking-widest">Flash Deal</div>
+</div>
+<div class="flex gap-1 mb-2">
+<span class="material-symbols-outlined text-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<h3 class="font-headline text-xl font-bold mb-4">Sahara Luxury Camp</h3>
+<div class="mt-auto flex flex-col gap-4">
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-black">€ 890</span>
+<span class="text-on-primary-container line-through text-sm">€ 1.200</span>
+</div>
+<button class="w-full bg-secondary hover:bg-secondary-container text-on-secondary py-3 font-headline font-bold text-[10px] uppercase tracking-widest transition-colors active:scale-95 duration-150">Jetzt buchen</button>
+</div>
+</div>
+<!-- Deal Card 4 -->
+<div class="bg-primary-container group p-4 rounded-sm flex flex-col">
+<div class="relative h-48 overflow-hidden rounded-sm mb-6">
+<img alt="Alpine Deal" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwPBujjf5jog2ImxYVFFJcffIn3pXaGMHVfb0wnmPGmdf5WeL3ArNyqTcIDW0eR1c42TGleP8zRNhjZ9-BkWiR5x88d3yWwMlEzcGCF3RWCobCrHhlomVVScF69AhmjX5gDf53XciO0EuZkYqO__ufOwoUA3fz3FeXEk_Mdg2UnAWkHltp-GPbE30MPSmAH3zhuyML0Tjuty1jMPbozTUn0D--ane_vNWUrteGhlzkzT78xjQ72ZUgR2mgHMNKDNtJBOB77zeBCPfe"/>
+<div class="absolute top-2 left-2 bg-secondary text-on-secondary px-3 py-1 font-headline font-bold text-[10px] uppercase tracking-widest">-15%</div>
+</div>
+<div class="flex gap-1 mb-2">
+<span class="material-symbols-outlined text-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<h3 class="font-headline text-xl font-bold mb-4">Chalet Zermatt Peak</h3>
+<div class="mt-auto flex flex-col gap-4">
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-black">€ 1.850</span>
+<span class="text-on-primary-container line-through text-sm">€ 2.100</span>
+</div>
+<button class="w-full bg-secondary hover:bg-secondary-container text-on-secondary py-3 font-headline font-bold text-[10px] uppercase tracking-widest transition-colors active:scale-95 duration-150">Jetzt buchen</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="w-full border-t border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950 py-12 px-8">
+<div class="w-full max-w-screen-2xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="text-lg font-black text-neutral-900 dark:text-white font-headline">Reisewelt Editorial</div>
+<div class="font-serif text-sm italic text-neutral-500">
+            © 2024 Reisewelt Editorial. Alle Rechte vorbehalten.
+        </div>
+<div class="flex gap-6">
+<a class="font-serif text-sm italic text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 hover:underline transition-all" href="#">Impressum</a>
+<a class="font-serif text-sm italic text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 hover:underline transition-all" href="#">Datenschutz</a>
+<a class="font-serif text-sm italic text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 hover:underline transition-all" href="#">AGB</a>
+<a class="font-serif text-sm italic text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 hover:underline transition-all" href="#">Kontakt</a>
+</div>
+</div>
+</footer>
+<!-- BottomNavBar (Shared Component - Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full h-20 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-lg flex justify-around items-center px-4 pb-safe z-50 rounded-t-2xl shadow-2xl">
+<a class="flex flex-col items-center justify-center text-[#E64415] bg-[#E64415]/10 rounded-xl px-3 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-sans text-[10px] font-bold uppercase tracking-widest mt-1">Entdecken</span>
+</a>
+<a class="flex flex-col items-center justify-center text-neutral-500 dark:text-neutral-400 active:bg-neutral-100 dark:active:bg-neutral-800 px-3 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-sans text-[10px] font-bold uppercase tracking-widest mt-1">Suche</span>
+</a>
+<a class="flex flex-col items-center justify-center text-neutral-500 dark:text-neutral-400 active:bg-neutral-100 dark:active:bg-neutral-800 px-3 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="bookmark">bookmark</span>
+<span class="font-sans text-[10px] font-bold uppercase tracking-widest mt-1">Merkliste</span>
+</a>
+<a class="flex flex-col items-center justify-center text-neutral-500 dark:text-neutral-400 active:bg-neutral-100 dark:active:bg-neutral-800 px-3 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-sans text-[10px] font-bold uppercase tracking-widest mt-1">Profil</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html class="light" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;family=Newsreader:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface": "#1d1b16",
+              "secondary": "#E64415",
+              "surface-dim": "#dfd9d1",
+              "inverse-surface": "#32302a",
+              "primary": "#04122e",
+              "on-tertiary-container": "#8f8f8f",
+              "on-primary": "#ffffff",
+              "secondary-container": "#E64415",
+              "on-tertiary-fixed-variant": "#464747",
+              "inverse-on-surface": "#f6f0e7",
+              "surface-container-lowest": "#ffffff",
+              "on-secondary-fixed-variant": "#881e0c",
+              "inverse-primary": "#b9c6eb",
+              "on-primary-fixed-variant": "#3a4665",
+              "primary-fixed-dim": "#b9c6eb",
+              "surface-container": "#f3ede4",
+              "tertiary-fixed": "#e3e2e2",
+              "error-container": "#ffdad6",
+              "on-secondary-fixed": "#3f0400",
+              "surface": "#ffffff",
+              "surface-tint": "#E64415",
+              "secondary-fixed": "#ffdad3",
+              "on-primary-fixed": "#0d1b37",
+              "primary-container": "#1a2744",
+              "error": "#ba1a1a",
+              "surface-container-low": "#f9f3ea",
+              "surface-container-high": "#ede7de",
+              "on-background": "#1d1b16",
+              "tertiary": "#121414",
+              "on-tertiary": "#ffffff",
+              "on-tertiary-fixed": "#1b1c1c",
+              "outline-variant": "#c5c6ce",
+              "on-error-container": "#93000a",
+              "primary-fixed": "#d9e2ff",
+              "on-primary-container": "#828eb1",
+              "tertiary-container": "#272828",
+              "on-secondary": "#ffffff",
+              "outline": "#75777e",
+              "secondary-fixed-dim": "#ffb4a5",
+              "tertiary-fixed-dim": "#c7c6c6",
+              "background": "#ffffff",
+              "surface-variant": "#e7e2d9",
+              "surface-container-highest": "#e7e2d9",
+              "on-error": "#ffffff",
+              "surface-bright": "#ffffff",
+              "on-surface-variant": "#45464d",
+              "on-secondary-container": "#6e0c00",
+              "brand-accent": "#E64415"
+            },
+            fontFamily: {
+              "headline": ["Inter", "sans-serif"],
+              "body": ["Newsreader", "serif"],
+              "label": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-brand-accent/20 selection:text-brand-accent">
+<!-- TopNavBar (Shared Component COMPONENTS_9) -->
+<header class="fixed top-0 w-full z-50 dark:bg-neutral-900/80 shadow-sm dark:shadow-none bg-[#E64415]">
+<nav class="flex justify-between items-center px-6 h-16 w-full max-w-screen-2xl mx-auto">
+<div class="flex items-center"><img alt="Reisewelt Logo" class="h-10 w-auto" src="https://lh3.googleusercontent.com/aida/ADBb0uiDi8B6yN4QXR-2BBNGBxz5ZuhgJoyCRl4q5mZeqdJ21I5Fcs6DvPves_PKpvRdYy5EDURwvlyUMjJ_gLLuOZGnlEcQQ9P86xlUB1iYXDGijh7m7IMfOGKJPqPAHoSoIC4_10HCAmfzOH55Me15jBmqrhnkDslCw_9P33OfBuDdpm0GplEp_gPs5CHxG2gTKj6KVfEGjytD_7Dd6LqWMXc8GtfjWoAU_NWyR3WGvXG4ZsKmLD_UWX2dSzQFWLmgr044VlupES9lqL0"/></div>
+<div class="hidden md:flex items-center space-x-8 font-headline font-bold">
+<a class="dark:text-neutral-400 font-medium hover:text-[#E64415] transition-colors duration-200 text-white" href="#">Magazin</a>
+<a class="font-bold border-b-2 pb-1 text-white border-white" href="#">Ziele</a>
+<a class="dark:text-neutral-400 font-medium hover:text-[#E64415] transition-colors duration-200 text-white" href="#">Deals</a>
+</div>
+<div class="flex items-center space-x-4">
+<button class="material-symbols-outlined dark:text-neutral-400 hover:text-[#E64415] transition-all duration-200 scale-95 active:scale-90 p-2 text-white">search</button>
+<button class="material-symbols-outlined dark:text-neutral-400 hover:text-[#E64415] transition-all duration-200 scale-95 active:scale-90 p-2 text-white">menu</button>
+</div>
+</nav>
+</header>
+<main class="pt-16">
+<!-- Hero Section -->
+<section class="relative h-[870px] overflow-hidden flex items-end">
+<div class="absolute inset-0 bg-primary/20 z-10"></div>
+<img alt="Tropical destination landscape" class="absolute inset-0 w-full h-full object-cover scale-105" data-alt="Breathtaking aerial view of turquoise ocean and white beach" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASljhtvoDYzEoVmoVuietpZBqIIRmgVsg1gIADnSzyKJ2Vez937HSJ97Zljjq4WyySZRvjVy0k3YBorLfFofzGxZgrbGQ-5pvqxr_-4e_j43U8JxCoz7MQI_gMTa9BfpeRu6b1TDT9dzAEIZJrQkYzOSw97KGDj1FdvL2Jo3Fk8-NW502WDZhT0DrNrFV_9ByHZqKJqsYK6wiKKu1TB9qhT8vR5sKHtq7Yry9w6jxuITrwvdC6mJsdNvJbAdJJF6G2eeEsssC4G41D"/>
+<div class="relative z-20 max-w-7xl mx-auto px-6 w-full pb-32">
+<div class="max-w-3xl">
+<h1 class="font-headline font-black text-6xl md:text-8xl text-on-primary tracking-tighter mb-6 leading-[0.9]">
+                    Die Magie von <br/><span class="text-brand-accent">Mauritius.</span>
+</h1>
+<p class="font-body text-xl md:text-2xl text-on-primary/90 italic max-w-xl border-l-2 border-brand-accent pl-6">
+                    Ein Mosaik aus türkisfarbenem Wasser, dramatischen Berggipfeln und einer Kultur, die so warmherzig ist wie die tropische Sonne.
+                </p>
+</div>
+</div>
+</section>
+<!-- Booking & Content Layout -->
+<div class="max-w-7xl mx-auto px-6 -mt-20 relative z-30">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Main Editorial & Offers -->
+<div class="lg:col-span-8">
+<!-- Booking Widget -->
+<div class="glass-effect p-8 rounded shadow-2xl mb-16 z-40 relative">
+<h2 class="font-headline font-bold text-xl mb-6 tracking-tight text-primary">Reisen nach Mauritius finden</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="flex flex-col space-y-1">
+<label class="font-headline text-[10px] uppercase tracking-widest font-bold text-primary/60">Ziel</label>
+<input class="bg-neutral-100 border-none border-b border-outline-variant/15 focus:ring-0 focus:border-brand-accent transition-colors font-headline text-sm p-3" type="text" value="Mauritius, Port Louis"/>
+</div>
+<div class="flex flex-col space-y-1">
+<label class="font-headline text-[10px] uppercase tracking-widest font-bold text-primary/60">Zeitraum</label>
+<input class="bg-neutral-100 border-none border-b border-outline-variant/15 focus:ring-0 focus:border-brand-accent transition-colors font-headline text-sm p-3" placeholder="Wähle Datum" type="text" value="Okt 15 - Okt 28"/>
+</div>
+<div class="flex flex-col space-y-1">
+<label class="font-headline text-[10px] uppercase tracking-widest font-bold text-primary/60">Reisende</label>
+<input class="bg-neutral-100 border-none border-b border-outline-variant/15 focus:ring-0 focus:border-brand-accent transition-colors font-headline text-sm p-3" type="text" value="2 Erwachsene"/>
+</div>
+<div class="flex items-end">
+<button class="w-full bg-[#E64415] text-white py-4 font-headline font-bold text-[10px] tracking-widest uppercase hover:opacity-90 transition-all flex items-center justify-center space-x-2">
+<span>Angebote suchen</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Content Area -->
+<div class="space-y-12">
+<!-- Featured Article Card -->
+<div class="group cursor-pointer">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+<div class="relative h-[400px] overflow-hidden">
+<img alt="Luxury hotel infinity pool" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Luxury resort with infinity pool overlooking the indian ocean" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3LqP7OLLIatMDl8z4uNaxSybHyThBhCfsRcxWnxfiBr3Q15D_5gAkjh6LHNEWxq5T8hGweKv3c_D1aDJ7LtJ5MeWUfRbqIdpUdkSaC8n5hsT1aQPUxmdct65iwWBQndQ0kEHGPe2K7b2SJ4Tu1zo9AKLFQqQUNPP0Itr0kcLpfU-B4QheezjO2SCm20oNSCVrZVyKElHiHSyc5Pj1zMU96hVIccR4OQnDX78LlrPxSXBzddDvspl4X7ofVjS7wYSKqlF8uzY0OkZZ"/>
+</div>
+<div class="pr-8">
+<span class="font-headline text-[10px] uppercase tracking-widest font-bold text-brand-accent mb-4 block">Geheimtipp</span>
+<h3 class="font-headline font-extrabold text-4xl mb-4 tracking-tighter leading-tight">Le Morne: Wo die Zeit stehen bleibt.</h3>
+<p class="font-body text-lg text-on-surface/80 leading-relaxed italic mb-6">
+                                    Abseits der großen Resorts findet man am Fuße des majestätischen Le Morne Brabant eine Ruhe, die man so nur selten auf der Welt spürt.
+                                </p>
+<a class="inline-block border-b-2 border-brand-accent pb-1 font-headline font-bold text-sm tracking-tight hover:text-brand-accent transition-colors" href="#">Artikel lesen</a>
+</div>
+</div>
+</div>
+<!-- Commercial Offer Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-12 border-t border-outline-variant/20">
+<!-- Hotel Offer -->
+<div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-shadow group">
+<div class="relative h-64">
+<img alt="Tropical Resort" class="w-full h-full object-cover" data-alt="Modern tropical bungalow on wooden deck" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9Bh2q4xwnY9B5_LzdJyp76vNxoLo3GZxc9BeXlIGLthpT5CdpjpoV-bv8AyMtnV_Dldl9leioTgUF3cPYm78Xyrs8OCXpZO6E7hnoPWTPXb1VqvZM5UbsZBt2eyd7Qg2gcBHsDLX0E8S-FXWmH4eqVuSALN8c_0HDD-6lkX-VVO_D3AXxk1h9fBc_LsyiazkvR5F-EEa-rI99ll_qPVIoGN9EN0E0nVWeJqa6fLdX-88YIqLX18o3B5VSeL9e2rX-2w2YZFWSbYol"/>
+<div class="absolute top-4 right-4 bg-brand-accent text-white px-3 py-1 font-headline font-bold text-[10px] tracking-tighter rounded-full">TOP ANGEBOT</div>
+</div>
+<div class="p-6">
+<h4 class="font-headline font-bold text-xl mb-2">Constance Prince Maurice</h4>
+<p class="font-body text-sm text-on-surface/70 mb-6 italic">7 Nächte inkl. Flug &amp; Halbpension</p>
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase font-bold text-primary/50 font-headline">pro Person ab</span>
+<span class="text-2xl font-black font-headline text-primary">2.490€</span>
+</div>
+<button class="bg-[#E64415] px-6 py-3 text-white font-headline font-bold text-[10px] tracking-widest uppercase hover:opacity-90 transition-colors">Buchen</button>
+</div>
+</div>
+</div>
+<!-- Boat Trip Offer -->
+<div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-shadow group">
+<div class="relative h-64">
+<img alt="Catamaran Tour" class="w-full h-full object-cover" data-alt="Catamaran sailing in clear blue tropical waters" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVp7foN-K0llr5-ImWth8189u_CMd-HTsruhI0H1x7k73KrHotVCJk9iFerdloH73q4EXELjKCkyhVhWrEMmx9us97xjbm11gm8MX-wSKrjqHsD9qDebCopSi7vqGIohMwloQZH7WnwS6TElPaHqDcetSoOw1OmuUaTQ0O2Ou0wqdx7ILdQqtiHNCNTbE0ZIkddhGEVyPupml9OxR6874eLreXG4l9-eZMIf3R_YUcetO2OYl7WIGiZBYj7BJd8JPoqOTkECr6CdQI"/>
+</div>
+<div class="p-6">
+<h4 class="font-headline font-bold text-xl mb-2">Katamaran-Tour Île aux Cerfs</h4>
+<p class="font-body text-sm text-on-surface/70 mb-6 italic">Ganztagestrip inkl. BBQ &amp; Getränke</p>
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase font-bold text-primary/50 font-headline">pro Person</span>
+<span class="text-2xl font-black font-headline text-primary">85€</span>
+</div>
+<button class="bg-[#E64415] px-6 py-3 text-white font-headline font-bold text-[10px] tracking-widest uppercase hover:opacity-90 transition-colors">Reservieren</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Editorial Quote Block -->
+<div class="relative py-20">
+<div class="absolute right-0 top-0 w-2/3 h-full bg-neutral-50 -z-10 translate-x-6"></div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+<div class="md:col-span-7">
+<img alt="Golden hour beach" class="w-full shadow-2xl grayscale hover:grayscale-0 transition-all duration-700" data-alt="Golden hour on a lonely sandy beach" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMw3kGz4zCwqn0wvUgTyZWoMZxFR9YUhZYTw2J5A_OYGqm1EfkqRaqn6xjqbV92Bf67E5cFTFFZywnSkidFUI5OrqzOvi74Y-SRaRGH6oGFy8OEBbo0LrMJdIiExuvFTJmEOS-xAFfcR30e30_VePjKSE_gdevB3vdkcTA6hKBSx-qAO53gGA8PLTYBLCuU3hmsFmgJnLsXT9JoUTtJ4DEVsJOZLFywmkVsRNOryRuREPKkFRPRLuxbIEepuNcUbzK1PRT3wyUHqvo"/>
+</div>
+<div class="md:col-span-5 md:-ml-20 bg-white p-12 shadow-xl">
+<span class="material-symbols-outlined text-brand-accent text-5xl mb-6" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+<p class="font-body text-2xl italic leading-snug mb-8">"Zuerst schuf Gott Mauritius, und dann das Paradies. Aber das Paradies war nur eine Kopie von Mauritius."</p>
+<span class="font-headline font-bold text-sm tracking-widest uppercase text-primary/60">— Mark Twain</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar -->
+<aside class="lg:col-span-4 space-y-12">
+<div class="sticky top-28">
+<!-- Fact Sheet Card -->
+<div class="bg-neutral-50 p-8 rounded shadow-sm mb-8 border-l-4 border-brand-accent">
+<h3 class="font-headline font-black text-2xl mb-8 tracking-tighter">Fakten Check</h3>
+<ul class="space-y-6">
+<li class="flex items-start space-x-4">
+<span class="material-symbols-outlined text-brand-accent mt-1">calendar_month</span>
+<div>
+<span class="block font-headline text-[10px] uppercase font-bold text-primary/40">Beste Reisezeit</span>
+<span class="font-headline font-bold text-primary">Mai bis Dezember</span>
+</div>
+</li>
+<li class="flex items-start space-x-4">
+<span class="material-symbols-outlined text-brand-accent mt-1">flight_takeoff</span>
+<div>
+<span class="block font-headline text-[10px] uppercase font-bold text-primary/40">Flugzeit (ab DE)</span>
+<span class="font-headline font-bold text-primary">ca. 11:30 Stunden</span>
+</div>
+</li>
+<li class="flex items-start space-x-4">
+<span class="material-symbols-outlined text-brand-accent mt-1">payments</span>
+<div>
+<span class="block font-headline text-[10px] uppercase font-bold text-primary/40">Ø Tageskosten</span>
+<span class="font-headline font-bold text-primary">ca. 120€ - 250€</span>
+</div>
+</li>
+<li class="flex items-start space-x-4">
+<span class="material-symbols-outlined text-brand-accent mt-1">language</span>
+<div>
+<span class="block font-headline text-[10px] uppercase font-bold text-primary/40">Sprache</span>
+<span class="font-headline font-bold text-primary">Englisch, Französisch, Kreol</span>
+</div>
+</li>
+</ul>
+</div>
+<!-- Sidebar Deal -->
+<div class="bg-[#E64415] text-white p-8 overflow-hidden relative group">
+<div class="absolute top-0 right-0 p-4 opacity-10 scale-150 pointer-events-none">
+<span class="material-symbols-outlined text-9xl">auto_awesome</span>
+</div>
+<h3 class="font-headline font-black text-2xl mb-4 leading-tight relative z-10">Last-Minute Flug Special</h3>
+<p class="font-body text-white/70 mb-6 italic relative z-10">Nur diese Woche: Direktflüge ab Frankfurt für unter 800€ inkl. Gepäck.</p>
+<a class="bg-white text-[#E64415] w-full py-4 font-headline font-bold text-[10px] tracking-widest uppercase inline-block text-center hover:bg-neutral-100 transition-all relative z-10" href="#">Deal sichern</a>
+</div>
+<!-- Map -->
+<div class="mt-8 bg-neutral-100 aspect-square relative group overflow-hidden">
+<img alt="Map location" class="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-1000" data-location="Mauritius" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJGeW2PaOasCadv1_6gpG55wJFSQiyiUHYh0UvdJHxFQNR3SxDtC4FtFpGxx2pD9MWLS6ZCnUEuvmglDezMBJQzDw44iTUD6o7-fe1BatjzHHYXcBJ_RV7ByfjJ98zw6tFX22Eklk2XofqzbkHmcq3TrwEDsAf8oHzvWhGyFdMravr19lSO_ysizEUddBBLZRigf7jBquuTAqADy5nWAAlSI3TWY9WoZXTETsa_oJpkzJdY2ePJ9i7gWV9AyQLHB34QPQQ0CoZ-xQk"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="bg-white/90 p-4 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-brand-accent text-3xl" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+</div>
+<div class="absolute bottom-4 left-4 bg-[#E64415] text-white text-[10px] font-bold px-2 py-1 tracking-widest uppercase">Indischer Ozean</div>
+</div>
+</div>
+</aside>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component COMPONENTS_9) -->
+<footer class="w-full bg-neutral-50 dark:bg-neutral-950 border-t border-neutral-200 dark:border-neutral-800 mt-20">
+<div class="max-w-7xl mx-auto py-16 px-8 grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="col-span-1 md:col-span-1">
+<div class="text-lg font-black text-neutral-900 dark:text-white font-headline mb-6">Reisewelt Editorial</div>
+<p class="font-serif text-sm italic text-neutral-500">
+                Kuratiertes Reisen für moderne Entdecker. Wir finden die Geschichten hinter den Koordinaten.
+            </p>
+</div>
+<div>
+<h4 class="font-headline font-bold text-sm uppercase tracking-widest mb-6 text-[#E64415]">Reiseziele</h4>
+<ul class="space-y-3 font-serif text-sm italic">
+<li><a class="text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 hover:underline transition-all" href="#">Indischer Ozean</a></li>
+<li><a class="text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 hover:underline transition-all" href="#">Skandinavien</a></li>
+<li><a class="text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 hover:underline transition-all" href="#">Südostasien</a></li>
+<li><a class="text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 hover:underline transition-all" href="#">Alpenraum</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold text-sm uppercase tracking-widest mb-6 text-[#E64415]">Magazin</h4>
+<ul class="space-y-3 font-serif text-sm italic">
+<li><a class="text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 hover:underline transition-all" href="#">Interviews</a></li>
+<li><a class="text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 hover:underline transition-all" href="#">Fotostrecken</a></li>
+<li><a class="text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 hover:underline transition-all" href="#">Packlisten</a></li>
+<li><a class="text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 hover:underline transition-all" href="#">Slow Travel</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold text-sm uppercase tracking-widest mb-6 text-[#E64415]">Unternehmen</h4>
+<ul class="space-y-3 font-serif text-sm italic">
+<li><a class="text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 hover:underline transition-all" href="#">Impressum</a></li>
+<li><a class="text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 hover:underline transition-all" href="#">Datenschutz</a></li>
+<li><a class="text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 hover:underline transition-all" href="#">Kontakt</a></li>
+</ul>
+</div>
+</div>
+<div class="w-full py-12 px-8 flex flex-col md:flex-row justify-between items-center gap-6 border-t border-neutral-200 dark:border-neutral-800">
+<p class="font-serif text-sm italic text-neutral-500">© 2024 Reisewelt Editorial. Alle Rechte vorbehalten.</p>
+<div class="flex space-x-6">
+<span class="material-symbols-outlined text-neutral-500 hover:text-[#E64415] cursor-pointer transition-colors opacity-80 hover:opacity-100">brand_awareness</span>
+<span class="material-symbols-outlined text-neutral-500 hover:text-[#E64415] cursor-pointer transition-colors opacity-80 hover:opacity-100">public</span>
+<span class="material-symbols-outlined text-neutral-500 hover:text-[#E64415] cursor-pointer transition-colors opacity-80 hover:opacity-100">mail</span>
+</div>
+</div>
+</footer>
+<!-- Mobile Bottom Navigation (Shared Component COMPONENTS_9) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full h-20 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-lg flex justify-around items-center px-4 pb-safe z-50 rounded-t-2xl shadow-2xl">
+<a class="flex flex-col items-center justify-center text-neutral-500 dark:text-neutral-400 tap-highlight-transparent active:bg-neutral-100" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-sans text-[10px] font-bold uppercase tracking-widest mt-1">Entdecken</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#E64415] bg-[#E64415]/10 rounded-xl px-3 py-1 tap-highlight-transparent" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-sans text-[10px] font-bold uppercase tracking-widest mt-1">Suche</span>
+</a>
+<a class="flex flex-col items-center justify-center text-neutral-500 dark:text-neutral-400 tap-highlight-transparent active:bg-neutral-100" href="#">
+<span class="material-symbols-outlined">bookmark</span>
+<span class="font-sans text-[10px] font-bold uppercase tracking-widest mt-1">Merkliste</span>
+</a>
+<a class="flex flex-col items-center justify-center text-neutral-500 dark:text-neutral-400 tap-highlight-transparent active:bg-neutral-100" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-sans text-[10px] font-bold uppercase tracking-widest mt-1">Profil</span>
+</a>
+</nav>
+</body></html>
