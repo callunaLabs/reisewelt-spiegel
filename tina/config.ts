@@ -1,19 +1,11 @@
 import { defineConfig } from "tinacms";
 
-// Your hosting URL (update after Replit deploy)
-const branch =
-  process.env.GITHUB_BRANCH ||
-  process.env.VERCEL_GIT_COMMIT_REF ||
-  process.env.HEAD ||
-  "main";
+const branch = process.env.TINA_BRANCH || process.env.HEAD || "main";
 
 export default defineConfig({
   branch,
-
-  // Get these from tina.io after connecting the repo
-  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || "",
+  clientId: process.env.TINA_CLIENT_ID || "",
   token: process.env.TINA_TOKEN || "",
-
   build: {
     outputFolder: "admin",
     publicFolder: "public",
@@ -27,9 +19,9 @@ export default defineConfig({
   schema: {
     collections: [
       {
-        name: "post",
+        name: "artikel",
         label: "Artikel",
-        path: "src/content/posts",
+        path: "src/content/artikel",
         format: "mdx",
         fields: [
           {
@@ -41,36 +33,34 @@ export default defineConfig({
           },
           {
             type: "string",
-            name: "description",
-            label: "Beschreibung",
-          },
-          {
-            type: "datetime",
-            name: "date",
-            label: "Datum",
+            name: "subtitle",
+            label: "Untertitel",
           },
           {
             type: "image",
             name: "heroImage",
-            label: "Titelbild",
+            label: "Hero-Bild",
           },
           {
             type: "string",
             name: "category",
             label: "Kategorie",
-            options: [
-              "Reiseziele",
-              "Hotels",
-              "Flugreisen",
-              "Kreuzfahrten",
-              "Reisetipps",
-              "Abenteuer",
-            ],
+            options: ["Städtereise", "Strandurlaub", "Abenteuer", "Kulinarik", "Kultur", "Wellness"],
           },
           {
             type: "string",
             name: "author",
             label: "Autor",
+          },
+          {
+            type: "datetime",
+            name: "publishDate",
+            label: "Veröffentlichungsdatum",
+          },
+          {
+            type: "string",
+            name: "readTime",
+            label: "Lesezeit",
           },
           {
             type: "rich-text",
@@ -81,27 +71,124 @@ export default defineConfig({
         ],
       },
       {
-        name: "page",
-        label: "Seiten",
-        path: "src/content/pages",
+        name: "ziel",
+        label: "Reiseziele",
+        path: "src/content/ziele",
         format: "mdx",
         fields: [
           {
             type: "string",
             name: "title",
-            label: "Titel",
+            label: "Zielname",
             isTitle: true,
             required: true,
           },
           {
             type: "string",
-            name: "description",
-            label: "Beschreibung",
+            name: "subtitle",
+            label: "Untertitel",
+          },
+          {
+            type: "image",
+            name: "heroImage",
+            label: "Hero-Bild",
+          },
+          {
+            type: "string",
+            name: "region",
+            label: "Region",
+          },
+          {
+            type: "string",
+            name: "country",
+            label: "Land",
+          },
+          {
+            type: "string",
+            name: "priceFrom",
+            label: "Preis ab",
+          },
+          {
+            type: "string",
+            name: "bestTime",
+            label: "Beste Reisezeit",
+          },
+          {
+            type: "object",
+            name: "highlights",
+            label: "Highlights",
+            list: true,
+            fields: [
+              { type: "string", name: "title", label: "Titel" },
+              { type: "string", name: "description", label: "Beschreibung" },
+              { type: "image", name: "image", label: "Bild" },
+            ],
           },
           {
             type: "rich-text",
             name: "body",
-            label: "Inhalt",
+            label: "Beschreibung",
+            isBody: true,
+          },
+        ],
+      },
+      {
+        name: "deal",
+        label: "Deals",
+        path: "src/content/deals",
+        format: "mdx",
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Hotelname",
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: "image",
+            name: "image",
+            label: "Bild",
+          },
+          {
+            type: "string",
+            name: "destination",
+            label: "Reiseziel",
+          },
+          {
+            type: "number",
+            name: "price",
+            label: "Preis (€)",
+          },
+          {
+            type: "number",
+            name: "originalPrice",
+            label: "Originalpreis (€)",
+          },
+          {
+            type: "string",
+            name: "discount",
+            label: "Rabatt-Label",
+          },
+          {
+            type: "number",
+            name: "stars",
+            label: "Sterne (1-5)",
+          },
+          {
+            type: "string",
+            name: "bookingUrl",
+            label: "Buchungs-URL",
+          },
+          {
+            type: "datetime",
+            name: "expiresAt",
+            label: "Gültig bis",
+          },
+          {
+            type: "rich-text",
+            name: "body",
+            label: "Beschreibung",
             isBody: true,
           },
         ],

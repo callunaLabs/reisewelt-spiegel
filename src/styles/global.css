@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #04122e;
+  --color-primary-container: #1a2744;
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #828eb1;
+  --color-secondary: #E64415;
+  --color-secondary-container: #ff5a2b;
+  --color-on-secondary: #ffffff;
+  --color-on-secondary-container: #6e0c00;
+  --color-surface: #ffffff;
+  --color-surface-dim: #f5f3f0;
+  --color-surface-container: #f8f6f2;
+  --color-surface-container-low: #faf8f5;
+  --color-surface-container-high: #f3f1ed;
+  --color-surface-container-highest: #e7e2d9;
+  --color-surface-container-lowest: #ffffff;
+  --color-on-surface: #1d1b16;
+  --color-on-surface-variant: #45464d;
+  --color-outline: #75777e;
+  --color-outline-variant: #c5c6ce;
+  --color-inverse-surface: #32302a;
+  --color-inverse-on-surface: #f6f0e7;
+
+  --font-headline: "Inter", sans-serif;
+  --font-body: "Newsreader", serif;
+  --font-label: "Inter", sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--color-on-surface);
+    background-color: var(--color-surface);
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-secondary) 30%, transparent);
+  }
+}
+
+@layer components {
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .hero-gradient {
+    background: linear-gradient(to bottom, rgba(4, 18, 46, 0.4) 0%, rgba(4, 18, 46, 0) 50%, rgba(4, 18, 46, 0.6) 100%);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
