@@ -1,11 +1,13 @@
 ---
+import settings from '../content/settings/global.json';
+const logoSrc = settings.logo || '/uploads/spiegel-reisewelt-logo.png';
 ---
 
 <header class="fixed top-0 left-0 right-0 h-16 bg-secondary z-50 flex items-center">
   <div class="w-full max-w-7xl mx-auto px-6 flex items-center justify-between">
-    <!-- Logo -->
+    <!-- Logo (änderbar über TinaCMS Einstellungen) -->
     <a href="/" class="h-6">
-      <img src="/uploads/spiegel-reisewelt-logo.png" alt="SPIEGEL Reisewelt" class="h-full w-auto object-contain" />
+      <img src={logoSrc} alt={settings.siteTitle || 'SPIEGEL Reisewelt'} class="h-full w-auto object-contain" />
     </a>
 
     <!-- Desktop Nav -->

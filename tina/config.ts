@@ -193,6 +193,37 @@ export default defineConfig({
           },
         ],
       },
+      {
+        name: "settings",
+        label: "Einstellungen",
+        path: "src/content/settings",
+        format: "json",
+        ui: {
+          allowedActions: {
+            create: false,
+            delete: false,
+          },
+          global: true,
+        },
+        fields: [
+          {
+            type: "image",
+            name: "logo",
+            label: "Hauptlogo (Header)",
+            description: "Das Logo oben in der Navigation (weiß auf rotem Hintergrund)",
+          },
+          {
+            type: "string",
+            name: "siteTitle",
+            label: "Seitentitel",
+          },
+          {
+            type: "string",
+            name: "siteDescription",
+            label: "Seitenbeschreibung",
+          },
+        ],
+      },
     ],
   },
 });
