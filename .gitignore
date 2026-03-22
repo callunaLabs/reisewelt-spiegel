@@ -24,7 +24,7 @@ pnpm-debug.log*
 .idea/
 
 # TinaCMS generated
-public/admin/
+# public/admin/ — committed for Replit deployment
 
 # Replit
 .cache/
