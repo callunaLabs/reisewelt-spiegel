@@ -179,7 +179,7 @@ const relatedTrips = fallbackTrips.filter((t) => t.slug !== slug).slice(0, 3);
           <div class="border-t border-neutral-200 pt-8">
             <h2 class="font-headline text-2xl font-black tracking-tight text-on-surface mb-6">Highlights</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {trip.highlights.map((highlight: string) => (
+              {(Array.isArray(trip.highlights) ? trip.highlights : (trip.highlights || '').split(',')).filter(Boolean).map((highlight: string) => (
                 <div class="flex items-center gap-3">
                   <span class="material-symbols-outlined text-[#E64415] text-[20px]">place</span>
                   <span class="font-headline text-sm font-medium text-on-surface">{highlight}</span>
@@ -192,7 +192,7 @@ const relatedTrips = fallbackTrips.filter((t) => t.slug !== slug).slice(0, 3);
           <div class="border-t border-neutral-200 pt-8">
             <h2 class="font-headline text-2xl font-black tracking-tight text-on-surface mb-6">Im Preis enthalten</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {trip.included.map((item: string) => (
+              {(Array.isArray(trip.included) ? trip.included : (trip.included || '').split(',')).filter(Boolean).map((item: string) => (
                 <div class="flex items-center gap-3">
                   <span class="material-symbols-outlined text-green-600 text-[20px]">check_circle</span>
                   <span class="font-headline text-sm font-medium text-on-surface">{item}</span>
