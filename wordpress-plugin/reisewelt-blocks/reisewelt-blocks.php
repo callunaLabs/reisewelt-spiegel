@@ -151,10 +151,13 @@ add_action('init', function () {
         'attributes' => [
             'title'    => ['type' => 'string', 'default' => 'Exklusive Reise-Empfehlungen'],
             'subtitle' => ['type' => 'string', 'default' => ''],
-            'items'    => ['type' => 'array', 'default' => [], 'items' => ['type' => 'object']],
-            'filters'  => ['type' => 'array', 'default' => [], 'items' => ['type' => 'string']],
+            'itemsJson' => ['type' => 'string', 'default' => '[]'],
+            'filtersJson' => ['type' => 'string', 'default' => '[]'],
         ],
         'render_callback' => function ($attrs) {
+            $attrs['items'] = json_decode($attrs['itemsJson'] ?? '[]', true) ?: [];
+            $attrs['filters'] = json_decode($attrs['filtersJson'] ?? '[]', true) ?: [];
+            unset($attrs['itemsJson'], $attrs['filtersJson']);
             return '<div class="reisewelt-bento-grid" data-attrs="' . esc_attr(json_encode($attrs)) . '"></div>';
         },
     ]);

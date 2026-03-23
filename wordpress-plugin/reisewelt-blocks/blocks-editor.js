@@ -347,9 +347,9 @@
         el(TextControl, { label: 'Überschrift', value: attributes.title, onChange: v => setAttributes({ title: v }) }),
         items.map(function (item, i) {
           return el('div', { key: i, style: { marginBottom: '12px', padding: '12px', background: '#f8f6f2', borderRadius: '4px' } },
-            el(TextControl, { label: 'Frage', value: item.frage || '', onChange: function (v) { var it = [].concat(items); it[i] = Object.assign({}, it[i], { frage: v }); setAttributes({ items: it }); } }),
-            el(TextareaControl, { label: 'Antwort', value: item.antwort || '', onChange: function (v) { var it = [].concat(items); it[i] = Object.assign({}, it[i], { antwort: v }); setAttributes({ items: it }); }, rows: 3 }),
-            el(Button, { isDestructive: true, isSmall: true, onClick: function () { var it = [].concat(items); it.splice(i, 1); setAttributes({ items: it }); } }, 'Entfernen')
+            el(TextControl, { label: 'Frage', value: item.frage || '', onChange: function (v) { var it = [].concat(items); it[i] = Object.assign({}, it[i], { frage: v }); setAttributes({ itemsJson: JSON.stringify(it) }); } }),
+            el(TextareaControl, { label: 'Antwort', value: item.antwort || '', onChange: function (v) { var it = [].concat(items); it[i] = Object.assign({}, it[i], { antwort: v }); setAttributes({ itemsJson: JSON.stringify(it) }); }, rows: 3 }),
+            el(Button, { isDestructive: true, isSmall: true, onClick: function () { var it = [].concat(items); it.splice(i, 1); setAttributes({ itemsJson: JSON.stringify(it) }); } }, 'Entfernen')
           );
         }),
         el(Button, { isPrimary: true, onClick: function () { setAttributes({ items: items.concat([{ frage: '', antwort: '' }]) }); } }, '+ Frage hinzufügen')
@@ -368,13 +368,16 @@
     attributes: {
       title: { type: 'string', default: 'Exklusive Reise-Empfehlungen' },
       subtitle: { type: 'string', default: 'Handverlesene Erlebnisse für anspruchsvolle Genießer.' },
-      filters: { type: 'array', default: ['Europa', 'Asien', 'Weinreisen'] },
-      items: { type: 'array', default: [] },
+      filtersJson: { type: 'string', default: '["Europa","Asien","Weinreisen"]' },
+      itemsJson: { type: 'string', default: '[]' },
     },
     edit: function (props) {
       var attrs = props.attributes;
       var setAttributes = props.setAttributes;
-      var items = attrs.items || [];
+      var items = [];
+      var filters = [];
+      try { items = JSON.parse(attrs.itemsJson || '[]'); } catch(e) { items = []; }
+      try { filters = JSON.parse(attrs.filtersJson || '[]'); } catch(e) { filters = []; }
 
       return el('div', { style: { padding: '20px', border: '2px solid #E64415', borderRadius: '8px', background: '#fafafa' } },
         el('div', { style: { marginBottom: '16px' } },
@@ -382,8 +385,8 @@
           el(TextControl, { label: 'Untertitel', value: attrs.subtitle, onChange: function(v) { setAttributes({ subtitle: v }); } }),
           el(TextareaControl, {
             label: 'Filter-Tabs (eins pro Zeile)',
-            value: (attrs.filters || []).join('\n'),
-            onChange: function(v) { setAttributes({ filters: v.split('\n').filter(Boolean) }); },
+            value: filters.join('\n'),
+            onChange: function(v) { setAttributes({ filtersJson: JSON.stringify(v.split('\n').filter(Boolean)) }); },
             rows: 3,
           })
         ),
@@ -396,7 +399,7 @@
                 el(SelectControl, {
                   label: 'Größe',
                   value: item.size || 'small',
-                  onChange: function(v) { var it = [].concat(items); it[i] = Object.assign({}, it[i], { size: v }); setAttributes({ items: it }); },
+                  onChange: function(v) { var it = [].concat(items); it[i] = Object.assign({}, it[i], { size: v }); setAttributes({ itemsJson: JSON.stringify(it) }); },
                   options: [
                     { label: 'Klein (1x1)', value: 'small' },
                     { label: 'Groß (2x2)', value: 'large' },
@@ -405,14 +408,14 @@
                   __nextHasNoMarginBottom: true,
                 })
               ),
-              el(TextControl, { label: 'Titel', value: item.title || '', onChange: function(v) { var it = [].concat(items); it[i] = Object.assign({}, it[i], { title: v }); setAttributes({ items: it }); } }),
-              el(TextControl, { label: 'Ort / Land', value: item.location || '', onChange: function(v) { var it = [].concat(items); it[i] = Object.assign({}, it[i], { location: v }); setAttributes({ items: it }); } }),
-              el(TextControl, { label: 'Preis', value: item.price || '', onChange: function(v) { var it = [].concat(items); it[i] = Object.assign({}, it[i], { price: v }); setAttributes({ items: it }); } }),
-              el(TextControl, { label: 'Beschreibung (optional)', value: item.description || '', onChange: function(v) { var it = [].concat(items); it[i] = Object.assign({}, it[i], { description: v }); setAttributes({ items: it }); } }),
-              el(TextControl, { label: 'Link', value: item.href || '', onChange: function(v) { var it = [].concat(items); it[i] = Object.assign({}, it[i], { href: v }); setAttributes({ items: it }); } }),
+              el(TextControl, { label: 'Titel', value: item.title || '', onChange: function(v) { var it = [].concat(items); it[i] = Object.assign({}, it[i], { title: v }); setAttributes({ itemsJson: JSON.stringify(it) }); } }),
+              el(TextControl, { label: 'Ort / Land', value: item.location || '', onChange: function(v) { var it = [].concat(items); it[i] = Object.assign({}, it[i], { location: v }); setAttributes({ itemsJson: JSON.stringify(it) }); } }),
+              el(TextControl, { label: 'Preis', value: item.price || '', onChange: function(v) { var it = [].concat(items); it[i] = Object.assign({}, it[i], { price: v }); setAttributes({ itemsJson: JSON.stringify(it) }); } }),
+              el(TextControl, { label: 'Beschreibung (optional)', value: item.description || '', onChange: function(v) { var it = [].concat(items); it[i] = Object.assign({}, it[i], { description: v }); setAttributes({ itemsJson: JSON.stringify(it) }); } }),
+              el(TextControl, { label: 'Link', value: item.href || '', onChange: function(v) { var it = [].concat(items); it[i] = Object.assign({}, it[i], { href: v }); setAttributes({ itemsJson: JSON.stringify(it) }); } }),
               el(MediaUploadCheck, {},
                 el(MediaUpload, {
-                  onSelect: function(media) { var it = [].concat(items); it[i] = Object.assign({}, it[i], { image: media.url, imageId: media.id }); setAttributes({ items: it }); },
+                  onSelect: function(media) { var it = [].concat(items); it[i] = Object.assign({}, it[i], { image: media.url, imageId: media.id }); setAttributes({ itemsJson: JSON.stringify(it) }); },
                   allowedTypes: ['image'],
                   value: item.imageId,
                   render: function(obj) {
@@ -426,7 +429,7 @@
               el(Button, {
                 isDestructive: true, isSmall: true,
                 style: { position: 'absolute', top: '8px', right: '8px' },
-                onClick: function() { var it = [].concat(items); it.splice(i, 1); setAttributes({ items: it }); }
+                onClick: function() { var it = [].concat(items); it.splice(i, 1); setAttributes({ itemsJson: JSON.stringify(it) }); }
               }, '×')
             );
           })
@@ -434,7 +437,7 @@
 
         el(Button, {
           isPrimary: true,
-          onClick: function() { setAttributes({ items: items.concat([{ title: '', location: '', price: '', image: '', href: '', size: 'small' }]) }); },
+          onClick: function() { setAttributes({ itemsJson: JSON.stringify(items.concat([{ title: '', location: '', price: '', image: '', href: '', size: 'small' }])) }); },
           style: { marginTop: '12px' }
         }, '+ Reise hinzufügen')
       );
