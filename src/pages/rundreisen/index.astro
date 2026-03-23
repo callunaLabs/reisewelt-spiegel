@@ -98,9 +98,9 @@ try {
 
     <!-- GRID -->
     <section style="max-width:80rem;margin:0 auto;padding:5rem 1.5rem;">
-      <div class="rw-grid">
+      <div id="rundreisen-grid">
         {rundreisen.map((reise) => (
-          <a href={`/rundreisen/${reise.slug}`} class="rw-card group" style="text-decoration:none;color:inherit;">
+          <a href={`/rundreisen/${reise.slug}`} class="group" style="text-decoration:none;color:inherit;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.08);border:1px solid #f0f0f0;transition:box-shadow 0.3s;">
             <div style="position:relative;height:240px;overflow:hidden;">
               <img src={reise.image} alt={reise.title} style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s;" class="group-hover:scale-105" />
               <div style="position:absolute;top:16px;left:16px;display:flex;gap:8px;">
@@ -150,27 +150,19 @@ try {
 </Layout>
 
 <style>
-  .rw-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  #rundreisen-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
   }
   @media (min-width: 768px) {
-    .rw-grid { grid-template-columns: repeat(2, 1fr); }
+    #rundreisen-grid { grid-template-columns: repeat(2, 1fr) !important; }
   }
   @media (min-width: 1024px) {
-    .rw-grid { grid-template-columns: repeat(3, 1fr); }
+    #rundreisen-grid { grid-template-columns: repeat(3, 1fr) !important; }
   }
-  .rw-card {
-    background: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-    border: 1px solid #f0f0f0;
-    transition: box-shadow 0.3s;
-  }
-  .rw-card:hover {
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  .group:hover {
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12) !important;
   }
   .rw-partner-grid {
     display: grid;
