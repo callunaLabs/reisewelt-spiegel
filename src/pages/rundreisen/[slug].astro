@@ -1,0 +1,275 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import MobileNav from "../../components/MobileNav.astro";
+import { getRundreisen, getRundreiseBySlug, getEmbeddedImage, getMeta } from "../../lib/wordpress";
+
+const fallbackTrips = [
+  {
+    slug: "vietnam",
+    title: "Vietnam: Facettenreich von Nord nach S\u00fcd",
+    duration: "13 Tage",
+    price: "2.395",
+    partner: "Marco Polo",
+    bookingUrl: "https://www.sgr-tours.de",
+    image: "https://images.unsplash.com/photo-1528127269322-539801943592?w=1920&q=80",
+    excerpt: "Entdecken Sie die faszinierende Vielfalt Vietnams \u2013 von den Reisterrassen im Norden bis zu den schwimmenden M\u00e4rkten im Mekong-Delta.",
+    description: "Diese 13-t\u00e4gige Rundreise f\u00fchrt Sie durch die vielf\u00e4ltigsten Landschaften Vietnams. Beginnen Sie in Hanoi mit seiner charmanten Altstadt, besuchen Sie die legend\u00e4re Halong-Bucht und reisen Sie \u00fcber die alte Kaiserstadt Hu\u00e9 bis nach Saigon. Unterwegs erleben Sie die Gastfreundschaft der Vietnamesen, probieren Pho auf lokalen M\u00e4rkten und entdecken die faszinierende Geschichte des Landes.",
+    highlights: ["Halong-Bucht per Boot", "Reisterrassen von Sapa", "Altstadt von Hoi An", "Mekong-Delta", "Cu-Chi-Tunnel"],
+    included: ["Internationale Fl\u00fcge", "12 \u00dcbernachtungen", "Fr\u00fchst\u00fcck t\u00e4glich", "Deutschsprachige Reiseleitung", "Alle Transfers"],
+  },
+  {
+    slug: "azoren",
+    title: "Azoren: Inselhopping im Atlantik",
+    duration: "11 Tage",
+    price: "2.495",
+    partner: "Marco Polo",
+    bookingUrl: "https://www.sgr-tours.de",
+    image: "https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=1920&q=80",
+    excerpt: "Neun Inseln voller Naturwunder: hei\u00dfe Quellen, Kraterseen, Walbeobachtung und azurblaue K\u00fcsten mitten im Atlantik.",
+    description: "Die Azoren sind ein Archipel im Herzen des Atlantiks \u2013 neun Inseln, jede mit ihrem eigenen Charakter. Auf dieser 11-t\u00e4gigen Rundreise entdecken Sie die gr\u00fcnen Landschaften von S\u00e3o Miguel, die dramatischen Klippen von Flores und die vulkanische Sch\u00f6nheit von Faial. Walbeobachtung, hei\u00dfe Quellen und erlesene Inselk\u00fcche machen diese Reise unvergesslich.",
+    highlights: ["Sete Cidades Kratersee", "Walbeobachtung", "Hei\u00dfe Quellen von Furnas", "Weinberge auf Pico", "Flores Wasserfälle"],
+    included: ["Fl\u00fcge ab/bis Frankfurt", "10 \u00dcbernachtungen", "Halbpension", "Inlandsfl\u00fcge", "Reiseleitung"],
+  },
+  {
+    slug: "china",
+    title: "China: Eine Reise durch Chinas Geschichte",
+    duration: "14 Tage",
+    price: "2.145",
+    partner: "Marco Polo",
+    bookingUrl: "https://www.sgr-tours.de",
+    image: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=1920&q=80",
+    excerpt: "Von der Gro\u00dfen Mauer \u00fcber die Terrakotta-Armee bis zur futuristischen Skyline von Shanghai \u2013 ein Land der Kontraste.",
+    description: "China fasziniert mit einer Jahrtausende alten Kultur und atemberaubender Modernit\u00e4t. Diese 14-t\u00e4gige Rundreise f\u00fchrt Sie von Peking mit der Verbotenen Stadt und der Gro\u00dfen Mauer \u00fcber Xi'an mit seiner Terrakotta-Armee bis nach Shanghai, wo Tradition und Zukunft verschmelzen.",
+    highlights: ["Gro\u00dfe Mauer bei Mutianyu", "Verbotene Stadt", "Terrakotta-Armee", "Li-Fluss Bootsfahrt", "Bund Promenade Shanghai"],
+    included: ["Internationale Fl\u00fcge", "13 \u00dcbernachtungen", "Fr\u00fchst\u00fcck & Abendessen", "Inlandsfl\u00fcge", "Deutschsprachige Reiseleitung"],
+  },
+  {
+    slug: "nordmazedonien-albanien-montenegro",
+    title: "Nordmazedonien, Albanien & Montenegro: Juwelen im unentdeckten Europa",
+    duration: "10 Tage",
+    price: "1.695",
+    partner: "Studiosus",
+    bookingUrl: "https://www.sgr-tours.de",
+    image: "https://images.unsplash.com/photo-1580654842939-e1e57a47e48a?w=1920&q=80",
+    excerpt: "Drei L\u00e4nder, eine Reise: Erleben Sie den unber\u00fchrten Charme Europas mit osmanischen Bazaren, Fjorden und antiken St\u00e4tten.",
+    description: "Der westliche Balkan geh\u00f6rt zu den letzten Geheimtipps Europas. Diese 10-t\u00e4gige Rundreise verbindet drei faszinierende L\u00e4nder: das multikulturelle Nordmazedonien mit dem Ohridsee, das wilde Albanien mit seinen osmanischen St\u00e4dten und Montenegros atemberaubende Bucht von Kotor.",
+    highlights: ["Ohridsee (UNESCO)", "Berat \u2013 Stadt der 1000 Fenster", "Bucht von Kotor", "Tirana Stadtspaziergang", "Ohrid Altstadt"],
+    included: ["Fl\u00fcge ab/bis M\u00fcnchen", "9 \u00dcbernachtungen", "Halbpension", "Studiosus-Reiseleitung", "Alle Eintritte"],
+  },
+  {
+    slug: "aeolische-inseln",
+    title: "\u00c4olische Inseln: Sieben Inseln auf einen Streich",
+    duration: "9 Tage",
+    price: "2.445",
+    partner: "Studiosus",
+    bookingUrl: "https://www.sgr-tours.de",
+    image: "https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?w=1920&q=80",
+    excerpt: "Vulkanische Eilande vor Siziliens K\u00fcste: Stromboli leuchtet, Lipari bet\u00f6rt und Salina verzaubert mit Kapernbl\u00fcten.",
+    description: "Die \u00c4olischen Inseln sind ein UNESCO-Welterbe vor der Nordost-K\u00fcste Siziliens. Auf dieser 9-t\u00e4gigen Reise erleben Sie den feuersprühenden Stromboli bei Nacht, die elegante Architektur von Lipari und die gr\u00fcne Oase Salina, bekannt f\u00fcr Malvasia-Wein und Kapern.",
+    highlights: ["Stromboli bei Nacht", "Lipari Arch\u00e4ologisches Museum", "Salina Weinverkostung", "Vulcano Schwefelquellen", "Panarea Dorfspaziergang"],
+    included: ["Fl\u00fcge ab/bis Frankfurt", "8 \u00dcbernachtungen", "Halbpension", "Bootsfahrten", "Studiosus-Reiseleitung"],
+  },
+  {
+    slug: "polen",
+    title: "Polen: Riesengebirge, Krakau und Breslau",
+    duration: "8 Tage",
+    price: "1.195",
+    partner: "Studiosus",
+    bookingUrl: "https://www.sgr-tours.de",
+    image: "https://images.unsplash.com/photo-1519197924294-4ba991a11128?w=1920&q=80",
+    excerpt: "Kultursch\u00e4tze und Naturerlebnisse im Herzen Europas: Polens sch\u00f6nste St\u00e4dte und die majest\u00e4tische Bergwelt.",
+    description: "Polen begeistert mit einer Mischung aus Geschichte, Kultur und grandioser Natur. Diese 8-t\u00e4gige Rundreise f\u00fchrt Sie vom eleganten Breslau \u00fcber das Riesengebirge bis ins k\u00f6nigliche Krakau. Erleben Sie gotische Kathedralen, Salzbergwerke und die Gastfreundschaft der Polen.",
+    highlights: ["Krakauer Altstadt & Wawel", "Salzbergwerk Wieliczka", "Breslauer Zwerge & Altstadt", "Riesengebirge Wanderung", "Polnische K\u00fcche"],
+    included: ["Fl\u00fcge ab/bis Berlin", "7 \u00dcbernachtungen", "Fr\u00fchst\u00fcck & Abendessen", "Studiosus-Reiseleitung", "Alle Eintritte"],
+  },
+];
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: "vietnam" } },
+    { params: { slug: "azoren" } },
+    { params: { slug: "china" } },
+    { params: { slug: "nordmazedonien-albanien-montenegro" } },
+    { params: { slug: "aeolische-inseln" } },
+    { params: { slug: "polen" } },
+  ];
+}
+
+const { slug } = Astro.params;
+
+let trip = fallbackTrips.find((t) => t.slug === slug) || fallbackTrips[0];
+
+try {
+  const wpTrip = await getRundreiseBySlug(slug);
+  if (wpTrip) {
+    trip = {
+      slug: wpTrip.slug,
+      title: wpTrip.title?.rendered || wpTrip.title,
+      duration: getMeta(wpTrip, "duration") || trip.duration,
+      price: getMeta(wpTrip, "price") || trip.price,
+      partner: getMeta(wpTrip, "partner") || trip.partner,
+      bookingUrl: getMeta(wpTrip, "booking_url") || trip.bookingUrl,
+      image: getEmbeddedImage(wpTrip) || trip.image,
+      excerpt: wpTrip.excerpt?.rendered?.replace(/<[^>]+>/g, "").trim() || trip.excerpt,
+      description: wpTrip.content?.rendered?.replace(/<[^>]+>/g, "").trim() || trip.description,
+      highlights: getMeta(wpTrip, "highlights") || trip.highlights,
+      included: getMeta(wpTrip, "included") || trip.included,
+    };
+  }
+} catch (e) {
+  // WordPress unavailable, use fallback
+}
+
+const relatedTrips = fallbackTrips.filter((t) => t.slug !== slug).slice(0, 3);
+---
+
+<Layout title={trip.title}>
+  <Header />
+  <MobileNav />
+
+  <main class="pb-20 md:pb-0">
+    <!-- ============================================ -->
+    <!-- HERO IMAGE                                   -->
+    <!-- ============================================ -->
+    <section class="relative h-[600px] overflow-hidden">
+      <img
+        src={trip.image}
+        alt={trip.title}
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+      <div class="relative z-10 h-full flex flex-col justify-end max-w-7xl mx-auto px-6 pb-16">
+        <div class="flex items-center gap-3 mb-4">
+          {trip.partner && (
+            <span class="bg-[#E64415] text-white font-headline text-[10px] font-bold px-3 py-1.5 rounded uppercase tracking-wider">
+              {trip.partner}
+            </span>
+          )}
+          <span class="glass-panel px-3 py-1.5 rounded font-headline text-xs font-bold text-on-surface">
+            {trip.duration}
+          </span>
+        </div>
+        <h1 class="font-headline text-4xl md:text-6xl font-black tracking-tighter text-white leading-[0.95] max-w-3xl">
+          {trip.title}
+        </h1>
+        <p class="font-body italic text-white/80 text-lg mt-4 max-w-2xl">
+          {trip.excerpt}
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CONTENT                                      -->
+    <!-- ============================================ -->
+    <section class="max-w-7xl mx-auto px-6 py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <!-- Main Content -->
+        <div class="lg:col-span-2 space-y-12">
+          <!-- Description -->
+          <div>
+            <h2 class="font-headline text-2xl font-black tracking-tight text-on-surface mb-6">Reise&uuml;bersicht</h2>
+            <p class="font-body text-on-surface-variant text-lg italic leading-relaxed">
+              {trip.description}
+            </p>
+          </div>
+
+          <!-- Highlights -->
+          <div class="border-t border-neutral-200 pt-8">
+            <h2 class="font-headline text-2xl font-black tracking-tight text-on-surface mb-6">Highlights</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {trip.highlights.map((highlight: string) => (
+                <div class="flex items-center gap-3">
+                  <span class="material-symbols-outlined text-[#E64415] text-[20px]">place</span>
+                  <span class="font-headline text-sm font-medium text-on-surface">{highlight}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Included -->
+          <div class="border-t border-neutral-200 pt-8">
+            <h2 class="font-headline text-2xl font-black tracking-tight text-on-surface mb-6">Im Preis enthalten</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {trip.included.map((item: string) => (
+                <div class="flex items-center gap-3">
+                  <span class="material-symbols-outlined text-green-600 text-[20px]">check_circle</span>
+                  <span class="font-headline text-sm font-medium text-on-surface">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="lg:col-span-1">
+          <div class="lg:sticky lg:top-24 space-y-6">
+            <!-- Price Card -->
+            <div class="bg-surface-container-low p-8 rounded-lg border-l-4 border-[#E64415]">
+              <p class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">Preis pro Person</p>
+              <p class="font-headline text-4xl font-black text-on-surface">ab {trip.price} &euro;</p>
+              <p class="font-body text-on-surface-variant text-sm italic mt-1">{trip.duration} &middot; {trip.partner}</p>
+              <a
+                href={trip.bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-6 block w-full bg-[#E64415] text-white text-center py-4 font-headline font-bold text-sm uppercase tracking-widest rounded hover:bg-[#d03d12] transition-colors"
+              >
+                Jetzt buchen
+              </a>
+              <p class="font-body text-on-surface-variant text-xs italic mt-3 text-center">
+                Buchung &uuml;ber {trip.partner}
+              </p>
+            </div>
+
+            <!-- Partner Info -->
+            <div class="bg-white p-6 rounded-lg border border-neutral-100">
+              <h3 class="font-headline text-sm font-bold text-on-surface mb-2">Reiseveranstalter</h3>
+              <p class="font-headline text-lg font-bold text-[#E64415]">{trip.partner}</p>
+              <p class="font-body text-on-surface-variant text-sm italic mt-2">
+                Dieser Reisepartner wird von der SPIEGEL Reisewelt empfohlen.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- RELATED TRIPS                                -->
+    <!-- ============================================ -->
+    <section class="bg-surface-container-low py-20">
+      <div class="max-w-7xl mx-auto px-6">
+        <p class="font-label text-[10px] font-bold uppercase tracking-widest text-[#E64415] mb-3">Weitere Rundreisen</p>
+        <h2 class="font-headline text-3xl font-black tracking-tighter text-on-surface mb-10">Das k&ouml;nnte Sie auch interessieren</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {relatedTrips.map((related) => (
+            <a href={`/rundreisen/${related.slug}`} class="group bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 border border-neutral-100">
+              <div class="relative h-[200px] overflow-hidden">
+                <img
+                  src={related.image}
+                  alt={related.title}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div class="absolute top-3 right-3">
+                  <span class="glass-panel px-2.5 py-1 rounded font-headline text-xs font-bold text-on-surface">
+                    ab {related.price} &euro;
+                  </span>
+                </div>
+              </div>
+              <div class="p-5">
+                <span class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">{related.duration}</span>
+                <h3 class="font-headline text-base font-bold text-on-surface tracking-tight mt-1 group-hover:text-[#E64415] transition-colors">
+                  {related.title}
+                </h3>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

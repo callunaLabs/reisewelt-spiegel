@@ -1,0 +1,203 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import MobileNav from "../../components/MobileNav.astro";
+import { getReisetrends, getReisetrendBySlug, getEmbeddedImage, getMeta } from "../../lib/wordpress";
+
+const fallbackArticles = [
+  {
+    slug: "reisetrends-2026",
+    title: "Reisetrends 2026: Wie Urlaub heute aussieht",
+    date: "15. M\u00e4rz 2026",
+    image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1920&q=80",
+    excerpt: "Slow Travel, digitale Detox-Resorts und KI-gesteuerte Reiseplanung: Die wichtigsten Trends, die das Reisen 2026 pr\u00e4gen werden.",
+    readTime: "8 Min. Lesezeit",
+    partner: "sparwelt.de",
+    content: `<p class="text-xl leading-relaxed text-on-surface/80">Die Art, wie wir reisen, ver\u00e4ndert sich fundamental. W\u00e4hrend die Pandemie-Jahre den Wunsch nach Ferne neu entfacht haben, pr\u00e4gen 2026 ganz andere Kr\u00e4fte die Reisebranche: Nachhaltigkeit ist kein Nice-to-have mehr, sondern Grundvoraussetzung. K\u00fcnstliche Intelligenz revolutioniert die Reiseplanung. Und eine wachsende Zahl von Reisenden sucht bewusst nach Entschleunigung.</p>
+
+<h3 class="font-headline text-2xl font-black tracking-tight text-on-surface mt-12 mb-4">1. Slow Travel: Weniger Ziele, mehr Tiefe</h3>
+<p class="text-xl leading-relaxed text-on-surface/80">Der Trend zum langsamen Reisen verst\u00e4rkt sich 2026 weiter. Statt f\u00fcnf St\u00e4dte in einer Woche zu besuchen, verbringen Reisende zwei Wochen an einem Ort. Sie lernen die Sprache, kochen mit Einheimischen und entdecken Viertel, die in keinem Reisef\u00fchrer stehen. Slow Travel bedeutet nicht weniger Erlebnis \u2013 im Gegenteil: Es bedeutet tiefere Erlebnisse.</p>
+
+<h3 class="font-headline text-2xl font-black tracking-tight text-on-surface mt-12 mb-4">2. Digital Detox Resorts</h3>
+<p class="text-xl leading-relaxed text-on-surface/80">Immer mehr Hotels bieten bewusst W-LAN-freie Zonen oder komplett digitale Auszeiten an. In einer Welt, in der Bildschirmzeit die Norm ist, wird das Abschalten zum Luxus. Resorts in Skandinavien, Bhutan und Costa Rica f\u00fchren den Trend an \u2013 mit \u00fcberraschend langen Wartelisten.</p>
+
+<h3 class="font-headline text-2xl font-black tracking-tight text-on-surface mt-12 mb-4">3. KI in der Reiseplanung</h3>
+<p class="text-xl leading-relaxed text-on-surface/80">K\u00fcnstliche Intelligenz wird zum pers\u00f6nlichen Reiseberater. Von der Routenplanung \u00fcber Restaurant-Empfehlungen bis zur Echtzeitoptimierung w\u00e4hrend der Reise \u2013 KI-Tools machen individuelle Reiseplanung so einfach wie nie zuvor. Die besten Tools kombinieren dabei lokales Wissen mit pers\u00f6nlichen Vorlieben.</p>
+
+<h3 class="font-headline text-2xl font-black tracking-tight text-on-surface mt-12 mb-4">4. Regeneratives Reisen</h3>
+<p class="text-xl leading-relaxed text-on-surface/80">Nachhaltigkeit allein reicht nicht mehr. 2026 geht der Trend zum regenerativen Reisen: Urlauber wollen nicht nur keinen Schaden anrichten, sondern aktiv zur Verbesserung der Destination beitragen. Community-Projekte, Aufforstungsinitiativen und kulturelle Austauschprogramme werden zum festen Bestandteil vieler Reiseangebote.</p>`,
+  },
+  {
+    slug: "eventkreuzfahrten",
+    title: "Eventkreuzfahrten: Motto-Reisen auf See im Aufwind",
+    date: "2. M\u00e4rz 2026",
+    image: "https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1920&q=80",
+    excerpt: "Von Heavy-Metal-Cruises bis Yoga-Retreats auf hoher See: Warum thematische Kreuzfahrten zum Megatrend werden.",
+    readTime: "6 Min. Lesezeit",
+    partner: "sparwelt.de",
+    content: `<p class="text-xl leading-relaxed text-on-surface/80">Die Kreuzfahrtbranche erfindet sich neu \u2013 und das Zauberwort hei\u00dft Erlebnis. Statt klassischer Buffet-Schiffe setzen Reedereien zunehmend auf thematische Kreuzfahrten, die eine klar definierte Zielgruppe ansprechen. Das Konzept funktioniert: Eventkreuzfahrten sind oft Monate im Voraus ausgebucht.</p>
+
+<h3 class="font-headline text-2xl font-black tracking-tight text-on-surface mt-12 mb-4">Musik auf hoher See</h3>
+<p class="text-xl leading-relaxed text-on-surface/80">Die Full Metal Cruise von TUI Cruises war einer der Pioniere \u2013 Heavy Metal trifft Mittelmeer. Heute gibt es Kreuzfahrten f\u00fcr jeden Musikgeschmack: Jazz, Klassik, EDM, Schlager. Die Schiffe werden zu schwimmenden Festivals, komplett mit B\u00fchnen auf dem Pooldeck und After-Show-Partys in der Piano-Bar.</p>
+
+<h3 class="font-headline text-2xl font-black tracking-tight text-on-surface mt-12 mb-4">Wellness &amp; Yoga</h3>
+<p class="text-xl leading-relaxed text-on-surface/80">Am anderen Ende des Spektrums boomen Wellness-Kreuzfahrten. Yoga bei Sonnenaufgang auf dem Oberdeck, Meditationskurse mit Blick aufs Meer und vegane Gourmet-K\u00fcche \u2013 Reedereien wie Virgin Voyages und Seabourn setzen gezielt auf gesundheitsbewusste Reisende.</p>
+
+<h3 class="font-headline text-2xl font-black tracking-tight text-on-surface mt-12 mb-4">Kulinarische Kreuzfahrten</h3>
+<p class="text-xl leading-relaxed text-on-surface/80">Auch die Genuss-Schiene w\u00e4chst rasant. Sternek\u00f6che kochen an Bord, Weinsommeliers f\u00fchren durch Verkostungen und in jedem Hafen stehen kulinarische Exkursionen auf dem Programm. Die Grenzen zwischen Kreuzfahrt und Gourmet-Reise verschwimmen zusehends.</p>
+
+<h3 class="font-headline text-2xl font-black tracking-tight text-on-surface mt-12 mb-4">Warum Eventkreuzfahrten funktionieren</h3>
+<p class="text-xl leading-relaxed text-on-surface/80">Der Erfolg liegt in der Community. Wer eine Motto-Kreuzfahrt bucht, teilt eine Leidenschaft mit allen anderen an Bord. Das schafft sofort Verbindung und macht den Urlaub zum Gemeinschaftserlebnis. Dazu kommt das Rundum-Sorglos-Paket: Transport, Unterkunft, Entertainment und kulinarische Versorgung \u2013 alles aus einer Hand.</p>`,
+  },
+];
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: "reisetrends-2026" } },
+    { params: { slug: "eventkreuzfahrten" } },
+  ];
+}
+
+const { slug } = Astro.params;
+
+let article = fallbackArticles.find((a) => a.slug === slug) || fallbackArticles[0];
+
+try {
+  const wpArticle = await getReisetrendBySlug(slug);
+  if (wpArticle) {
+    article = {
+      slug: wpArticle.slug,
+      title: wpArticle.title?.rendered || wpArticle.title,
+      date: wpArticle.date ? new Date(wpArticle.date).toLocaleDateString("de-DE", { day: "numeric", month: "long", year: "numeric" }) : article.date,
+      image: getEmbeddedImage(wpArticle) || article.image,
+      excerpt: wpArticle.excerpt?.rendered?.replace(/<[^>]+>/g, "").trim() || article.excerpt,
+      readTime: getMeta(wpArticle, "read_time") || article.readTime,
+      partner: getMeta(wpArticle, "partner") || article.partner,
+      content: wpArticle.content?.rendered || article.content,
+    };
+  }
+} catch (e) {
+  // WordPress unavailable, use fallback
+}
+
+const otherArticles = fallbackArticles.filter((a) => a.slug !== slug);
+---
+
+<Layout title={article.title}>
+  <Header />
+  <MobileNav />
+
+  <main class="pb-20 md:pb-0">
+    <!-- ============================================ -->
+    <!-- LEAD IMAGE                                   -->
+    <!-- ============================================ -->
+    <section class="relative h-[600px] w-full overflow-hidden">
+      <img
+        src={article.image}
+        alt={article.title}
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+      <div class="absolute bottom-16 left-0 right-0 max-w-7xl mx-auto px-6">
+        <span class="inline-block px-3 py-1 mb-6 bg-[#E64415] text-white text-[10px] font-label font-bold tracking-widest uppercase rounded">Reisetrend</span>
+        <h1 class="text-white font-headline font-black text-4xl md:text-6xl lg:text-7xl tracking-tighter leading-[0.95] max-w-4xl mb-4">
+          {article.title}
+        </h1>
+        <p class="font-body italic text-white/80 text-lg max-w-2xl">
+          {article.excerpt}
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- ARTICLE CONTENT                              -->
+    <!-- ============================================ -->
+    <article class="max-w-7xl mx-auto px-6 pt-16 pb-16">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+
+        <!-- Left Sidebar -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 lg:self-start">
+          <!-- Meta -->
+          <div class="space-y-4">
+            <div>
+              <p class="text-[10px] uppercase tracking-[0.2em] text-outline font-bold font-label">Ver&ouml;ffentlicht</p>
+              <p class="font-headline font-bold text-sm mt-1">{article.date}</p>
+            </div>
+            <div>
+              <p class="text-[10px] uppercase tracking-[0.2em] text-outline font-bold font-label">Lesezeit</p>
+              <p class="font-headline font-bold text-sm mt-1">{article.readTime}</p>
+            </div>
+            <div>
+              <p class="text-[10px] uppercase tracking-[0.2em] text-outline font-bold font-label">Pr&auml;sentiert von</p>
+              <p class="font-headline font-bold text-sm mt-1 text-[#E64415]">{article.partner}</p>
+            </div>
+          </div>
+
+          <!-- Share Buttons -->
+          <div class="flex items-center gap-3 mt-8">
+            <button class="w-10 h-10 rounded-full border border-outline-variant hover:border-[#E64415] hover:text-[#E64415] flex items-center justify-center transition-colors" aria-label="Teilen">
+              <span class="material-symbols-outlined text-[18px]">share</span>
+            </button>
+            <button class="w-10 h-10 rounded-full border border-outline-variant hover:border-[#E64415] hover:text-[#E64415] flex items-center justify-center transition-colors" aria-label="Merken">
+              <span class="material-symbols-outlined text-[18px]">bookmark</span>
+            </button>
+          </div>
+        </aside>
+
+        <!-- Article Body -->
+        <div class="lg:col-span-7 space-y-8">
+          <Fragment set:html={article.content} />
+        </div>
+      </div>
+    </article>
+
+    <!-- ============================================ -->
+    <!-- MORE ARTICLES                                -->
+    <!-- ============================================ -->
+    {otherArticles.length > 0 && (
+      <section class="bg-surface-container-low py-20">
+        <div class="max-w-7xl mx-auto px-6">
+          <p class="font-label text-[10px] font-bold uppercase tracking-widest text-[#E64415] mb-3">Weitere Reisetrends</p>
+          <h2 class="font-headline text-3xl font-black tracking-tighter text-on-surface mb-10">Mehr lesen</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {otherArticles.map((other) => (
+              <a href={`/reisetrends/${other.slug}`} class="group flex flex-col bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 border border-neutral-100">
+                <div class="relative h-[220px] overflow-hidden">
+                  <img
+                    src={other.image}
+                    alt={other.title}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div class="p-6">
+                  <span class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">{other.date}</span>
+                  <h3 class="font-headline text-xl font-bold text-on-surface tracking-tight mt-2 group-hover:text-[#E64415] transition-colors">
+                    {other.title}
+                  </h3>
+                  <p class="font-body text-on-surface-variant text-sm mt-2 italic line-clamp-2">
+                    {other.excerpt}
+                  </p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .drop-cap::first-letter {
+    float: left;
+    font-size: 5rem;
+    line-height: 0.8;
+    padding-right: 0.75rem;
+    font-family: "Inter", sans-serif;
+    font-weight: 900;
+    color: #E64415;
+  }
+</style>

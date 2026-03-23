@@ -1,0 +1,135 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import MobileNav from "../../components/MobileNav.astro";
+import { getReisetrends, getEmbeddedImage, getMeta } from "../../lib/wordpress";
+
+const fallbackData = [
+  {
+    slug: "reisetrends-2026",
+    title: "Reisetrends 2026: Wie Urlaub heute aussieht",
+    date: "15. M\u00e4rz 2026",
+    image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80",
+    excerpt: "Slow Travel, digitale Detox-Resorts und KI-gesteuerte Reiseplanung: Die wichtigsten Trends, die das Reisen 2026 pr\u00e4gen werden.",
+    readTime: "8 Min. Lesezeit",
+    partner: "sparwelt.de",
+  },
+  {
+    slug: "eventkreuzfahrten",
+    title: "Eventkreuzfahrten: Motto-Reisen auf See im Aufwind",
+    date: "2. M\u00e4rz 2026",
+    image: "https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&q=80",
+    excerpt: "Von Heavy-Metal-Cruises bis Yoga-Retreats auf hoher See: Warum thematische Kreuzfahrten zum Megatrend werden.",
+    readTime: "6 Min. Lesezeit",
+    partner: "sparwelt.de",
+  },
+];
+
+let reisetrends = fallbackData;
+
+try {
+  const wpData = await getReisetrends();
+  if (wpData && wpData.length > 0) {
+    reisetrends = wpData.map((item: any) => ({
+      slug: item.slug,
+      title: item.title?.rendered || item.title,
+      date: item.date ? new Date(item.date).toLocaleDateString("de-DE", { day: "numeric", month: "long", year: "numeric" }) : "",
+      image: getEmbeddedImage(item) || fallbackData[0].image,
+      excerpt: item.excerpt?.rendered?.replace(/<[^>]+>/g, "").trim() || "",
+      readTime: getMeta(item, "read_time") || "5 Min. Lesezeit",
+      partner: getMeta(item, "partner") || "sparwelt.de",
+    }));
+  }
+} catch (e) {
+  // WordPress unavailable, use fallback data
+}
+---
+
+<Layout title="Reisetrends">
+  <Header />
+  <MobileNav />
+
+  <main class="pb-20 md:pb-0">
+    <!-- ============================================ -->
+    <!-- HERO SECTION                                 -->
+    <!-- ============================================ -->
+    <section class="relative h-[500px] overflow-hidden">
+      <img
+        src="https://images.unsplash.com/photo-1436491865332-7a61a109db05?w=1920&q=80"
+        alt="Reisetrends"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 hero-gradient"></div>
+      <div class="relative z-10 h-full flex flex-col justify-end max-w-7xl mx-auto px-6 pb-16">
+        <p class="font-label text-[10px] font-bold uppercase tracking-widest text-white/70 mb-3">SPIEGEL Reisewelt</p>
+        <h1 class="font-headline text-5xl md:text-7xl font-black tracking-tighter text-white leading-[0.95]">
+          Reisetrends.
+        </h1>
+        <p class="font-body italic text-white/80 text-lg md:text-xl mt-4 max-w-xl">
+          Analysen, Hintergr&uuml;nde und Perspektiven zur Zukunft des Reisens.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- ARTICLES                                     -->
+    <!-- ============================================ -->
+    <section class="max-w-7xl mx-auto px-6 py-20">
+      <div class="space-y-12">
+        {reisetrends.map((artikel, i) => (
+          <a href={`/reisetrends/${artikel.slug}`} class="group flex flex-col lg:flex-row bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 border border-neutral-100">
+            <div class={`lg:w-2/5 relative h-72 lg:h-auto overflow-hidden ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
+              <img
+                src={artikel.image}
+                alt={artikel.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div class="absolute top-4 left-4">
+                <span class="bg-[#E64415] text-white font-headline text-[10px] font-bold px-2.5 py-1 rounded uppercase tracking-wider">
+                  Trend
+                </span>
+              </div>
+            </div>
+            <div class={`lg:w-3/5 p-8 lg:p-12 flex flex-col justify-center ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
+              <div class="flex items-center gap-3 mb-4">
+                <span class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">{artikel.date}</span>
+                <span class="text-on-surface-variant/30">&bull;</span>
+                <span class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">{artikel.readTime}</span>
+              </div>
+              <h2 class="font-headline text-2xl md:text-3xl font-black tracking-tight text-on-surface group-hover:text-[#E64415] transition-colors leading-tight">
+                {artikel.title}
+              </h2>
+              <p class="font-body text-on-surface-variant text-lg mt-4 italic leading-relaxed">
+                {artikel.excerpt}
+              </p>
+              <div class="mt-6 flex items-center gap-2 font-headline text-sm font-bold text-[#E64415]">
+                Artikel lesen
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- PARTNER SECTION                              -->
+    <!-- ============================================ -->
+    <section class="bg-surface-container-low py-20">
+      <div class="max-w-7xl mx-auto px-6">
+        <p class="font-label text-[10px] font-bold uppercase tracking-widest text-[#E64415] mb-4">Pr&auml;sentiert von</p>
+        <h2 class="font-headline text-3xl md:text-4xl font-black tracking-tighter text-on-surface mb-8">
+          sparwelt.de
+        </h2>
+        <div class="bg-white p-8 rounded-lg border border-neutral-100 max-w-2xl">
+          <p class="font-body text-on-surface-variant italic leading-relaxed">
+            sparwelt.de ist Deutschlands gr&ouml;&szlig;tes Portal f&uuml;r Gutscheine, Deals und Sparangebote. In Zusammenarbeit mit der SPIEGEL Reisewelt pr&auml;sentieren wir Ihnen die neuesten Trends und Entwicklungen der Reisebranche.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

@@ -3,6 +3,14 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import MobileNav from "../components/MobileNav.astro";
+import { getHomepageData } from "../lib/wordpress";
+
+let wpData = { rundreisen: [], genussreisen: [], reisetrends: [], deals: [] };
+try {
+  wpData = await getHomepageData();
+} catch (e) {
+  // WordPress unavailable, use static content below
+}
 ---
 
 <Layout title="Die Kunst des Ankommens">
@@ -178,10 +186,10 @@ import MobileNav from "../components/MobileNav.astro";
               Handverlesene Destinationen, die weit &uuml;ber das Gew&ouml;hnliche hinausgehen. Jedes Ziel erz&auml;hlt seine eigene Geschichte.
             </p>
             <a
-              href="#"
+              href="/rundreisen"
               class="inline-flex items-center gap-2 mt-8 font-headline text-sm font-bold text-secondary hover:text-secondary-container transition-colors"
             >
-              Alle Ziele entdecken
+              Alle Rundreisen entdecken
               <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
             </a>
           </div>
@@ -307,7 +315,7 @@ import MobileNav from "../components/MobileNav.astro";
               Vergessen Sie den Louvre. Wir f&uuml;hren Sie zu den versteckten Ateliers von Belleville, den besten Naturweinen im 11. Arrondissement und einem Fr&uuml;hst&uuml;ck mit Blick auf die D&auml;cher von Montmartre.
             </p>
             <a
-              href="#"
+              href="/reisetrends/reisetrends-2026"
               class="inline-flex items-center gap-2 mt-8 font-headline text-sm font-bold text-secondary hover:text-secondary-container transition-colors"
             >
               Artikel lesen

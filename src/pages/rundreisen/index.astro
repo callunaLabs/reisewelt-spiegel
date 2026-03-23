@@ -1,0 +1,216 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import MobileNav from "../../components/MobileNav.astro";
+import { getRundreisen, getEmbeddedImage, getMeta } from "../../lib/wordpress";
+
+const fallbackData = [
+  {
+    slug: "vietnam",
+    title: "Vietnam: Facettenreich von Nord nach S\u00fcd",
+    duration: "13 Tage",
+    price: "2.395",
+    partner: "Marco Polo",
+    image: "https://images.unsplash.com/photo-1528127269322-539801943592?w=800&q=80",
+    excerpt: "Entdecken Sie die faszinierende Vielfalt Vietnams \u2013 von den Reisterrassen im Norden bis zu den schwimmenden M\u00e4rkten im Mekong-Delta.",
+  },
+  {
+    slug: "azoren",
+    title: "Azoren: Inselhopping im Atlantik",
+    duration: "11 Tage",
+    price: "2.495",
+    partner: "Marco Polo",
+    image: "https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=800&q=80",
+    excerpt: "Neun Inseln voller Naturwunder: hei\u00dfe Quellen, Kraterseen, Walbeobachtung und azurblaue K\u00fcsten mitten im Atlantik.",
+  },
+  {
+    slug: "china",
+    title: "China: Eine Reise durch Chinas Geschichte",
+    duration: "14 Tage",
+    price: "2.145",
+    partner: "Marco Polo",
+    image: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800&q=80",
+    excerpt: "Von der Gro\u00dfen Mauer \u00fcber die Terrakotta-Armee bis zur futuristischen Skyline von Shanghai \u2013 ein Land der Kontraste.",
+  },
+  {
+    slug: "nordmazedonien-albanien-montenegro",
+    title: "Nordmazedonien, Albanien & Montenegro: Juwelen im unentdeckten Europa",
+    duration: "10 Tage",
+    price: "1.695",
+    partner: "Studiosus",
+    image: "https://images.unsplash.com/photo-1580654842939-e1e57a47e48a?w=800&q=80",
+    excerpt: "Drei L\u00e4nder, eine Reise: Erleben Sie den unber\u00fchrten Charme Europas mit osmanischen Bazaren, Fjorden und antiken St\u00e4tten.",
+  },
+  {
+    slug: "aeolische-inseln",
+    title: "\u00c4olische Inseln: Sieben Inseln auf einen Streich",
+    duration: "9 Tage",
+    price: "2.445",
+    partner: "Studiosus",
+    image: "https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?w=800&q=80",
+    excerpt: "Vulkanische Eilande vor Siziliens K\u00fcste: Stromboli leuchtet, Lipari betört und Salina verzaubert mit Kapernbl\u00fcten.",
+  },
+  {
+    slug: "polen",
+    title: "Polen: Riesengebirge, Krakau und Breslau",
+    duration: "8 Tage",
+    price: "1.195",
+    partner: "Studiosus",
+    image: "https://images.unsplash.com/photo-1519197924294-4ba991a11128?w=800&q=80",
+    excerpt: "Kultursch\u00e4tze und Naturerlebnisse im Herzen Europas: Polens sch\u00f6nste St\u00e4dte und die majest\u00e4tische Bergwelt.",
+  },
+];
+
+let rundreisen = fallbackData;
+
+try {
+  const wpData = await getRundreisen();
+  if (wpData && wpData.length > 0) {
+    rundreisen = wpData.map((item: any) => ({
+      slug: item.slug,
+      title: item.title?.rendered || item.title,
+      duration: getMeta(item, "duration") || "Mehrere Tage",
+      price: getMeta(item, "price") || "",
+      partner: getMeta(item, "partner") || "",
+      image: getEmbeddedImage(item) || fallbackData[0].image,
+      excerpt: item.excerpt?.rendered?.replace(/<[^>]+>/g, "") || "",
+    }));
+  }
+} catch (e) {
+  // WordPress unavailable, use fallback data
+}
+---
+
+<Layout title="Rundreisen">
+  <Header />
+  <MobileNav />
+
+  <main class="pb-20 md:pb-0">
+    <!-- ============================================ -->
+    <!-- HERO SECTION                                 -->
+    <!-- ============================================ -->
+    <section class="relative h-[500px] overflow-hidden">
+      <img
+        src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1920&q=80"
+        alt="Rundreisen"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 hero-gradient"></div>
+      <div class="relative z-10 h-full flex flex-col justify-end max-w-7xl mx-auto px-6 pb-16">
+        <p class="font-label text-[10px] font-bold uppercase tracking-widest text-white/70 mb-3">SPIEGEL Reisewelt</p>
+        <h1 class="font-headline text-5xl md:text-7xl font-black tracking-tighter text-white leading-[0.95]">
+          Rundreisen.
+        </h1>
+        <p class="font-body italic text-white/80 text-lg md:text-xl mt-4 max-w-xl">
+          Die Welt entdecken &ndash; auf sorgf&auml;ltig zusammengestellten Routen mit erfahrenen Partnern.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- RUNDREISEN GRID                              -->
+    <!-- ============================================ -->
+    <section class="max-w-7xl mx-auto px-6 py-20">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {rundreisen.map((reise) => (
+          <a href={`/rundreisen/${reise.slug}`} class="group bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 border border-neutral-100">
+            <div class="relative h-[260px] overflow-hidden">
+              <img
+                src={reise.image}
+                alt={reise.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div class="absolute top-4 right-4">
+                <span class="glass-panel px-3 py-1.5 rounded font-headline text-xs font-bold text-on-surface">
+                  ab {reise.price} &euro; p.P.
+                </span>
+              </div>
+              {reise.partner && (
+                <div class="absolute top-4 left-4">
+                  <span class="bg-[#E64415] text-white font-headline text-[10px] font-bold px-2.5 py-1 rounded uppercase tracking-wider">
+                    {reise.partner}
+                  </span>
+                </div>
+              )}
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="material-symbols-outlined text-[#E64415] text-[16px]">schedule</span>
+                <span class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">{reise.duration}</span>
+              </div>
+              <h3 class="font-headline text-lg font-bold text-on-surface tracking-tight group-hover:text-[#E64415] transition-colors">
+                {reise.title}
+              </h3>
+              <p class="font-body text-on-surface-variant text-sm mt-2 line-clamp-2 italic">
+                {reise.excerpt}
+              </p>
+              <div class="mt-4 flex items-center gap-2 font-headline text-sm font-bold text-[#E64415]">
+                Reise entdecken
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- PARTNER SECTION                              -->
+    <!-- ============================================ -->
+    <section class="bg-surface-container-low py-20">
+      <div class="max-w-7xl mx-auto px-6">
+        <p class="font-label text-[10px] font-bold uppercase tracking-widest text-[#E64415] mb-4">Unsere Partner</p>
+        <h2 class="font-headline text-3xl md:text-4xl font-black tracking-tighter text-on-surface mb-12">
+          Reisen mit den Besten.
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Marco Polo -->
+          <div class="bg-white p-8 rounded-lg border border-neutral-100">
+            <h3 class="font-headline text-xl font-bold text-on-surface mb-3">Marco Polo Reisen</h3>
+            <p class="font-body text-on-surface-variant italic leading-relaxed mb-4">
+              Seit &uuml;ber 50 Jahren f&uuml;hrt Marco Polo kleine Gruppen zu den sch&ouml;nsten Zielen der Welt. Authentische Begegnungen, lokale Insider und nachhaltige Reisekonzepte zeichnen jeden Trip aus.
+            </p>
+            <ul class="space-y-2">
+              <li class="flex items-center gap-2 font-headline text-sm text-on-surface-variant">
+                <span class="material-symbols-outlined text-[#E64415] text-[16px]">check_circle</span>
+                Kleine Gruppen (max. 20 Teilnehmer)
+              </li>
+              <li class="flex items-center gap-2 font-headline text-sm text-on-surface-variant">
+                <span class="material-symbols-outlined text-[#E64415] text-[16px]">check_circle</span>
+                Erfahrene deutschsprachige Reiseleitung
+              </li>
+              <li class="flex items-center gap-2 font-headline text-sm text-on-surface-variant">
+                <span class="material-symbols-outlined text-[#E64415] text-[16px]">check_circle</span>
+                Nachhaltig &amp; verantwortungsvoll
+              </li>
+            </ul>
+          </div>
+          <!-- Studiosus -->
+          <div class="bg-white p-8 rounded-lg border border-neutral-100">
+            <h3 class="font-headline text-xl font-bold text-on-surface mb-3">Studiosus Gruppenreisen</h3>
+            <p class="font-body text-on-surface-variant italic leading-relaxed mb-4">
+              Studiosus verbindet seit 1954 Bildung und Genuss auf h&ouml;chstem Niveau. Kompetente Reiseleiter machen jede Gruppenreise zu einem unvergesslichen Erlebnis.
+            </p>
+            <ul class="space-y-2">
+              <li class="flex items-center gap-2 font-headline text-sm text-on-surface-variant">
+                <span class="material-symbols-outlined text-[#E64415] text-[16px]">check_circle</span>
+                Kulturelle Tiefe &amp; Expertise
+              </li>
+              <li class="flex items-center gap-2 font-headline text-sm text-on-surface-variant">
+                <span class="material-symbols-outlined text-[#E64415] text-[16px]">check_circle</span>
+                Flexibles Reiseprogramm
+              </li>
+              <li class="flex items-center gap-2 font-headline text-sm text-on-surface-variant">
+                <span class="material-symbols-outlined text-[#E64415] text-[16px]">check_circle</span>
+                CO2-kompensierte Reisen
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

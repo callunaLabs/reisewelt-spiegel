@@ -6,18 +6,16 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "tinacms dev -c \"astro dev --host 0.0.0.0\" --local",
-    "build": "tinacms build --skip-cloud-checks && astro build",
+    "dev": "astro dev --host 0.0.0.0",
+    "build": "astro build",
     "preview": "astro preview",
     "start": "npm run build && npx serve dist -l 3000",
     "astro": "astro"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.2",
-    "@tinacms/cli": "^2.1.11",
     "astro": "^6.0.8",
     "serve": "^14.2.6",
-    "tailwindcss": "^4.2.2",
-    "tinacms": "^3.6.3"
+    "tailwindcss": "^4.2.2"
   }
 }

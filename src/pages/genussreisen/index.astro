@@ -1,0 +1,181 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import MobileNav from "../../components/MobileNav.astro";
+import { getGenussreisen, getEmbeddedImage, getMeta } from "../../lib/wordpress";
+
+const fallbackData = [
+  {
+    slug: "truffelreise-perigord",
+    title: "Tr\u00fcffelreise P\u00e9rigord",
+    duration: "5 Tage",
+    price: "1.689",
+    image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80",
+    excerpt: "Auf den Spuren des schwarzen Diamanten: Tr\u00fcffeljagd mit Hund, Sternek\u00fcche und die besten Weine des S\u00fcdwestens.",
+  },
+  {
+    slug: "sizilien",
+    title: "Sizilien: Vulkane, Wein & Dolce Vita",
+    duration: "8 Tage",
+    price: "2.998",
+    image: "https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?w=800&q=80",
+    excerpt: "Zwischen \u00c4tna und Mittelmeer: Fischm\u00e4rkte in Catania, Weinverkostungen am Vulkanhang und Cannoli wie bei der Nonna.",
+  },
+  {
+    slug: "baskenland-rioja",
+    title: "Baskenland & Rioja: Pintxos und Premiumweine",
+    duration: "7 Tage",
+    price: "2.785",
+    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=800&q=80",
+    excerpt: "San Sebasti\u00e1n, die Hauptstadt der Pintxos, trifft auf die Weinkeller der Rioja \u2013 eine kulinarische Symphonie.",
+  },
+  {
+    slug: "suedwestfrankreich",
+    title: "S\u00fcdwestfrankreich: Bordeaux bis Bassin d\u2019Arcachon",
+    duration: "8 Tage",
+    price: "3.589",
+    image: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=800&q=80",
+    excerpt: "Grand-Cru-Verkostungen, Austernb\u00e4nke am Atlantik und die feinste Entenstopfleber des Landes.",
+  },
+  {
+    slug: "katalonien",
+    title: "Katalonien: Von Barcelona bis Costa Brava",
+    duration: "7 Tage",
+    price: "3.115",
+    image: "https://images.unsplash.com/photo-1515443961218-a51367888e4b?w=800&q=80",
+    excerpt: "Avantgarde-K\u00fcche in Barcelona, Cava-Kellereien im Pened\u00e8s und frischer Fang in den Buchten der Costa Brava.",
+  },
+  {
+    slug: "slowenien",
+    title: "Slowenien: Europas gr\u00fcner Genussschatz",
+    duration: "7 Tage",
+    price: "2.899",
+    image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80",
+    excerpt: "Vom Karst bis Ljubljana: Naturweine, Honigspezialit\u00e4ten und eine der nachhaltigsten K\u00fcchen Europas.",
+  },
+];
+
+let genussreisen = fallbackData;
+
+try {
+  const wpData = await getGenussreisen();
+  if (wpData && wpData.length > 0) {
+    genussreisen = wpData.map((item: any) => ({
+      slug: item.slug,
+      title: item.title?.rendered || item.title,
+      duration: getMeta(item, "duration") || "Mehrere Tage",
+      price: getMeta(item, "price") || "",
+      image: getEmbeddedImage(item) || fallbackData[0].image,
+      excerpt: item.excerpt?.rendered?.replace(/<[^>]+>/g, "") || "",
+    }));
+  }
+} catch (e) {
+  // WordPress unavailable, use fallback data
+}
+---
+
+<Layout title="Genussreisen">
+  <Header />
+  <MobileNav />
+
+  <main class="pb-20 md:pb-0">
+    <!-- ============================================ -->
+    <!-- HERO SECTION                                 -->
+    <!-- ============================================ -->
+    <section class="relative h-[500px] overflow-hidden">
+      <img
+        src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1920&q=80"
+        alt="Genussreisen"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 hero-gradient"></div>
+      <div class="relative z-10 h-full flex flex-col justify-end max-w-7xl mx-auto px-6 pb-16">
+        <p class="font-label text-[10px] font-bold uppercase tracking-widest text-white/70 mb-3">SPIEGEL Reisewelt</p>
+        <h1 class="font-headline text-5xl md:text-7xl font-black tracking-tighter text-white leading-[0.95]">
+          Genussreisen.
+        </h1>
+        <p class="font-body italic text-white/80 text-lg md:text-xl mt-4 max-w-xl">
+          Kulinarische Genussreisen &ndash; Entdecken Sie die Welt der Aromen.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- GENUSSREISEN GRID                            -->
+    <!-- ============================================ -->
+    <section class="max-w-7xl mx-auto px-6 py-20">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {genussreisen.map((reise) => (
+          <a href={`/genussreisen/${reise.slug}`} class="group bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 border border-neutral-100">
+            <div class="relative h-[260px] overflow-hidden">
+              <img
+                src={reise.image}
+                alt={reise.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div class="absolute top-4 right-4">
+                <span class="glass-panel px-3 py-1.5 rounded font-headline text-xs font-bold text-on-surface">
+                  ab {reise.price} &euro; p.P.
+                </span>
+              </div>
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent h-20"></div>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="material-symbols-outlined text-[#E64415] text-[16px]">schedule</span>
+                <span class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">{reise.duration}</span>
+                <span class="text-on-surface-variant/30">&bull;</span>
+                <span class="material-symbols-outlined text-[#E64415] text-[16px]">restaurant</span>
+                <span class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Kulinarik</span>
+              </div>
+              <h3 class="font-headline text-lg font-bold text-on-surface tracking-tight group-hover:text-[#E64415] transition-colors">
+                {reise.title}
+              </h3>
+              <p class="font-body text-on-surface-variant text-sm mt-2 line-clamp-2 italic">
+                {reise.excerpt}
+              </p>
+              <div class="mt-4 flex items-center gap-2 font-headline text-sm font-bold text-[#E64415]">
+                Reise entdecken
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- PARTNER SECTION                              -->
+    <!-- ============================================ -->
+    <section class="bg-surface-container-low py-20">
+      <div class="max-w-7xl mx-auto px-6">
+        <p class="font-label text-[10px] font-bold uppercase tracking-widest text-[#E64415] mb-4">Unser Partner</p>
+        <h2 class="font-headline text-3xl md:text-4xl font-black tracking-tighter text-on-surface mb-8">
+          Genussreisen GmbH
+        </h2>
+        <div class="bg-white p-8 rounded-lg border border-neutral-100 max-w-2xl">
+          <p class="font-body text-on-surface-variant italic leading-relaxed mb-4">
+            Die Genussreisen GmbH ist Deutschlands f&uuml;hrender Anbieter f&uuml;r kulinarische Erlebnisreisen. Jede Reise wird von erfahrenen Food-Experten kuratiert und verbindet regionale K&uuml;che mit kulturellen Entdeckungen.
+          </p>
+          <ul class="space-y-2">
+            <li class="flex items-center gap-2 font-headline text-sm text-on-surface-variant">
+              <span class="material-symbols-outlined text-[#E64415] text-[16px]">check_circle</span>
+              Exklusive Kochkurse &amp; Verkostungen
+            </li>
+            <li class="flex items-center gap-2 font-headline text-sm text-on-surface-variant">
+              <span class="material-symbols-outlined text-[#E64415] text-[16px]">check_circle</span>
+              Handverlesene Restaurants &amp; Weingüter
+            </li>
+            <li class="flex items-center gap-2 font-headline text-sm text-on-surface-variant">
+              <span class="material-symbols-outlined text-[#E64415] text-[16px]">check_circle</span>
+              Kleine Gruppen (max. 14 Teilnehmer)
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

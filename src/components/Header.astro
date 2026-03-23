@@ -1,34 +1,38 @@
 ---
-import settings from '../content/settings/global.json';
-const logoSrc = settings.logo || '/uploads/spiegel-reisewelt-logo.png';
+import { getSiteSettings } from '../lib/wordpress';
+
+let logoSrc = '/uploads/spiegel-reisewelt-logo.png';
+let siteTitle = 'SPIEGEL Reisewelt';
+
+try {
+  const settings = await getSiteSettings();
+  if (settings.logo) logoSrc = settings.logo;
+  if (settings.siteTitle) siteTitle = settings.siteTitle;
+} catch {}
 ---
 
-<header class="fixed top-0 left-0 right-0 h-16 bg-secondary z-50 flex items-center">
-  <div class="w-full max-w-7xl mx-auto px-6 flex items-center justify-between">
-    <!-- Logo (änderbar über TinaCMS Einstellungen) -->
+<header class="fixed top-0 left-0 right-0 h-16 bg-[#E64415] z-50 flex items-center shadow-sm">
+  <div class="w-full max-w-screen-2xl mx-auto px-6 flex items-center justify-between">
+    <!-- Logo -->
     <a href="/" class="h-6">
-      <img src={logoSrc} alt={settings.siteTitle || 'SPIEGEL Reisewelt'} class="h-full w-auto object-contain" />
+      <img src={logoSrc} alt={siteTitle} class="h-full w-auto object-contain" />
     </a>
 
     <!-- Desktop Nav -->
     <nav class="hidden md:flex items-center gap-8">
-      <a href="/" class="font-headline text-sm font-semibold text-on-secondary/90 hover:text-on-secondary transition-colors">
-        Magazin
-      </a>
-      <a href="#ziele" class="font-headline text-sm font-semibold text-on-secondary/90 hover:text-on-secondary transition-colors">
-        Ziele
-      </a>
-      <a href="#deals" class="font-headline text-sm font-semibold text-on-secondary/90 hover:text-on-secondary transition-colors">
-        Deals
-      </a>
+      <a href="/" class="font-headline font-bold text-white border-b-2 border-white pb-1 text-sm">Startseite</a>
+      <a href="/rundreisen" class="font-headline font-medium text-white/90 hover:text-white transition-colors text-sm">Rundreisen</a>
+      <a href="/genussreisen" class="font-headline font-medium text-white/90 hover:text-white transition-colors text-sm">Genussreisen</a>
+      <a href="/reisetrends" class="font-headline font-medium text-white/90 hover:text-white transition-colors text-sm">Reisetrends</a>
+      <a href="/ueber-uns" class="font-headline font-medium text-white/90 hover:text-white transition-colors text-sm">Über uns</a>
     </nav>
 
     <!-- Icons -->
     <div class="flex items-center gap-4">
-      <button class="text-on-secondary/90 hover:text-on-secondary transition-colors" aria-label="Suche">
+      <a href="/suche" class="text-white/90 hover:text-white transition-colors" aria-label="Suche">
         <span class="material-symbols-outlined text-[22px]">search</span>
-      </button>
-      <button class="md:hidden text-on-secondary/90 hover:text-on-secondary transition-colors" aria-label="Menü">
+      </a>
+      <button class="md:hidden text-white/90 hover:text-white transition-colors" aria-label="Menü">
         <span class="material-symbols-outlined text-[22px]">menu</span>
       </button>
     </div>

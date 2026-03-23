@@ -1,0 +1,273 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import MobileNav from "../../components/MobileNav.astro";
+import { getGenussreisen, getGenussreiseBySlug, getEmbeddedImage, getMeta } from "../../lib/wordpress";
+
+const fallbackTrips = [
+  {
+    slug: "truffelreise-perigord",
+    title: "Tr\u00fcffelreise P\u00e9rigord",
+    duration: "5 Tage",
+    price: "1.689",
+    partner: "Genussreisen GmbH",
+    bookingUrl: "https://www.genussreisen.de",
+    image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80",
+    excerpt: "Auf den Spuren des schwarzen Diamanten: Tr\u00fcffeljagd mit Hund, Sternek\u00fcche und die besten Weine des S\u00fcdwestens.",
+    description: "Begleiten Sie uns in das P\u00e9rigord, die Heimat des schwarzen Tr\u00fcffels. Diese 5-t\u00e4gige Genussreise f\u00fchrt Sie zu traditionellen Tr\u00fcffelm\u00e4rkten, auf die Jagd mit erfahrenen Caveurs und ihren Hunden, und in die K\u00fcchen von Sternerestaurants, die das ,schwarze Gold' in unvergessliche Gerichte verwandeln. Dazu geniessen Sie die besten Weine aus Bergerac und Cahors.",
+    highlights: ["Tr\u00fcffeljagd mit Hund", "Sternerestaurant-Dinner", "Weinverkostung Bergerac", "Markt von Sarlat", "Kochkurs mit lokalem Chef"],
+    included: ["Fl\u00fcge ab/bis Frankfurt", "4 \u00dcbernachtungen in Boutique-Hotels", "Halbpension plus", "Alle Verkostungen", "Reiseleitung"],
+  },
+  {
+    slug: "sizilien",
+    title: "Sizilien: Vulkane, Wein & Dolce Vita",
+    duration: "8 Tage",
+    price: "2.998",
+    partner: "Genussreisen GmbH",
+    bookingUrl: "https://www.genussreisen.de",
+    image: "https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?w=1920&q=80",
+    excerpt: "Zwischen \u00c4tna und Mittelmeer: Fischm\u00e4rkte in Catania, Weinverkostungen am Vulkanhang und Cannoli wie bei der Nonna.",
+    description: "Sizilien ist ein kulinarisches Paradies. Diese 8-t\u00e4gige Reise f\u00fchrt Sie vom lebhaften Fischmarkt in Catania zu den Weingütern am \u00c4tna, von den Barock-St\u00e4dten des Val di Noto bis zur Str\u00e4nden von Taormina. Lernen Sie, wie echte Arancini gemacht werden, probieren Sie Pistazien aus Bronte und geniessen Sie Cannoli, die nach Familienrezepten gebacken werden.",
+    highlights: ["\u00c4tna-Weinverkostung", "Fischmarkt Catania", "Kochkurs Arancini", "Pistazien in Bronte", "Taormina Altstadt"],
+    included: ["Fl\u00fcge ab/bis M\u00fcnchen", "7 \u00dcbernachtungen", "Halbpension", "Weinverkostungen", "Kochkurse"],
+  },
+  {
+    slug: "baskenland-rioja",
+    title: "Baskenland & Rioja: Pintxos und Premiumweine",
+    duration: "7 Tage",
+    price: "2.785",
+    partner: "Genussreisen GmbH",
+    bookingUrl: "https://www.genussreisen.de",
+    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=1920&q=80",
+    excerpt: "San Sebasti\u00e1n, die Hauptstadt der Pintxos, trifft auf die Weinkeller der Rioja \u2013 eine kulinarische Symphonie.",
+    description: "Erleben Sie die gastronomische Hauptstadt Europas: San Sebasti\u00e1n mit seiner unglaublichen Dichte an Michelin-Sternen. Wandeln Sie durch die Pintxos-Bars der Altstadt, besuchen Sie ber\u00fchmte Weinkeller in der Rioja und lernen Sie die baskische K\u00fcchenphilosophie kennen, die Tradition und Innovation meisterhaft verbindet.",
+    highlights: ["Pintxos-Tour San Sebasti\u00e1n", "Rioja-Weinkeller", "Baskischer Kochkurs", "Bilbao & Guggenheim", "Txakoli-Verkostung"],
+    included: ["Fl\u00fcge ab/bis Frankfurt", "6 \u00dcbernachtungen", "Fr\u00fchst\u00fcck & Abendessen", "Alle Verkostungen", "Transfers"],
+  },
+  {
+    slug: "suedwestfrankreich",
+    title: "S\u00fcdwestfrankreich: Bordeaux bis Bassin d\u2019Arcachon",
+    duration: "8 Tage",
+    price: "3.589",
+    partner: "Genussreisen GmbH",
+    bookingUrl: "https://www.genussreisen.de",
+    image: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=1920&q=80",
+    excerpt: "Grand-Cru-Verkostungen, Austernb\u00e4nke am Atlantik und die feinste Entenstopfleber des Landes.",
+    description: "S\u00fcdwestfrankreich ist das Epizentrum franz\u00f6sischer Genusskultur. Diese 8-t\u00e4gige Reise f\u00fchrt Sie durch die legendären Weinberge von Bordeaux, zu den Austernz\u00fcchtern am Bassin d\u2019Arcachon und in die Landgasth\u00f6fe des Landes, wo Entenstopfleber, Confit und Armagnac zu Hause sind.",
+    highlights: ["Grand-Cru Ch\u00e2teau-Besuch", "Austernverkostung Arcachon", "Bordeaux Altstadt", "Saint-\u00c9milion", "Armagnac-Destillerie"],
+    included: ["Fl\u00fcge ab/bis Frankfurt", "7 \u00dcbernachtungen", "Halbpension", "Grand-Cru Verkostungen", "Privattransfers"],
+  },
+  {
+    slug: "katalonien",
+    title: "Katalonien: Von Barcelona bis Costa Brava",
+    duration: "7 Tage",
+    price: "3.115",
+    partner: "Genussreisen GmbH",
+    bookingUrl: "https://www.genussreisen.de",
+    image: "https://images.unsplash.com/photo-1515443961218-a51367888e4b?w=1920&q=80",
+    excerpt: "Avantgarde-K\u00fcche in Barcelona, Cava-Kellereien im Pened\u00e8s und frischer Fang in den Buchten der Costa Brava.",
+    description: "Katalonien vereint spanische Lebensart mit einer der innovativsten K\u00fcchenszenen der Welt. Von den Tapas-Bars im Borne-Viertel Barcelonas \u00fcber die Cava-Kellereien im Pened\u00e8s bis zu den Fischrestaurants an der Costa Brava erleben Sie 7 Tage voller kulinarischer H\u00f6hepunkte.",
+    highlights: ["Boqueria-Markt Barcelona", "Cava-Kellerei Pened\u00e8s", "Costa Brava Fischrestaurant", "Olive\u00f6l-Verkostung", "Modernisme-Architektur"],
+    included: ["Fl\u00fcge ab/bis Berlin", "6 \u00dcbernachtungen", "Fr\u00fchst\u00fcck & Abendessen", "Weinverkostungen", "Transfers"],
+  },
+  {
+    slug: "slowenien",
+    title: "Slowenien: Europas gr\u00fcner Genussschatz",
+    duration: "7 Tage",
+    price: "2.899",
+    partner: "Genussreisen GmbH",
+    bookingUrl: "https://www.genussreisen.de",
+    image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1920&q=80",
+    excerpt: "Vom Karst bis Ljubljana: Naturweine, Honigspezialit\u00e4ten und eine der nachhaltigsten K\u00fcchen Europas.",
+    description: "Slowenien wurde zur European Region of Gastronomy gek\u00fcrt \u2013 und das zu Recht. Diese 7-t\u00e4gige Genussreise f\u00fchrt Sie durch die Weinregionen des Karst und der Gori\u0161ka Brda, in die Imkereien der slowenischen Alpen und nach Ljubljana, wo Ana Ro\u0161 und andere Spitzenk\u00f6che die slowenische K\u00fcche revolutionieren.",
+    highlights: ["Ljubljana Food-Tour", "Karst-Naturweine", "Imkerei-Besuch", "Gori\u0161ka Brda Weinberge", "Bleder See"],
+    included: ["Fl\u00fcge ab/bis M\u00fcnchen", "6 \u00dcbernachtungen", "Halbpension", "Alle Verkostungen", "Transfers"],
+  },
+];
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: "truffelreise-perigord" } },
+    { params: { slug: "sizilien" } },
+    { params: { slug: "baskenland" } },
+    { params: { slug: "suedwestfrankreich" } },
+    { params: { slug: "katalonien" } },
+    { params: { slug: "slowenien" } },
+  ];
+}
+
+const { slug } = Astro.params;
+
+let trip = fallbackTrips.find((t) => t.slug === slug) || fallbackTrips[0];
+
+try {
+  const wpTrip = await getGenussreiseBySlug(slug);
+  if (wpTrip) {
+    trip = {
+      slug: wpTrip.slug,
+      title: wpTrip.title?.rendered || wpTrip.title,
+      duration: getMeta(wpTrip, "duration") || trip.duration,
+      price: getMeta(wpTrip, "price") || trip.price,
+      partner: getMeta(wpTrip, "partner") || trip.partner,
+      bookingUrl: getMeta(wpTrip, "booking_url") || trip.bookingUrl,
+      image: getEmbeddedImage(wpTrip) || trip.image,
+      excerpt: wpTrip.excerpt?.rendered?.replace(/<[^>]+>/g, "").trim() || trip.excerpt,
+      description: wpTrip.content?.rendered?.replace(/<[^>]+>/g, "").trim() || trip.description,
+      highlights: getMeta(wpTrip, "highlights") || trip.highlights,
+      included: getMeta(wpTrip, "included") || trip.included,
+    };
+  }
+} catch (e) {
+  // WordPress unavailable, use fallback
+}
+
+const relatedTrips = fallbackTrips.filter((t) => t.slug !== slug).slice(0, 3);
+---
+
+<Layout title={trip.title}>
+  <Header />
+  <MobileNav />
+
+  <main class="pb-20 md:pb-0">
+    <!-- ============================================ -->
+    <!-- HERO IMAGE                                   -->
+    <!-- ============================================ -->
+    <section class="relative h-[600px] overflow-hidden">
+      <img
+        src={trip.image}
+        alt={trip.title}
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+      <div class="relative z-10 h-full flex flex-col justify-end max-w-7xl mx-auto px-6 pb-16">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="bg-[#E64415] text-white font-headline text-[10px] font-bold px-3 py-1.5 rounded uppercase tracking-wider">
+            Genussreise
+          </span>
+          <span class="glass-panel px-3 py-1.5 rounded font-headline text-xs font-bold text-on-surface">
+            {trip.duration}
+          </span>
+        </div>
+        <h1 class="font-headline text-4xl md:text-6xl font-black tracking-tighter text-white leading-[0.95] max-w-3xl">
+          {trip.title}
+        </h1>
+        <p class="font-body italic text-white/80 text-lg mt-4 max-w-2xl">
+          {trip.excerpt}
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CONTENT                                      -->
+    <!-- ============================================ -->
+    <section class="max-w-7xl mx-auto px-6 py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <!-- Main Content -->
+        <div class="lg:col-span-2 space-y-12">
+          <!-- Description -->
+          <div>
+            <h2 class="font-headline text-2xl font-black tracking-tight text-on-surface mb-6">Reise&uuml;bersicht</h2>
+            <p class="font-body text-on-surface-variant text-lg italic leading-relaxed">
+              {trip.description}
+            </p>
+          </div>
+
+          <!-- Highlights -->
+          <div class="border-t border-neutral-200 pt-8">
+            <h2 class="font-headline text-2xl font-black tracking-tight text-on-surface mb-6">Kulinarische Highlights</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {trip.highlights.map((highlight: string) => (
+                <div class="flex items-center gap-3">
+                  <span class="material-symbols-outlined text-[#E64415] text-[20px]">restaurant</span>
+                  <span class="font-headline text-sm font-medium text-on-surface">{highlight}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Included -->
+          <div class="border-t border-neutral-200 pt-8">
+            <h2 class="font-headline text-2xl font-black tracking-tight text-on-surface mb-6">Im Preis enthalten</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {trip.included.map((item: string) => (
+                <div class="flex items-center gap-3">
+                  <span class="material-symbols-outlined text-green-600 text-[20px]">check_circle</span>
+                  <span class="font-headline text-sm font-medium text-on-surface">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="lg:col-span-1">
+          <div class="lg:sticky lg:top-24 space-y-6">
+            <!-- Price Card -->
+            <div class="bg-surface-container-low p-8 rounded-lg border-l-4 border-[#E64415]">
+              <p class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">Preis pro Person</p>
+              <p class="font-headline text-4xl font-black text-on-surface">ab {trip.price} &euro;</p>
+              <p class="font-body text-on-surface-variant text-sm italic mt-1">{trip.duration} &middot; {trip.partner}</p>
+              <a
+                href={trip.bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-6 block w-full bg-[#E64415] text-white text-center py-4 font-headline font-bold text-sm uppercase tracking-widest rounded hover:bg-[#d03d12] transition-colors"
+              >
+                Jetzt buchen
+              </a>
+              <p class="font-body text-on-surface-variant text-xs italic mt-3 text-center">
+                Buchung &uuml;ber {trip.partner}
+              </p>
+            </div>
+
+            <!-- Partner Info -->
+            <div class="bg-white p-6 rounded-lg border border-neutral-100">
+              <h3 class="font-headline text-sm font-bold text-on-surface mb-2">Reiseveranstalter</h3>
+              <p class="font-headline text-lg font-bold text-[#E64415]">{trip.partner}</p>
+              <p class="font-body text-on-surface-variant text-sm italic mt-2">
+                Deutschlands f&uuml;hrender Anbieter f&uuml;r kulinarische Erlebnisreisen.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- RELATED TRIPS                                -->
+    <!-- ============================================ -->
+    <section class="bg-surface-container-low py-20">
+      <div class="max-w-7xl mx-auto px-6">
+        <p class="font-label text-[10px] font-bold uppercase tracking-widest text-[#E64415] mb-3">Weitere Genussreisen</p>
+        <h2 class="font-headline text-3xl font-black tracking-tighter text-on-surface mb-10">Das k&ouml;nnte Sie auch interessieren</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {relatedTrips.map((related) => (
+            <a href={`/genussreisen/${related.slug}`} class="group bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 border border-neutral-100">
+              <div class="relative h-[200px] overflow-hidden">
+                <img
+                  src={related.image}
+                  alt={related.title}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div class="absolute top-3 right-3">
+                  <span class="glass-panel px-2.5 py-1 rounded font-headline text-xs font-bold text-on-surface">
+                    ab {related.price} &euro;
+                  </span>
+                </div>
+              </div>
+              <div class="p-5">
+                <span class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">{related.duration}</span>
+                <h3 class="font-headline text-base font-bold text-on-surface tracking-tight mt-1 group-hover:text-[#E64415] transition-colors">
+                  {related.title}
+                </h3>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
