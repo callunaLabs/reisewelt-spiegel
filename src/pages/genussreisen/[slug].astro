@@ -108,13 +108,13 @@ try {
     trip = {
       slug: wpTrip.slug,
       title: wpTrip.title?.rendered || wpTrip.title,
-      duration: getMeta(wpTrip, "duration") || trip.duration,
-      price: getMeta(wpTrip, "price") || trip.price,
+      duration: getMeta(wpTrip, "dauer") || trip.duration,
+      price: getMeta(wpTrip, "preis") || trip.price,
       partner: getMeta(wpTrip, "partner") || trip.partner,
       bookingUrl: getMeta(wpTrip, "booking_url") || trip.bookingUrl,
       image: getEmbeddedImage(wpTrip) || trip.image,
       excerpt: wpTrip.excerpt?.rendered?.replace(/<[^>]+>/g, "").trim() || trip.excerpt,
-      description: wpTrip.content?.rendered?.replace(/<[^>]+>/g, "").trim() || trip.description,
+      description: wpTrip.content?.rendered || trip.description,
       highlights: getMeta(wpTrip, "highlights") || trip.highlights,
       included: getMeta(wpTrip, "included") || trip.included,
     };

@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "tailwindcss" layer(reisewelt);
 
 @theme {
   --color-primary: #04122e;
@@ -29,18 +29,15 @@
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  body {
+  /* Scope base styles to reisewelt-content only — don't touch SPIEGEL areas */
+  .reisewelt-content {
     font-family: var(--font-body);
     color: var(--color-on-surface);
     background-color: var(--color-surface);
+    -webkit-font-smoothing: antialiased;
   }
 
-  ::selection {
+  .reisewelt-content ::selection {
     background-color: color-mix(in srgb, var(--color-secondary) 30%, transparent);
   }
 }
