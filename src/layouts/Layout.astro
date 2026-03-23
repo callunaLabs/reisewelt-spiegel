@@ -60,6 +60,32 @@ try {
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   </head>
   <Fragment set:html={spiegelHeader} />
+    <style is:global>
+      /* Reisewelt Content: break out of SPIEGEL container constraints */
+      .reisewelt-content {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        overflow-x: hidden;
+      }
+      /* Ensure our header sits above SPIEGEL nav */
+      .reisewelt-content header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      /* Override any SPIEGEL max-width on our content */
+      .reisewelt-content section,
+      .reisewelt-content main,
+      .reisewelt-content footer {
+        max-width: none !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+    </style>
     <div class="reisewelt-content">
       <slot />
     </div>
