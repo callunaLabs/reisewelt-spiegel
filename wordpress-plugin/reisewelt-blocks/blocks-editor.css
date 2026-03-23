@@ -1,0 +1,39 @@
+/* Reisewelt Blocks Editor Styles */
+
+.reisewelt-block-hero,
+.reisewelt-block-info-bar,
+.reisewelt-block-highlights,
+.reisewelt-block-itinerary,
+.reisewelt-block-gallery,
+.reisewelt-block-inclusions,
+.reisewelt-block-booking,
+.reisewelt-block-partner,
+.reisewelt-block-prices,
+.reisewelt-block-faq {
+  margin-bottom: 1px;
+}
+
+/* Block label styling */
+[data-type^="reisewelt/"] .block-editor-block-list__block-edit::before {
+  content: '';
+  display: block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #E64415;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+/* Booking CTA inputs override */
+.reisewelt-block-booking .components-text-control__input {
+  background: rgba(255,255,255,0.9) !important;
+}
+
+/* Itinerary day border */
+.reisewelt-block-itinerary > div > div {
+  transition: border-color 0.2s;
+}
+.reisewelt-block-itinerary > div > div:hover {
+  border-left-color: #04122e;
+}

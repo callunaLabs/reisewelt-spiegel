@@ -1,0 +1,195 @@
+---
+interface Block {
+  name: string;
+  attrs: Record<string, any>;
+  innerHTML?: string;
+}
+
+interface Props {
+  blocks: Block[];
+}
+
+const { blocks = [] } = Astro.props;
+---
+
+{blocks.map((block) => {
+  const a = block.attrs || {};
+
+  if (block.name === 'reisewelt/hero') return (
+    <section class="relative h-[600px] md:h-[700px] overflow-hidden">
+      {a.image && <img src={a.image} alt={a.title || ''} class="absolute inset-0 w-full h-full object-cover" />}
+      <div class="absolute inset-0 hero-gradient"></div>
+      <div class="relative z-10 h-full flex flex-col justify-end max-w-7xl mx-auto px-6 pb-16">
+        {a.title && <h1 class="font-headline text-4xl md:text-6xl font-black tracking-tighter text-white leading-tight max-w-3xl">{a.title}</h1>}
+        {a.subtitle && <p class="font-body italic text-xl md:text-2xl text-white/90 mt-4 max-w-xl">{a.subtitle}</p>}
+      </div>
+    </section>
+  );
+
+  if (block.name === 'reisewelt/info-bar') return (
+    <div class="max-w-7xl mx-auto px-6 py-8">
+      <div class="flex flex-wrap gap-6 md:gap-12 items-center py-6 border-y border-outline-variant/30">
+        {a.preis && <div><span class="font-headline text-[10px] font-bold uppercase tracking-widest text-on-surface-variant block">Preis</span><span class="font-headline text-xl font-black text-[#E64415]">{a.preis}</span></div>}
+        {a.dauer && <div><span class="font-headline text-[10px] font-bold uppercase tracking-widest text-on-surface-variant block">Dauer</span><span class="font-headline text-xl font-bold text-primary">{a.dauer}</span></div>}
+        {a.destination && <div><span class="font-headline text-[10px] font-bold uppercase tracking-widest text-on-surface-variant block">Ziel</span><span class="font-headline text-xl font-bold text-primary">{a.destination}</span></div>}
+        {a.kategorie && <div><span class="font-headline text-[10px] font-bold uppercase tracking-widest text-on-surface-variant block">Art</span><span class="font-headline text-lg text-primary">{a.kategorie}</span></div>}
+        {a.partner && <div><span class="font-headline text-[10px] font-bold uppercase tracking-widest text-on-surface-variant block">Partner</span><span class="font-headline text-lg text-primary">{a.partner}</span></div>}
+      </div>
+    </div>
+  );
+
+  if (block.name === 'reisewelt/highlights') return (
+    <div class="max-w-7xl mx-auto px-6 py-12">
+      <h2 class="font-headline text-2xl font-black tracking-tight text-primary mb-8">{a.title || 'Highlights'}</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {(a.items || []).map((item: string) => (
+          <div class="flex items-start gap-3 p-4 bg-surface-container-low rounded">
+            <span class="material-symbols-outlined text-[#E64415] text-lg mt-0.5">check_circle</span>
+            <span class="font-body text-on-surface">{item}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  if (block.name === 'reisewelt/itinerary') return (
+    <div class="max-w-7xl mx-auto px-6 py-12">
+      <h2 class="font-headline text-2xl font-black tracking-tight text-primary mb-8">{a.title || 'Reiseverlauf'}</h2>
+      <div class="space-y-6">
+        {(a.days || []).map((day: any, i: number) => (
+          <div class="flex gap-6">
+            <div class="flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-[#E64415] text-white flex items-center justify-center font-headline font-bold text-sm">{i + 1}</div>
+              {i < (a.days.length - 1) && <div class="w-px flex-1 bg-outline-variant/30 mt-2"></div>}
+            </div>
+            <div class="flex-1 pb-6">
+              <h3 class="font-headline font-bold text-lg text-primary mb-2">{day.titel}</h3>
+              <div class="font-body text-on-surface-variant leading-relaxed" set:html={day.beschreibung}></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  if (block.name === 'reisewelt/gallery') return (
+    <div class="max-w-7xl mx-auto px-6 py-12">
+      <div class={`grid gap-4 grid-cols-2 ${a.columns === 4 ? 'md:grid-cols-4' : a.columns === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'}`}>
+        {(a.images || []).map((img: any) => (
+          <div class="aspect-[4/3] overflow-hidden rounded group">
+            <img src={img.url} alt={img.alt || ''} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  if (block.name === 'reisewelt/inclusions') return (
+    <div class="max-w-7xl mx-auto px-6 py-12 bg-surface-container-low">
+      <h2 class="font-headline text-2xl font-black tracking-tight text-primary mb-8">{a.title || 'Inklusivleistungen'}</h2>
+      <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        {(a.items || []).map((item: string) => (
+          <li class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-green-600 text-lg">done</span>
+            <span class="font-body text-on-surface">{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+
+  if (block.name === 'reisewelt/booking-cta') return (
+    <div class="max-w-7xl mx-auto px-6 py-12">
+      <div class="bg-primary p-8 md:p-12 rounded flex flex-col md:flex-row items-center justify-between gap-8">
+        <div>
+          {a.preis && <p class="font-headline text-3xl font-black text-white mb-2">{a.preis}</p>}
+          {a.hinweis && <p class="font-body italic text-white/70">{a.hinweis}</p>}
+        </div>
+        <a href={a.url || '#'} target="_blank" rel="noopener" class="bg-[#E64415] hover:bg-[#ff5a2b] text-white font-headline font-bold text-[11px] tracking-widest uppercase px-12 py-5 rounded-sm transition-colors whitespace-nowrap">
+          {a.buttonText || 'Jetzt buchen'}
+        </a>
+      </div>
+    </div>
+  );
+
+  if (block.name === 'reisewelt/partner-info') return (
+    <div class="max-w-7xl mx-auto px-6 py-12 border-t border-outline-variant/30">
+      <div class="flex flex-col md:flex-row gap-8 items-start">
+        <div class="md:w-1/3">
+          {a.logo && <img src={a.logo} alt={a.name} class="h-12 mb-4 object-contain" />}
+          <h3 class="font-headline font-bold text-xl text-primary mb-2">{a.name}</h3>
+          {a.telefon && <p class="font-body text-sm text-on-surface-variant"><span class="material-symbols-outlined text-sm align-middle mr-1">phone</span>{a.telefon}</p>}
+          {a.email && <p class="font-body text-sm text-on-surface-variant"><span class="material-symbols-outlined text-sm align-middle mr-1">mail</span>{a.email}</p>}
+          {a.website && <a href={a.website} target="_blank" class="font-headline text-sm text-[#E64415] hover:underline">{a.website}</a>}
+        </div>
+        {(a.usps || []).length > 0 && (
+          <div class="md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-4">
+            {(a.usps || []).map((usp: string) => (
+              <div class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-[#E64415] mt-0.5">verified</span>
+                <span class="font-body text-on-surface">{usp}</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
+  if (block.name === 'reisewelt/price-table') return (
+    <div class="max-w-7xl mx-auto px-6 py-12">
+      <h2 class="font-headline text-2xl font-black tracking-tight text-primary mb-8">{a.title || 'Termine & Preise'}</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <thead>
+            <tr class="border-b-2 border-primary">
+              <th class="text-left font-headline text-sm font-bold uppercase tracking-widest text-primary py-3 pr-4">Termin</th>
+              <th class="text-left font-headline text-sm font-bold uppercase tracking-widest text-primary py-3 pr-4">Preis</th>
+              <th class="text-left font-headline text-sm font-bold uppercase tracking-widest text-primary py-3">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {(a.rows || []).map((row: any) => (
+              <tr class="border-b border-outline-variant/30">
+                <td class="font-body py-3 pr-4">{row.termin}</td>
+                <td class="font-headline font-bold text-[#E64415] py-3 pr-4">{row.preis}</td>
+                <td class="font-body text-on-surface-variant py-3">{row.status}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+
+  if (block.name === 'reisewelt/faq') return (
+    <div class="max-w-7xl mx-auto px-6 py-12">
+      <h2 class="font-headline text-2xl font-black tracking-tight text-primary mb-8">{a.title || 'Häufige Fragen'}</h2>
+      <div class="space-y-4">
+        {(a.items || []).map((item: any) => (
+          <details class="group border border-outline-variant/30 rounded overflow-hidden">
+            <summary class="flex items-center justify-between px-6 py-4 cursor-pointer font-headline font-bold text-primary hover:bg-surface-container-low transition-colors">
+              {item.frage}
+              <span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+            </summary>
+            <div class="px-6 pb-4 font-body text-on-surface-variant leading-relaxed">{item.antwort}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  );
+
+  // Default: render standard WordPress blocks as HTML
+  if (block.name?.startsWith('core/')) return (
+    <div class="max-w-7xl mx-auto px-6 py-4">
+      <div class="font-body text-on-surface leading-relaxed prose prose-lg" set:html={block.innerHTML}></div>
+    </div>
+  );
+
+  // Unknown block: render innerHTML if available
+  if (block.innerHTML) return (
+    <div class="max-w-7xl mx-auto px-6 py-4" set:html={block.innerHTML}></div>
+  );
+
+  return null;
+})}
