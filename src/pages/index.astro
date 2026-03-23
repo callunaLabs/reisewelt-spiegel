@@ -11,522 +11,450 @@ try {
 } catch (e) {
   // WordPress unavailable, use static content below
 }
+
+// Static featured trips data (fallback / default)
+const featuredTrips = [
+  {
+    title: "Azoren: Inselhopping im Atlantik",
+    category: "Rundreise",
+    price: "ab 2.495 \u20AC p.P.",
+    duration: "11 Tage",
+    image: "https://reisewelt.spiegel.de/fileadmin/_processed_/5/6/csm_azoren4_063a01fb8d.webp",
+    href: "/rundreisen/azoren-inselhopping",
+    isAd: true,
+  },
+  {
+    title: "Katalonien abseits von Barcelona",
+    category: "Genussreise",
+    price: "ab 3.115 \u20AC p.P.",
+    duration: "7 Tage",
+    image: "https://reisewelt.spiegel.de/fileadmin/_processed_/2/1/csm_Katalonien_bb7c12bb6d.webp",
+    href: "/genussreisen/katalonien",
+    isAd: true,
+  },
+  {
+    title: "Reisetrends 2026: Wie Urlaub heute aussieht",
+    category: "Reisetrend",
+    price: null,
+    duration: null,
+    image: "https://reisewelt.spiegel.de/fileadmin/_processed_/6/f/csm_Bild_1_Credit_iStock_Galyna_Andrushko_e4e97cc98c.webp",
+    href: "/reisetrends/reisetrends-2026",
+    isAd: false,
+  },
+  {
+    title: "S\u00FCdwestfrankreich",
+    category: "Genussreise",
+    price: "ab 3.589 \u20AC p.P.",
+    duration: "8 Tage",
+    image: "https://reisewelt.spiegel.de/fileadmin/_processed_/c/1/csm_chateaulesmerles_f2f86ee02e.webp",
+    href: "/genussreisen/suedwestfrankreich",
+    isAd: true,
+  },
+  {
+    title: "Nordmazedonien, Albanien & Montenegro",
+    category: "Rundreise",
+    price: "ab 1.695 \u20AC p.P.",
+    duration: "10 Tage",
+    image: "https://reisewelt.spiegel.de/fileadmin/_processed_/c/d/csm_962247-373195-1_18dbfd6b62.webp",
+    href: "/rundreisen/nordmazedonien-albanien-montenegro",
+    isAd: true,
+  },
+  {
+    title: "Eventkreuzfahrten: Motto-Reisen auf See",
+    category: "Reisetrend",
+    price: null,
+    duration: null,
+    image: "https://reisewelt.spiegel.de/fileadmin/_processed_/6/d/csm_Bild_1_Credit_iStock_Galyna_Andrushko_e4e97cc98c.webp",
+    href: "/reisetrends/eventkreuzfahrten",
+    isAd: false,
+  },
+];
+
+const categories = [
+  {
+    title: "Genussreisen",
+    tagline: "Genussvolle Gruppenreisen in Europa",
+    image: "https://reisewelt.spiegel.de/fileadmin/_processed_/4/e/csm_Teaser_Genussreisen_85a2caa6a3.webp",
+    href: "/genussreisen",
+  },
+  {
+    title: "Rundreisen",
+    tagline: "Die Welt entdecken",
+    image: "https://reisewelt.spiegel.de/fileadmin/_processed_/b/7/csm_china6_77424a8063.webp",
+    href: "/rundreisen",
+  },
+  {
+    title: "Reisetrends",
+    tagline: "Wie Reisen heute aussieht",
+    image: "https://reisewelt.spiegel.de/fileadmin/_processed_/f/5/csm_Bild_2_Credit_iStock_svetikd_6d2e3a6dbb.webp",
+    href: "/reisetrends",
+  },
+];
+
+const spiegelArticles = [
+  {
+    title: "Urlaub in Griechenland: Die sch\u00F6nsten Inseln abseits der Massen",
+    date: "18. M\u00E4rz 2026",
+    image: "https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=800&q=80",
+    href: "https://www.spiegel.de/reise/",
+  },
+  {
+    title: "Overtourism in Europa: Welche St\u00E4dte jetzt reagieren",
+    date: "15. M\u00E4rz 2026",
+    image: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800&q=80",
+    href: "https://www.spiegel.de/reise/",
+  },
+  {
+    title: "Nachtzug statt Flugzeug: Die besten Verbindungen durch Europa",
+    date: "12. M\u00E4rz 2026",
+    image: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?w=800&q=80",
+    href: "https://www.spiegel.de/reise/",
+  },
+  {
+    title: "Camping-Boom: Warum immer mehr Deutsche im Zelt schlafen",
+    date: "9. M\u00E4rz 2026",
+    image: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800&q=80",
+    href: "https://www.spiegel.de/reise/",
+  },
+];
+
+const faqItems = [
+  {
+    question: "Was ist die SPIEGEL Reisewelt?",
+    answer: "Die SPIEGEL Reisewelt ist eine kuratierte Reiseplattform, auf der ausgew\u00E4hlte Reiseangebote von vertrauensw\u00FCrdigen Partnern pr\u00E4sentiert werden. Die Redaktion stellt Rundreisen, Genussreisen und redaktionelle Reisetrends zusammen, die den hohen Qualit\u00E4tsanspr\u00FCchen des SPIEGEL entsprechen. Ziel ist es, Leserinnen und Lesern inspirierende Reiseerlebnisse zu bieten, die sorgf\u00E4ltig gepr\u00FCft und zusammengestellt wurden.",
+  },
+  {
+    question: "Wie funktioniert die Buchung \u00FCber die SPIEGEL Reisewelt?",
+    answer: "Die SPIEGEL Reisewelt vermittelt zwischen Reisenden und erfahrenen Reiseveranstaltern. Wenn Sie sich f\u00FCr ein Angebot interessieren, werden Sie direkt zur Buchungsseite des jeweiligen Partners weitergeleitet. Dort k\u00F6nnen Sie alle Details einsehen und Ihre Reise verbindlich buchen. Der Reiseveranstalter ist Ihr direkter Vertragspartner und steht Ihnen f\u00FCr alle Fragen rund um Ihre Buchung zur Verf\u00FCgung.",
+  },
+  {
+    question: "Verdient der SPIEGEL an meiner Buchung?",
+    answer: "Ja, der SPIEGEL erh\u00E4lt f\u00FCr die Vermittlung eine Provision vom Reiseveranstalter. F\u00FCr Sie als Reisende entstehen dadurch keine Mehrkosten \u2013 der Reisepreis bleibt derselbe, als w\u00FCrden Sie direkt beim Veranstalter buchen. Die Einnahmen aus der Reisewelt unterst\u00FCtzen den unabh\u00E4ngigen Journalismus des SPIEGEL.",
+  },
+];
 ---
 
-<Layout title="Die Kunst des Ankommens">
+<Layout title="SPIEGEL Reisewelt">
   <Header />
   <MobileNav />
 
   <main class="pb-20 md:pb-0">
     <!-- ============================================ -->
-    <!-- HERO SECTION                                 -->
+    <!-- SECTION 1: HERO                              -->
     <!-- ============================================ -->
-    <section class="relative h-[870px] overflow-hidden">
+    <section class="relative h-[600px] md:h-[700px] overflow-hidden">
       <!-- Background Image -->
       <img
-        src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80"
-        alt="Tropischer Strand"
+        src="https://reisewelt.spiegel.de/fileadmin/_processed_/5/6/csm_azoren4_063a01fb8d.webp"
+        alt="Azoren Panorama"
         class="absolute inset-0 w-full h-full object-cover"
+        loading="eager"
       />
       <!-- Gradient Overlay -->
       <div class="absolute inset-0 hero-gradient"></div>
 
       <!-- Hero Content -->
-      <div class="relative z-10 h-full flex flex-col justify-end max-w-7xl mx-auto px-6 pb-40">
-        <h1 class="font-headline text-6xl md:text-8xl font-black tracking-tighter text-white leading-[0.95]">
-          Die Kunst des<br />Ankommens.
+      <div class="relative z-10 h-full flex flex-col justify-end max-w-7xl mx-auto px-6 pb-16 md:pb-24">
+        <h1 class="font-headline text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter text-white leading-[1.05] max-w-3xl">
+          SPIEGEL Reisewelt &ndash; schon die n&auml;chste Reise geplant?
         </h1>
-        <p class="font-body italic text-white/80 text-lg md:text-xl mt-5 max-w-xl">
-          Kuratierte Reisemomente f&uuml;r den modernen Entdecker.
+        <p class="font-body italic text-white/80 text-base md:text-lg mt-4 max-w-2xl leading-relaxed">
+          Auf dieser Seite finden Sie Reiseangebote, die wir zusammen mit unseren Reisepartnern f&uuml;r Sie zusammengestellt haben.
         </p>
-      </div>
-
-      <!-- Booking Widget -->
-      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 w-full max-w-5xl px-6">
-        <div class="glass-panel rounded-[0.25rem] p-4 flex flex-col md:flex-row items-stretch gap-3">
-          <!-- Wohin -->
-          <div class="flex-1 flex items-center gap-3 px-4 py-3 bg-surface-container-low rounded-[0.25rem]">
-            <span class="material-symbols-outlined text-on-surface-variant text-[20px]">flight_takeoff</span>
-            <div>
-              <p class="font-label text-[10px] font-semibold text-on-surface-variant uppercase tracking-wider">Wohin?</p>
-              <p class="font-headline text-sm text-on-surface">Ziel eingeben</p>
-            </div>
-          </div>
-          <!-- Zeitraum -->
-          <div class="flex-1 flex items-center gap-3 px-4 py-3 bg-surface-container-low rounded-[0.25rem]">
-            <span class="material-symbols-outlined text-on-surface-variant text-[20px]">calendar_month</span>
-            <div>
-              <p class="font-label text-[10px] font-semibold text-on-surface-variant uppercase tracking-wider">Zeitraum</p>
-              <p class="font-headline text-sm text-on-surface">Datum w&auml;hlen</p>
-            </div>
-          </div>
-          <!-- Reisende -->
-          <div class="flex-1 flex items-center gap-3 px-4 py-3 bg-surface-container-low rounded-[0.25rem]">
-            <span class="material-symbols-outlined text-on-surface-variant text-[20px]">group</span>
-            <div>
-              <p class="font-label text-[10px] font-semibold text-on-surface-variant uppercase tracking-wider">Reisende</p>
-              <p class="font-headline text-sm text-on-surface">2 Erwachsene</p>
-            </div>
-          </div>
-          <!-- Reiseart -->
-          <div class="hidden md:flex flex-1 items-center gap-3 px-4 py-3 bg-surface-container-low rounded-[0.25rem]">
-            <span class="material-symbols-outlined text-on-surface-variant text-[20px]">category</span>
-            <div>
-              <p class="font-label text-[10px] font-semibold text-on-surface-variant uppercase tracking-wider">Reiseart</p>
-              <p class="font-headline text-sm text-on-surface">Alle Kategorien</p>
-            </div>
-          </div>
-          <!-- Suchen Button -->
-          <button class="bg-secondary hover:bg-secondary-container text-on-secondary font-headline font-bold text-sm px-8 py-4 rounded-[0.25rem] transition-colors shrink-0">
-            Suchen
-          </button>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a
+            href="/rundreisen"
+            class="inline-flex items-center gap-2 bg-secondary hover:bg-secondary-container text-on-secondary font-headline text-sm font-bold px-6 py-3 rounded-[0.25rem] transition-colors"
+          >
+            Rundreisen entdecken
+            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+          </a>
+          <a
+            href="/genussreisen"
+            class="inline-flex items-center gap-2 glass-panel text-on-surface font-headline text-sm font-bold px-6 py-3 rounded-[0.25rem] hover:bg-white transition-colors"
+          >
+            Genussreisen
+          </a>
         </div>
       </div>
     </section>
 
     <!-- ============================================ -->
-    <!-- TRENDS SECTION                               -->
+    <!-- SECTION 2: FEATURED TRIPS SLIDER             -->
     <!-- ============================================ -->
-    <section class="mt-40 max-w-7xl mx-auto px-6">
+    <section class="mt-16 md:mt-24 max-w-7xl mx-auto px-6">
       <!-- Section Header -->
-      <div class="mb-10">
-        <h2 class="font-headline text-5xl md:text-6xl font-black tracking-tighter text-on-surface">
-          Trends.
+      <div class="mb-8">
+        <h2 class="font-headline text-3xl md:text-4xl font-black tracking-tight text-on-surface">
+          Reiseerlebnisse finden &amp; buchen
         </h2>
-        <p class="font-body text-on-surface-variant text-lg mt-2">
-          Die meistgesuchten Ziele der Saison.
+        <p class="font-body text-on-surface-variant text-base md:text-lg mt-2">
+          Ausgew&auml;hlte Angebote unserer Reisepartner.
         </p>
       </div>
 
       <!-- Horizontal Scroll Cards -->
       <div class="flex gap-5 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-4">
-        <!-- Card 1: Santorini -->
-        <div class="snap-start shrink-0 w-[300px] md:w-[340px] group relative rounded-[0.25rem] overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=800&q=80"
-            alt="Santorini"
-            class="w-full h-[450px] object-cover group-hover:scale-105 transition-transform duration-500"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent"></div>
-          <div class="absolute top-4 left-4">
-            <span class="font-headline text-6xl font-black text-white/20">01</span>
-          </div>
-          <div class="absolute bottom-6 left-5 right-5">
-            <h3 class="font-headline text-xl font-bold text-white">Santorini</h3>
-            <p class="font-body text-white/70 text-sm mt-1">Griechenland &middot; &Auml;g&auml;ische Tr&auml;ume</p>
-          </div>
-        </div>
+        {featuredTrips.map((trip) => (
+          <a
+            href={trip.href}
+            class="snap-start shrink-0 w-[280px] md:w-[320px] group relative rounded-[0.25rem] overflow-hidden block"
+          >
+            <img
+              src={trip.image}
+              alt={trip.title}
+              class="w-full h-[420px] object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/10 to-transparent"></div>
 
-        <!-- Card 2: Agra -->
-        <div class="snap-start shrink-0 w-[300px] md:w-[340px] group relative rounded-[0.25rem] overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800&q=80"
-            alt="Taj Mahal"
-            class="w-full h-[450px] object-cover group-hover:scale-105 transition-transform duration-500"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent"></div>
-          <div class="absolute top-4 left-4">
-            <span class="font-headline text-6xl font-black text-white/20">02</span>
-          </div>
-          <div class="absolute bottom-6 left-5 right-5">
-            <h3 class="font-headline text-xl font-bold text-white">Agra</h3>
-            <p class="font-body text-white/70 text-sm mt-1">Indien &middot; Zeitlose Sch&ouml;nheit</p>
-          </div>
-        </div>
+            {/* Category Tag + Anzeige */}
+            <div class="absolute top-4 left-4 flex items-center gap-2">
+              <span class="bg-secondary text-on-secondary font-headline text-[11px] font-bold px-2.5 py-1 rounded-[0.25rem]">
+                {trip.category}
+              </span>
+              {trip.isAd && (
+                <span class="bg-white/20 backdrop-blur-sm text-white font-headline text-[10px] font-semibold px-2 py-0.5 rounded-[0.25rem]">
+                  Anzeige
+                </span>
+              )}
+            </div>
 
-        <!-- Card 3: Ubud -->
-        <div class="snap-start shrink-0 w-[300px] md:w-[340px] group relative rounded-[0.25rem] overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&q=80"
-            alt="Bali"
-            class="w-full h-[450px] object-cover group-hover:scale-105 transition-transform duration-500"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent"></div>
-          <div class="absolute top-4 left-4">
-            <span class="font-headline text-6xl font-black text-white/20">03</span>
-          </div>
-          <div class="absolute bottom-6 left-5 right-5">
-            <h3 class="font-headline text-xl font-bold text-white">Ubud</h3>
-            <p class="font-body text-white/70 text-sm mt-1">Bali &middot; Spirituelle Ruhe</p>
-          </div>
-        </div>
-
-        <!-- Card 4: Kyoto -->
-        <div class="snap-start shrink-0 w-[300px] md:w-[340px] group relative rounded-[0.25rem] overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&q=80"
-            alt="Kyoto"
-            class="w-full h-[450px] object-cover group-hover:scale-105 transition-transform duration-500"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent"></div>
-          <div class="absolute top-4 left-4">
-            <span class="font-headline text-6xl font-black text-white/20">04</span>
-          </div>
-          <div class="absolute bottom-6 left-5 right-5">
-            <h3 class="font-headline text-xl font-bold text-white">Kyoto</h3>
-            <p class="font-body text-white/70 text-sm mt-1">Japan &middot; Tradition & Moderne</p>
-          </div>
-        </div>
+            {/* Content */}
+            <div class="absolute bottom-5 left-5 right-5">
+              <h3 class="font-headline text-lg font-bold text-white leading-snug">
+                {trip.title}
+              </h3>
+              <div class="flex items-center gap-3 mt-2">
+                {trip.price && (
+                  <span class="font-headline text-sm font-bold text-white">
+                    {trip.price}
+                  </span>
+                )}
+                {trip.duration && (
+                  <span class="font-body text-white/70 text-sm">
+                    {trip.duration}
+                  </span>
+                )}
+                {!trip.price && !trip.duration && (
+                  <span class="font-body text-white/70 text-sm italic">
+                    Redaktioneller Beitrag
+                  </span>
+                )}
+              </div>
+            </div>
+          </a>
+        ))}
       </div>
     </section>
 
     <!-- ============================================ -->
-    <!-- CURATED GRID SECTION                         -->
+    <!-- SECTION 3: CATEGORY GRID                     -->
     <!-- ============================================ -->
-    <section id="ziele" class="bg-surface-container-low mt-32 py-24">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          <!-- Left Column: Sticky Text -->
-          <div class="lg:sticky lg:top-32 lg:self-start">
-            <p class="font-label text-xs font-semibold text-secondary uppercase tracking-widest mb-4">Kuratiert</p>
-            <h2 class="font-headline text-5xl md:text-6xl font-black tracking-tighter text-on-surface leading-[1.05]">
-              Ziele der<br />Sehnsucht.
-            </h2>
-            <p class="font-body text-on-surface-variant text-lg mt-6 max-w-md leading-relaxed">
-              Handverlesene Destinationen, die weit &uuml;ber das Gew&ouml;hnliche hinausgehen. Jedes Ziel erz&auml;hlt seine eigene Geschichte.
-            </p>
-            <a
-              href="/rundreisen"
-              class="inline-flex items-center gap-2 mt-8 font-headline text-sm font-bold text-secondary hover:text-secondary-container transition-colors"
-            >
-              Alle Rundreisen entdecken
-              <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-            </a>
-          </div>
+    <section class="mt-20 md:mt-28 max-w-7xl mx-auto px-6">
+      <!-- Section Header -->
+      <div class="mb-10">
+        <h2 class="font-headline text-3xl md:text-4xl font-black tracking-tight text-on-surface">
+          Unsere Reisekategorien
+        </h2>
+      </div>
 
-          <!-- Right Column: 2-Col Grid with Offset -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <!-- Card 1: Alpine Hideaways -->
-            <div class="group relative rounded-[0.25rem] overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=800&q=80"
-                alt="Alpine Hideaways"
-                class="w-full h-[340px] object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent"></div>
-              <div class="absolute top-4 right-4">
-                <span class="glass-panel px-3 py-1 rounded-[0.25rem] font-headline text-xs font-bold text-on-surface">ab 899&euro;</span>
-              </div>
-              <div class="absolute bottom-5 left-5 right-5">
-                <h3 class="font-headline text-lg font-bold text-white">Alpine Hideaways</h3>
-                <p class="font-body text-white/70 text-sm mt-1">Bergrefugien der Stille</p>
-              </div>
+      <!-- 3-Column Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {categories.map((cat) => (
+          <a
+            href={cat.href}
+            class="group relative rounded-[0.25rem] overflow-hidden block h-[360px] md:h-[420px]"
+          >
+            <img
+              src={cat.image}
+              alt={cat.title}
+              class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/20 to-transparent group-hover:from-primary/80 transition-all duration-300"></div>
+            <div class="absolute bottom-6 left-6 right-6">
+              <h3 class="font-headline text-2xl font-black text-white tracking-tight">
+                {cat.title}
+              </h3>
+              <p class="font-body text-white/80 text-sm mt-1 italic">
+                {cat.tagline}
+              </p>
+              <span class="inline-flex items-center gap-1 mt-3 font-headline text-sm font-bold text-white group-hover:gap-2 transition-all">
+                Entdecken
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </span>
             </div>
-
-            <!-- Card 2: Private Islands (offset) -->
-            <div class="group relative rounded-[0.25rem] overflow-hidden translate-y-0 sm:translate-y-12">
-              <img
-                src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80"
-                alt="Private Islands"
-                class="w-full h-[340px] object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent"></div>
-              <div class="absolute top-4 right-4">
-                <span class="glass-panel px-3 py-1 rounded-[0.25rem] font-headline text-xs font-bold text-on-surface">ab 2.499&euro;</span>
-              </div>
-              <div class="absolute bottom-5 left-5 right-5">
-                <h3 class="font-headline text-lg font-bold text-white">Private Islands</h3>
-                <p class="font-body text-white/70 text-sm mt-1">Exklusive Inselparadiese</p>
-              </div>
-            </div>
-
-            <!-- Card 3: Urban Oasis -->
-            <div class="group relative rounded-[0.25rem] overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80"
-                alt="Urban Oasis"
-                class="w-full h-[340px] object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent"></div>
-              <div class="absolute top-4 right-4">
-                <span class="glass-panel px-3 py-1 rounded-[0.25rem] font-headline text-xs font-bold text-on-surface">ab 1.200&euro;</span>
-              </div>
-              <div class="absolute bottom-5 left-5 right-5">
-                <h3 class="font-headline text-lg font-bold text-white">Urban Oasis</h3>
-                <p class="font-body text-white/70 text-sm mt-1">St&auml;dtische Ruheoasen</p>
-              </div>
-            </div>
-
-            <!-- Card 4: Coastal Elegance (offset) -->
-            <div class="group relative rounded-[0.25rem] overflow-hidden translate-y-0 sm:translate-y-12">
-              <img
-                src="https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?w=800&q=80"
-                alt="Coastal Elegance"
-                class="w-full h-[340px] object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent"></div>
-              <div class="absolute top-4 right-4">
-                <span class="glass-panel px-3 py-1 rounded-[0.25rem] font-headline text-xs font-bold text-on-surface">ab 1.599&euro;</span>
-              </div>
-              <div class="absolute bottom-5 left-5 right-5">
-                <h3 class="font-headline text-lg font-bold text-white">Coastal Elegance</h3>
-                <p class="font-body text-white/70 text-sm mt-1">K&uuml;stenmagie pur</p>
-              </div>
-            </div>
-          </div>
-        </div>
+          </a>
+        ))}
       </div>
     </section>
 
     <!-- ============================================ -->
-    <!-- EDITOR'S PICK SECTION                        -->
+    <!-- SECTION 4: SPIEGEL REISE ARTICLES            -->
     <!-- ============================================ -->
-    <section class="py-32 overflow-hidden">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="relative grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <!-- Large watermark text -->
-          <div class="absolute -left-8 top-1/2 -translate-y-1/2 pointer-events-none select-none hidden lg:block">
-            <span class="font-headline text-[200px] font-black text-surface-container-high/60 leading-none tracking-tighter">
-              EDITS
-            </span>
-          </div>
-
-          <!-- Left: Image Composition -->
-          <div class="relative z-10">
-            <div class="relative">
-              <img
-                src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80"
-                alt="Paris"
-                class="w-full h-[500px] object-cover rounded-[0.25rem]"
-              />
-              <!-- Floating stats card -->
-              <div class="absolute -bottom-6 -right-4 md:-right-8 glass-panel rounded-[0.25rem] p-5 shadow-lg">
-                <div class="flex gap-8">
-                  <div class="text-center">
-                    <p class="font-headline text-3xl font-black text-secondary">12</p>
-                    <p class="font-label text-[10px] font-semibold text-on-surface-variant uppercase tracking-widest">Hotspots</p>
-                  </div>
-                  <div class="text-center">
-                    <p class="font-headline text-3xl font-black text-secondary">03</p>
-                    <p class="font-label text-[10px] font-semibold text-on-surface-variant uppercase tracking-widest">Viertel</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Right: Text Content -->
-          <div class="relative z-10 lg:pl-8">
-            <p class="font-label text-xs font-semibold text-secondary uppercase tracking-widest mb-4">Editor&apos;s Pick</p>
-            <h2 class="font-headline text-4xl md:text-5xl font-black tracking-tighter text-on-surface leading-[1.05]">
-              72 Stunden in Paris: Ein Guide f&uuml;r Genie&szlig;er.
-            </h2>
-            <p class="font-body text-on-surface-variant text-lg mt-6 leading-relaxed max-w-lg">
-              Vergessen Sie den Louvre. Wir f&uuml;hren Sie zu den versteckten Ateliers von Belleville, den besten Naturweinen im 11. Arrondissement und einem Fr&uuml;hst&uuml;ck mit Blick auf die D&auml;cher von Montmartre.
-            </p>
-            <a
-              href="/reisetrends/reisetrends-2026"
-              class="inline-flex items-center gap-2 mt-8 font-headline text-sm font-bold text-secondary hover:text-secondary-container transition-colors"
-            >
-              Artikel lesen
-              <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================ -->
-    <!-- DEALS SECTION                                -->
-    <!-- ============================================ -->
-    <section id="deals" class="bg-primary py-24">
+    <section class="mt-20 md:mt-28 bg-surface-container-low py-16 md:py-20">
       <div class="max-w-7xl mx-auto px-6">
         <!-- Section Header -->
-        <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
+        <div class="flex items-end justify-between mb-8">
           <div>
-            <h2 class="font-headline text-5xl md:text-6xl font-black tracking-tighter text-on-primary">
-              Deals der Woche.
+            <p class="font-label text-xs font-semibold text-secondary uppercase tracking-widest mb-2">Redaktion</p>
+            <h2 class="font-headline text-3xl md:text-4xl font-black tracking-tight text-on-surface">
+              SPIEGEL Reise
             </h2>
-            <p class="font-body text-on-primary/60 text-lg mt-2">
-              Exklusive Angebote, nur f&uuml;r kurze Zeit.
-            </p>
           </div>
-          <!-- Countdown Timer -->
-          <div class="flex items-center gap-3">
-            <span class="material-symbols-outlined text-on-primary/40 text-[20px]">timer</span>
-            <div class="flex items-center gap-2 font-headline text-on-primary">
-              <div class="bg-primary-container px-3 py-2 rounded-[0.25rem] text-center">
-                <span class="text-xl font-bold block" id="days">02</span>
-                <span class="text-[9px] uppercase tracking-wider text-on-primary-container font-semibold">Tage</span>
+          <a
+            href="https://www.spiegel.de/reise/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hidden md:inline-flex items-center gap-1 font-headline text-sm font-bold text-secondary hover:text-secondary-container transition-colors"
+          >
+            Alle Artikel
+            <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+          </a>
+        </div>
+
+        <!-- Articles Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {spiegelArticles.map((article) => (
+            <a
+              href={article.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group block rounded-[0.25rem] overflow-hidden bg-surface hover:shadow-lg transition-shadow duration-300"
+            >
+              <div class="relative overflow-hidden">
+                <img
+                  src={article.image}
+                  alt={article.title}
+                  class="w-full h-[180px] object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
               </div>
-              <span class="text-on-primary/30 font-bold">:</span>
-              <div class="bg-primary-container px-3 py-2 rounded-[0.25rem] text-center">
-                <span class="text-xl font-bold block" id="hours">14</span>
-                <span class="text-[9px] uppercase tracking-wider text-on-primary-container font-semibold">Std</span>
+              <div class="p-4">
+                <p class="font-label text-[11px] font-semibold text-on-surface-variant uppercase tracking-wide">
+                  {article.date}
+                </p>
+                <h3 class="font-headline text-sm font-bold text-on-surface mt-1 leading-snug group-hover:text-secondary transition-colors">
+                  {article.title}
+                </h3>
+                <span class="inline-flex items-center gap-1 mt-3 font-headline text-xs font-bold text-secondary">
+                  Auf spiegel.de lesen
+                  <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+                </span>
               </div>
-              <span class="text-on-primary/30 font-bold">:</span>
-              <div class="bg-primary-container px-3 py-2 rounded-[0.25rem] text-center">
-                <span class="text-xl font-bold block" id="minutes">38</span>
-                <span class="text-[9px] uppercase tracking-wider text-on-primary-container font-semibold">Min</span>
-              </div>
+            </a>
+          ))}
+        </div>
+
+        <!-- Mobile "Alle Artikel" link -->
+        <div class="mt-6 md:hidden text-center">
+          <a
+            href="https://www.spiegel.de/reise/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1 font-headline text-sm font-bold text-secondary"
+          >
+            Alle Artikel auf spiegel.de
+            <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SECTION 5: SIDEBAR WIDGETS (INLINE)          -->
+    <!-- ============================================ -->
+    <section class="mt-20 md:mt-28 max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- eSIM Widget -->
+        <div class="rounded-[0.25rem] border border-outline-variant/30 bg-surface-container-low p-6 md:p-8">
+          <div class="flex items-start gap-4">
+            <span class="material-symbols-outlined text-secondary text-[32px] shrink-0 mt-1">sim_card</span>
+            <div>
+              <p class="font-label text-[10px] font-semibold text-on-surface-variant uppercase tracking-widest mb-1">Partner</p>
+              <h3 class="font-headline text-lg font-bold text-on-surface">WonderConnect eSIM</h3>
+              <p class="font-body text-on-surface-variant text-sm mt-2 leading-relaxed">
+                Bleiben Sie im Urlaub verbunden &ndash; mit g&uuml;nstigen eSIM-Datentarifen f&uuml;r &uuml;ber 190 L&auml;nder. Kein SIM-Kartenwechsel n&ouml;tig, einfach per QR-Code aktivieren.
+              </p>
+              <a
+                href="https://www.wonderconnect.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1 mt-4 font-headline text-sm font-bold text-secondary hover:text-secondary-container transition-colors"
+              >
+                eSIM bestellen
+                <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+              </a>
+              <p class="font-label text-[10px] text-on-surface-variant mt-2">Anzeige</p>
             </div>
           </div>
         </div>
 
-        <!-- Deals Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          <!-- Deal 1: Soneva Fushi -->
-          <div class="bg-primary-container rounded-[0.25rem] overflow-hidden group">
-            <div class="relative">
-              <img
-                src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80"
-                alt="Soneva Fushi"
-                class="w-full h-[200px] object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div class="absolute top-3 left-3">
-                <span class="bg-secondary text-on-secondary font-headline text-xs font-bold px-2.5 py-1 rounded-[0.25rem]">-35%</span>
-              </div>
-            </div>
-            <div class="p-5">
-              <div class="flex items-center gap-0.5 mb-2">
-                <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
-                <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
-                <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
-                <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
-                <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
-              </div>
-              <h3 class="font-headline text-base font-bold text-on-primary">Soneva Fushi Resort</h3>
-              <p class="font-body text-on-primary-container text-sm mt-1">Malediven</p>
-              <div class="mt-4 flex items-baseline gap-2">
-                <span class="font-headline text-2xl font-black text-on-primary">&euro;3.490</span>
-                <span class="font-body text-sm text-on-primary-container line-through">&euro;5.200</span>
-              </div>
-              <button class="mt-4 w-full bg-secondary hover:bg-secondary-container text-on-secondary font-headline text-sm font-bold py-3 rounded-[0.25rem] transition-colors">
-                Jetzt buchen
-              </button>
-            </div>
-          </div>
-
-          <!-- Deal 2: Hotel de Russie -->
-          <div class="bg-primary-container rounded-[0.25rem] overflow-hidden group">
-            <div class="relative">
-              <img
-                src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80"
-                alt="Hotel de Russie"
-                class="w-full h-[200px] object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div class="absolute top-3 left-3">
-                <span class="bg-secondary text-on-secondary font-headline text-xs font-bold px-2.5 py-1 rounded-[0.25rem]">-20%</span>
-              </div>
-            </div>
-            <div class="p-5">
-              <div class="flex items-center gap-0.5 mb-2">
-                <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
-                <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
-                <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
-                <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
-                <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
-              </div>
-              <h3 class="font-headline text-base font-bold text-on-primary">Hotel de Russie</h3>
-              <p class="font-body text-on-primary-container text-sm mt-1">Rom, Italien</p>
-              <div class="mt-4 flex items-baseline gap-2">
-                <span class="font-headline text-2xl font-black text-on-primary">&euro;1.150</span>
-                <span class="font-body text-sm text-on-primary-container line-through">&euro;1.440</span>
-              </div>
-              <button class="mt-4 w-full bg-secondary hover:bg-secondary-container text-on-secondary font-headline text-sm font-bold py-3 rounded-[0.25rem] transition-colors">
-                Jetzt buchen
-              </button>
-            </div>
-          </div>
-
-          <!-- Deal 3: Sahara Luxury Camp -->
-          <div class="bg-primary-container rounded-[0.25rem] overflow-hidden group">
-            <div class="relative">
-              <img
-                src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80"
-                alt="Sahara Luxury Camp"
-                class="w-full h-[200px] object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div class="absolute top-3 left-3">
-                <span class="bg-secondary text-on-secondary font-headline text-xs font-bold px-2.5 py-1 rounded-[0.25rem]">Flash</span>
-              </div>
-            </div>
-            <div class="p-5">
-              <div class="flex items-center gap-0.5 mb-2">
-                <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
-                <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
-                <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
-                <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
-                <span class="material-symbols-outlined text-amber-400 text-[16px]">star_half</span>
-              </div>
-              <h3 class="font-headline text-base font-bold text-on-primary">Sahara Luxury Camp</h3>
-              <p class="font-body text-on-primary-container text-sm mt-1">Marokko</p>
-              <div class="mt-4 flex items-baseline gap-2">
-                <span class="font-headline text-2xl font-black text-on-primary">&euro;890</span>
-              </div>
-              <button class="mt-4 w-full bg-secondary hover:bg-secondary-container text-on-secondary font-headline text-sm font-bold py-3 rounded-[0.25rem] transition-colors">
-                Jetzt buchen
-              </button>
-            </div>
-          </div>
-
-          <!-- Deal 4: Chalet Zermatt Peak -->
-          <div class="bg-primary-container rounded-[0.25rem] overflow-hidden group">
-            <div class="relative">
-              <img
-                src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=800&q=80"
-                alt="Chalet Zermatt Peak"
-                class="w-full h-[200px] object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div class="absolute top-3 left-3">
-                <span class="bg-secondary text-on-secondary font-headline text-xs font-bold px-2.5 py-1 rounded-[0.25rem]">-15%</span>
-              </div>
-            </div>
-            <div class="p-5">
-              <div class="flex items-center gap-0.5 mb-2">
-                <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
-                <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
-                <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
-                <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
-                <span class="material-symbols-outlined text-amber-400 text-[16px]">star</span>
-              </div>
-              <h3 class="font-headline text-base font-bold text-on-primary">Chalet Zermatt Peak</h3>
-              <p class="font-body text-on-primary-container text-sm mt-1">Schweiz</p>
-              <div class="mt-4 flex items-baseline gap-2">
-                <span class="font-headline text-2xl font-black text-on-primary">&euro;1.850</span>
-                <span class="font-body text-sm text-on-primary-container line-through">&euro;2.175</span>
-              </div>
-              <button class="mt-4 w-full bg-secondary hover:bg-secondary-container text-on-secondary font-headline text-sm font-bold py-3 rounded-[0.25rem] transition-colors">
-                Jetzt buchen
-              </button>
+        <!-- Newsletter Widget -->
+        <div class="rounded-[0.25rem] border border-outline-variant/30 bg-surface-container-low p-6 md:p-8">
+          <div class="flex items-start gap-4">
+            <span class="material-symbols-outlined text-secondary text-[32px] shrink-0 mt-1">mail</span>
+            <div class="w-full">
+              <p class="font-label text-[10px] font-semibold text-secondary uppercase tracking-widest mb-1">Newsletter</p>
+              <h3 class="font-headline text-lg font-bold text-on-surface">SPIEGEL &bdquo;Gute Reise&ldquo;</h3>
+              <p class="font-body text-on-surface-variant text-sm mt-2 leading-relaxed">
+                Jede Woche die besten Reisetipps, Reportagen und Angebote direkt in Ihr Postfach. Kostenlos abonnieren und keine Reise-Inspiration mehr verpassen.
+              </p>
+              <form class="mt-4 flex flex-col sm:flex-row gap-2" onsubmit="return false;">
+                <input
+                  type="email"
+                  placeholder="Ihre E-Mail-Adresse"
+                  class="flex-1 px-4 py-2.5 rounded-[0.25rem] border border-outline-variant/40 bg-surface font-body text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-secondary transition-colors"
+                />
+                <button
+                  type="submit"
+                  class="bg-secondary hover:bg-secondary-container text-on-secondary font-headline text-sm font-bold px-5 py-2.5 rounded-[0.25rem] transition-colors shrink-0"
+                >
+                  Abonnieren
+                </button>
+              </form>
             </div>
           </div>
         </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SECTION 6: FAQ                               -->
+    <!-- ============================================ -->
+    <section class="mt-20 md:mt-28 mb-16 max-w-3xl mx-auto px-6">
+      <!-- Section Header -->
+      <div class="mb-8 text-center">
+        <h2 class="font-headline text-3xl md:text-4xl font-black tracking-tight text-on-surface">
+          H&auml;ufige Fragen
+        </h2>
+      </div>
+
+      <!-- FAQ Items -->
+      <div class="space-y-4">
+        {faqItems.map((item) => (
+          <details class="group rounded-[0.25rem] border border-outline-variant/30 bg-surface-container-low overflow-hidden">
+            <summary class="flex items-center justify-between gap-4 cursor-pointer p-5 md:p-6 list-none [&::-webkit-details-marker]:hidden">
+              <h3 class="font-headline text-base font-bold text-on-surface">
+                {item.question}
+              </h3>
+              <span class="material-symbols-outlined text-on-surface-variant text-[20px] shrink-0 transition-transform duration-200 group-open:rotate-180">
+                expand_more
+              </span>
+            </summary>
+            <div class="px-5 pb-5 md:px-6 md:pb-6 -mt-1">
+              <p class="font-body text-on-surface-variant text-sm leading-relaxed">
+                {item.answer}
+              </p>
+            </div>
+          </details>
+        ))}
       </div>
     </section>
   </main>
 
-  <Footer />
+  <Footer variant="full" />
 </Layout>
-
-<script>
-  // Countdown Timer
-  function updateCountdown() {
-    const target = new Date();
-    target.setDate(target.getDate() + 2);
-    target.setHours(14, 38, 0, 0);
-
-    function tick() {
-      const now = new Date();
-      const diff = target.getTime() - now.getTime();
-      if (diff <= 0) return;
-
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-
-      const daysEl = document.getElementById('days');
-      const hoursEl = document.getElementById('hours');
-      const minutesEl = document.getElementById('minutes');
-
-      if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
-      if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
-      if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
-    }
-
-    tick();
-    setInterval(tick, 60000);
-  }
-
-  updateCountdown();
-</script>
