@@ -64,10 +64,10 @@ try {
     genussreisen = wpData.map((item: any) => ({
       slug: item.slug,
       title: item.title?.rendered || item.title,
-      duration: getMeta(item, "duration") || "Mehrere Tage",
-      price: getMeta(item, "price") || "",
+      duration: getMeta(item, "dauer") || "Mehrere Tage",
+      price: getMeta(item, "preis") || "",
       image: getEmbeddedImage(item) || fallbackData[0].image,
-      excerpt: item.excerpt?.rendered?.replace(/<[^>]+>/g, "") || "",
+      excerpt: item.excerpt?.rendered?.replace(/<[^>]+>/g, "").trim() || "",
     }));
   }
 } catch (e) {
