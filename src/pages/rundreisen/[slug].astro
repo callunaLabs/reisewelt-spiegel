@@ -4,6 +4,7 @@ import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import MobileNav from "../../components/MobileNav.astro";
 import { getRundreisen, getRundreiseBySlug, getEmbeddedImage, getMeta } from "../../lib/wordpress";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 
 const fallbackTrips = [
   {
@@ -129,7 +130,8 @@ const relatedTrips = fallbackTrips.filter((t) => t.slug !== slug).slice(0, 3);
   <Header />
   <MobileNav />
 
-  <main class="pb-20 md:pb-0">
+  <main class="pb-20 md:pb-0 pt-16">
+    <Breadcrumbs items={[{label: "Rundreisen", href: "/rundreisen"}, {label: trip.title}]} />
     <!-- ============================================ -->
     <!-- HERO IMAGE                                   -->
     <!-- ============================================ -->
