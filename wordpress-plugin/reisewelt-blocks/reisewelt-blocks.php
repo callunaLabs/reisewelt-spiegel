@@ -55,9 +55,10 @@ add_action('init', function () {
     register_block_type('reisewelt/highlights', [
         'attributes' => [
             'title'      => ['type' => 'string', 'default' => 'Highlights'],
-            'items'      => ['type' => 'array', 'default' => [], 'items' => ['type' => 'string']],
+            'itemsText'  => ['type' => 'string', 'default' => ''],
         ],
         'render_callback' => function ($attrs) {
+            $attrs['items'] = array_filter(explode("\n", $attrs['itemsText'] ?? ''));
             return '<div class="reisewelt-highlights" data-attrs="' . esc_attr(json_encode($attrs)) . '"></div>';
         },
     ]);
@@ -65,10 +66,11 @@ add_action('init', function () {
     // 4. Tagesablauf Block
     register_block_type('reisewelt/itinerary', [
         'attributes' => [
-            'title' => ['type' => 'string', 'default' => 'Reiseverlauf'],
-            'days'  => ['type' => 'array', 'default' => [], 'items' => ['type' => 'object']],
+            'title'    => ['type' => 'string', 'default' => 'Reiseverlauf'],
+            'daysJson' => ['type' => 'string', 'default' => '[]'],
         ],
         'render_callback' => function ($attrs) {
+            $attrs['days'] = json_decode($attrs['daysJson'] ?? '[]', true) ?: [];
             return '<div class="reisewelt-itinerary" data-attrs="' . esc_attr(json_encode($attrs)) . '"></div>';
         },
     ]);
@@ -76,10 +78,11 @@ add_action('init', function () {
     // 5. Galerie Block
     register_block_type('reisewelt/gallery', [
         'attributes' => [
-            'images' => ['type' => 'array', 'default' => [], 'items' => ['type' => 'object']],
-            'columns' => ['type' => 'number', 'default' => 3],
+            'imagesJson' => ['type' => 'string', 'default' => '[]'],
+            'columns'    => ['type' => 'number', 'default' => 3],
         ],
         'render_callback' => function ($attrs) {
+            $attrs['images'] = json_decode($attrs['imagesJson'] ?? '[]', true) ?: [];
             return '<div class="reisewelt-gallery" data-attrs="' . esc_attr(json_encode($attrs)) . '"></div>';
         },
     ]);
@@ -87,10 +90,11 @@ add_action('init', function () {
     // 6. Inklusivleistungen Block
     register_block_type('reisewelt/inclusions', [
         'attributes' => [
-            'title' => ['type' => 'string', 'default' => 'Inklusivleistungen'],
-            'items' => ['type' => 'array', 'default' => [], 'items' => ['type' => 'string']],
+            'title'     => ['type' => 'string', 'default' => 'Inklusivleistungen'],
+            'itemsText' => ['type' => 'string', 'default' => ''],
         ],
         'render_callback' => function ($attrs) {
+            $attrs['items'] = array_filter(explode("\n", $attrs['itemsText'] ?? ''));
             return '<div class="reisewelt-inclusions" data-attrs="' . esc_attr(json_encode($attrs)) . '"></div>';
         },
     ]);
@@ -117,9 +121,10 @@ add_action('init', function () {
             'telefon' => ['type' => 'string', 'default' => ''],
             'email'   => ['type' => 'string', 'default' => ''],
             'website' => ['type' => 'string', 'default' => ''],
-            'usps'    => ['type' => 'array', 'default' => [], 'items' => ['type' => 'string']],
+            'uspsText' => ['type' => 'string', 'default' => ''],
         ],
         'render_callback' => function ($attrs) {
+            $attrs['usps'] = array_filter(explode("\n", $attrs['uspsText'] ?? ''));
             return '<div class="reisewelt-partner-info" data-attrs="' . esc_attr(json_encode($attrs)) . '"></div>';
         },
     ]);
@@ -127,10 +132,11 @@ add_action('init', function () {
     // 9. Preistabelle Block
     register_block_type('reisewelt/price-table', [
         'attributes' => [
-            'title' => ['type' => 'string', 'default' => 'Termine & Preise'],
-            'rows'  => ['type' => 'array', 'default' => [], 'items' => ['type' => 'object']],
+            'title'    => ['type' => 'string', 'default' => 'Termine & Preise'],
+            'rowsJson' => ['type' => 'string', 'default' => '[]'],
         ],
         'render_callback' => function ($attrs) {
+            $attrs['rows'] = json_decode($attrs['rowsJson'] ?? '[]', true) ?: [];
             return '<div class="reisewelt-price-table" data-attrs="' . esc_attr(json_encode($attrs)) . '"></div>';
         },
     ]);
@@ -138,10 +144,11 @@ add_action('init', function () {
     // 10. FAQ Block
     register_block_type('reisewelt/faq', [
         'attributes' => [
-            'title' => ['type' => 'string', 'default' => 'Häufige Fragen'],
-            'items' => ['type' => 'array', 'default' => [], 'items' => ['type' => 'object']],
+            'title'     => ['type' => 'string', 'default' => 'Häufige Fragen'],
+            'itemsJson' => ['type' => 'string', 'default' => '[]'],
         ],
         'render_callback' => function ($attrs) {
+            $attrs['items'] = json_decode($attrs['itemsJson'] ?? '[]', true) ?: [];
             return '<div class="reisewelt-faq" data-attrs="' . esc_attr(json_encode($attrs)) . '"></div>';
         },
     ]);
@@ -151,13 +158,12 @@ add_action('init', function () {
         'attributes' => [
             'title'    => ['type' => 'string', 'default' => 'Exklusive Reise-Empfehlungen'],
             'subtitle' => ['type' => 'string', 'default' => ''],
-            'itemsJson' => ['type' => 'string', 'default' => '[]'],
-            'filtersJson' => ['type' => 'string', 'default' => '[]'],
+            'itemsJson'   => ['type' => 'string', 'default' => '[]'],
+            'filtersText' => ['type' => 'string', 'default' => ''],
         ],
         'render_callback' => function ($attrs) {
             $attrs['items'] = json_decode($attrs['itemsJson'] ?? '[]', true) ?: [];
-            $attrs['filters'] = json_decode($attrs['filtersJson'] ?? '[]', true) ?: [];
-            unset($attrs['itemsJson'], $attrs['filtersJson']);
+            $attrs['filters'] = array_filter(explode("\n", $attrs['filtersText'] ?? ''));
             return '<div class="reisewelt-bento-grid" data-attrs="' . esc_attr(json_encode($attrs)) . '"></div>';
         },
     ]);
