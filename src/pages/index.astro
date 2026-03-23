@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import MobileNav from "../components/MobileNav.astro";
-import { getHomepageData } from "../lib/wordpress";
+import { getHomepageData, getPageBySlug } from "../lib/wordpress";
 
 let wpData = { rundreisen: [], genussreisen: [], reisetrends: [], deals: [] };
 try {
@@ -11,6 +11,24 @@ try {
 } catch (e) {
   // WordPress unavailable, use static content below
 }
+
+// Fetch hero data from WordPress Page
+let heroImage = "https://reisewelt.spiegel.de/fileadmin/_processed_/6/f/csm_azoren4_b2e0c40bbc.webp";
+let heroTitle = "SPIEGEL Reisewelt – schon die nächste Reise geplant?";
+let heroSubtitle = "Auf dieser Seite finden Sie Reiseangebote, die wir zusammen mit unseren Reisepartnern für Sie zusammengestellt haben.";
+
+try {
+  const page = await getPageBySlug('startseite');
+  if (page) {
+    const rendered = page.content?.rendered || '';
+    const imgMatch = rendered.match(/data-image="([^"]+)"/);
+    const titleMatch = rendered.match(/data-title="([^"]+)"/);
+    const subtitleMatch = rendered.match(/data-subtitle="([^"]+)"/);
+    if (imgMatch) heroImage = imgMatch[1];
+    if (titleMatch) heroTitle = titleMatch[1];
+    if (subtitleMatch) heroSubtitle = subtitleMatch[1];
+  }
+} catch {}
 
 // Static featured trips data (fallback / default)
 const featuredTrips = [
@@ -145,8 +163,8 @@ const faqItems = [
     <section class="relative h-[600px] md:h-[700px] overflow-hidden">
       <!-- Background Image -->
       <img
-        src="https://reisewelt.spiegel.de/fileadmin/_processed_/6/f/csm_azoren4_b2e0c40bbc.webp"
-        alt="Azoren Panorama"
+        src={heroImage}
+        alt="SPIEGEL Reisewelt"
         class="absolute inset-0 w-full h-full object-cover"
         loading="eager"
       />
@@ -157,10 +175,10 @@ const faqItems = [
       <div style="position:relative;z-index:10;height:100%;display:flex;flex-direction:column;justify-content:flex-end;max-width:80rem;margin:0 auto;padding:0 1.5rem 4rem;">
         <div style="background:rgba(4,18,46,0.75);backdrop-filter:blur(8px);padding:2.5rem 3rem;border-radius:8px;max-width:42rem;">
           <h1 style="font-family:Inter,sans-serif;font-size:clamp(1.75rem,4vw,3rem);font-weight:900;letter-spacing:-0.03em;color:#fff;line-height:1.1;margin:0;">
-            SPIEGEL Reisewelt &ndash; schon die n&auml;chste Reise geplant?
+            {heroTitle}
           </h1>
           <p style="font-family:Newsreader,serif;font-style:italic;color:rgba(255,255,255,0.8);font-size:1.05rem;margin-top:1rem;line-height:1.6;">
-            Auf dieser Seite finden Sie Reiseangebote, die wir zusammen mit unseren Reisepartnern f&uuml;r Sie zusammengestellt haben.
+            {heroSubtitle}
           </p>
           <div style="margin-top:1.5rem;display:flex;flex-wrap:wrap;gap:12px;">
             <a href="/rundreisen" style="display:inline-flex;align-items:center;gap:8px;background:#E64415;color:#fff;font-family:Inter,sans-serif;font-size:14px;font-weight:700;padding:12px 24px;border-radius:4px;text-decoration:none;transition:background 0.2s;">

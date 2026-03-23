@@ -3,7 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import MobileNav from "../../components/MobileNav.astro";
-import { getGenussreisen, getEmbeddedImage, getMeta } from "../../lib/wordpress";
+import { getGenussreisen, getEmbeddedImage, getMeta, getPageBySlug } from "../../lib/wordpress";
 
 const fallbackData = [
   {
@@ -73,6 +73,26 @@ try {
 } catch (e) {
   // WordPress unavailable, use fallback data
 }
+
+// Fetch hero data from WordPress Page
+let heroImage = "https://reisewelt-poc.calluna.ai/wp-content/uploads/2026/03/csm_Teaser_Genussreisen_Kategorie_23f28543a9-1.jpg";
+let heroTitle = "Genussreisen.";
+let heroSubtitle = "Kulinarische Genussreisen – Entdecken Sie die Welt der Aromen.";
+let pageContent = '';
+
+try {
+  const page = await getPageBySlug('genussreisen-seite');
+  if (page) {
+    const rendered = page.content?.rendered || '';
+    const imgMatch = rendered.match(/data-image="([^"]+)"/);
+    const titleMatch = rendered.match(/data-title="([^"]+)"/);
+    const subtitleMatch = rendered.match(/data-subtitle="([^"]+)"/);
+    if (imgMatch) heroImage = imgMatch[1];
+    if (titleMatch) heroTitle = titleMatch[1];
+    if (subtitleMatch) heroSubtitle = subtitleMatch[1];
+    pageContent = rendered;
+  }
+} catch {}
 ---
 
 <Layout title="Genussreisen">
@@ -83,7 +103,7 @@ try {
     <!-- HERO -->
     <section style="position:relative;height:500px;overflow:hidden;">
       <img
-        src="https://reisewelt-poc.calluna.ai/wp-content/uploads/2026/03/csm_Teaser_Genussreisen_Kategorie_23f28543a9-1.jpg"
+        src={heroImage}
         alt="Genussreisen"
         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"
         loading="eager"
@@ -93,10 +113,10 @@ try {
       <div style="position:relative;z-index:10;height:100%;display:flex;flex-direction:column;justify-content:flex-end;max-width:80rem;margin:0 auto;padding:0 1.5rem 4rem;">
         <p style="font-family:Inter,sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.7);margin-bottom:12px;">SPIEGEL Reisewelt</p>
         <h1 style="font-family:Inter,sans-serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:900;letter-spacing:-0.03em;color:#fff;line-height:0.95;">
-          Genussreisen.
+          {heroTitle}
         </h1>
         <p style="font-family:Newsreader,serif;font-style:italic;color:rgba(255,255,255,0.8);font-size:1.2rem;margin-top:1rem;max-width:32rem;">
-          Kulinarische Genussreisen &ndash; Entdecken Sie die Welt der Aromen.
+          {heroSubtitle}
         </p>
       </div>
     </section>
@@ -148,6 +168,9 @@ try {
         ))}
       </div>
     </section>
+
+    <!-- WORDPRESS PAGE CONTENT -->
+    {pageContent && <div class="wp-content" style="max-width:80rem;margin:0 auto;padding:0 1.5rem;" set:html={pageContent}></div>}
 
     <!-- PARTNER SECTION -->
     <section style="background:#faf8f5;padding:5rem 1.5rem;">

@@ -166,7 +166,7 @@ add_action('enqueue_block_editor_assets', function () {
 
 // ─── Expose parsed blocks in REST API ───
 add_action('rest_api_init', function () {
-    $post_types = ['rundreise', 'genussreise', 'reisetrend', 'deal'];
+    $post_types = ['rundreise', 'genussreise', 'reisetrend', 'deal', 'page'];
 
     foreach ($post_types as $type) {
         register_rest_field($type, 'blocks', [

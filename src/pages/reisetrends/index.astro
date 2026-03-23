@@ -3,7 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import MobileNav from "../../components/MobileNav.astro";
-import { getReisetrends, getEmbeddedImage, getMeta } from "../../lib/wordpress";
+import { getReisetrends, getEmbeddedImage, getMeta, getPageBySlug } from "../../lib/wordpress";
 
 const fallbackData = [
   {
@@ -44,6 +44,26 @@ try {
 } catch (e) {
   // WordPress unavailable, use fallback data
 }
+
+// Fetch hero data from WordPress Page
+let heroImage = "https://images.unsplash.com/photo-1436491865332-7a61a109db05?w=1920&q=80";
+let heroTitle = "Reisetrends.";
+let heroSubtitle = "Analysen, Hintergründe und Perspektiven zur Zukunft des Reisens.";
+let pageContent = '';
+
+try {
+  const page = await getPageBySlug('reisetrends-seite');
+  if (page) {
+    const rendered = page.content?.rendered || '';
+    const imgMatch = rendered.match(/data-image="([^"]+)"/);
+    const titleMatch = rendered.match(/data-title="([^"]+)"/);
+    const subtitleMatch = rendered.match(/data-subtitle="([^"]+)"/);
+    if (imgMatch) heroImage = imgMatch[1];
+    if (titleMatch) heroTitle = titleMatch[1];
+    if (subtitleMatch) heroSubtitle = subtitleMatch[1];
+    pageContent = rendered;
+  }
+} catch {}
 ---
 
 <Layout title="Reisetrends">
@@ -54,20 +74,21 @@ try {
     <!-- ============================================ -->
     <!-- HERO SECTION                                 -->
     <!-- ============================================ -->
-    <section class="relative h-[500px] overflow-hidden">
+    <section style="position:relative;height:500px;overflow:hidden;">
       <img
-        src="https://images.unsplash.com/photo-1436491865332-7a61a109db05?w=1920&q=80"
+        src={heroImage}
         alt="Reisetrends"
-        class="absolute inset-0 w-full h-full object-cover"
+        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"
+        loading="eager"
       />
-      <div class="absolute inset-0 hero-gradient"></div>
-      <div class="relative z-10 h-full flex flex-col justify-end max-w-7xl mx-auto px-6 pb-16">
-        <p class="font-label text-[10px] font-bold uppercase tracking-widest text-white/70 mb-3">SPIEGEL Reisewelt</p>
-        <h1 class="font-headline text-5xl md:text-7xl font-black tracking-tighter text-white leading-[0.95]">
-          Reisetrends.
+      <div class="hero-gradient" style="position:absolute;inset:0;"></div>
+      <div style="position:relative;z-index:10;height:100%;display:flex;flex-direction:column;justify-content:flex-end;max-width:80rem;margin:0 auto;padding:0 1.5rem 4rem;">
+        <p style="font-family:Inter,sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.7);margin-bottom:12px;">SPIEGEL Reisewelt</p>
+        <h1 style="font-family:Inter,sans-serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:900;letter-spacing:-0.03em;color:#fff;line-height:0.95;">
+          {heroTitle}
         </h1>
-        <p class="font-body italic text-white/80 text-lg md:text-xl mt-4 max-w-xl">
-          Analysen, Hintergr&uuml;nde und Perspektiven zur Zukunft des Reisens.
+        <p style="font-family:Newsreader,serif;font-style:italic;color:rgba(255,255,255,0.8);font-size:1.2rem;margin-top:1rem;max-width:32rem;">
+          {heroSubtitle}
         </p>
       </div>
     </section>
@@ -112,6 +133,9 @@ try {
         ))}
       </div>
     </section>
+
+    <!-- WORDPRESS PAGE CONTENT -->
+    {pageContent && <div class="wp-content" style="max-width:80rem;margin:0 auto;padding:0 1.5rem;" set:html={pageContent}></div>}
 
     <!-- ============================================ -->
     <!-- PARTNER SECTION                              -->

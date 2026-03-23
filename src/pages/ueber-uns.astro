@@ -3,138 +3,138 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import MobileNav from "../components/MobileNav.astro";
+import { getPageBySlug } from "../lib/wordpress";
+
+// Fetch entire page content from WordPress
+let pageContent = '';
+let pageTitle = 'Über uns';
+
+try {
+  const page = await getPageBySlug('ueber-uns-seite');
+  if (page) {
+    pageTitle = page.title?.rendered || pageTitle;
+    pageContent = page.content?.rendered || '';
+  }
+} catch {}
 ---
 
-<Layout title="\u00dcber uns">
+<Layout title={pageTitle}>
   <Header />
   <MobileNav />
 
-  <main class="pb-20 md:pb-0">
-    <!-- ============================================ -->
-    <!-- HERO SECTION                                 -->
-    <!-- ============================================ -->
-    <section class="relative h-[400px] overflow-hidden">
+  <main style="padding-bottom:5rem;">
+    <!-- HERO SECTION -->
+    <section style="position:relative;height:400px;overflow:hidden;">
       <img
         src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1920&q=80"
-        alt="\u00dcber die SPIEGEL Reisewelt"
-        class="absolute inset-0 w-full h-full object-cover"
+        alt="Über die SPIEGEL Reisewelt"
+        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"
+        loading="eager"
       />
-      <div class="absolute inset-0 hero-gradient"></div>
-      <div class="relative z-10 h-full flex flex-col justify-end max-w-7xl mx-auto px-6 pb-16">
-        <p class="font-label text-[10px] font-bold uppercase tracking-widest text-white/70 mb-3">SPIEGEL Reisewelt</p>
-        <h1 class="font-headline text-5xl md:text-7xl font-black tracking-tighter text-white leading-[0.95]">
-          &Uuml;ber uns.
+      <div class="hero-gradient" style="position:absolute;inset:0;"></div>
+      <div style="position:relative;z-index:10;height:100%;display:flex;flex-direction:column;justify-content:flex-end;max-width:80rem;margin:0 auto;padding:0 1.5rem 4rem;">
+        <p style="font-family:Inter,sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.7);margin-bottom:12px;">SPIEGEL Reisewelt</p>
+        <h1 style="font-family:Inter,sans-serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:900;letter-spacing:-0.03em;color:#fff;line-height:0.95;">
+          {pageTitle}.
         </h1>
       </div>
     </section>
 
-    <!-- ============================================ -->
-    <!-- ABOUT CONTENT                                -->
-    <!-- ============================================ -->
-    <section class="max-w-4xl mx-auto px-6 py-20">
-      <div class="space-y-12">
-        <!-- Intro -->
-        <div>
-          <h2 class="font-headline text-3xl md:text-4xl font-black tracking-tighter text-on-surface mb-6">
-            Willkommen bei der SPIEGEL Reisewelt
-          </h2>
-          <p class="font-body text-on-surface-variant text-xl italic leading-relaxed">
-            Die SPIEGEL Reisewelt ist das Reiseportal des SPIEGEL. Wir kuratieren f&uuml;r Sie die besten Reiseangebote ausgew&auml;hlter Partner &ndash; von Rundreisen &uuml;ber kulinarische Erlebnisreisen bis hin zu aktuellen Reisetrends. Unser Ziel: Ihnen Inspiration und Orientierung f&uuml;r Ihre n&auml;chste Reise zu geben.
-          </p>
-        </div>
+    <!-- WORDPRESS PAGE CONTENT -->
+    {pageContent ? (
+      <div class="wp-content" style="max-width:52rem;margin:0 auto;padding:3rem 1.5rem 5rem;" set:html={pageContent}></div>
+    ) : (
+      <section style="max-width:52rem;margin:0 auto;padding:3rem 1.5rem 5rem;">
+        <div style="display:flex;flex-direction:column;gap:3rem;">
+          <!-- Intro -->
+          <div>
+            <h2 style="font-family:Inter,sans-serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:900;color:#1a1a1a;margin-bottom:1.5rem;letter-spacing:-0.02em;">
+              Willkommen bei der SPIEGEL Reisewelt
+            </h2>
+            <p style="font-family:Newsreader,serif;font-size:1.15rem;color:#666;line-height:1.8;font-style:italic;">
+              Die SPIEGEL Reisewelt ist das Reiseportal des SPIEGEL. Wir kuratieren f&uuml;r Sie die besten Reiseangebote ausgew&auml;hlter Partner &ndash; von Rundreisen &uuml;ber kulinarische Erlebnisreisen bis hin zu aktuellen Reisetrends. Unser Ziel: Ihnen Inspiration und Orientierung f&uuml;r Ihre n&auml;chste Reise zu geben.
+            </p>
+          </div>
 
-        <!-- How it works -->
-        <div class="border-t border-neutral-200 pt-12">
-          <h2 class="font-headline text-3xl md:text-4xl font-black tracking-tighter text-on-surface mb-8">
-            So funktioniert die SPIEGEL Reisewelt
-          </h2>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="text-center">
-              <div class="w-16 h-16 bg-[#E64415]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span class="material-symbols-outlined text-[#E64415] text-[28px]">travel_explore</span>
+          <!-- How it works -->
+          <div style="border-top:1px solid #e8e8e8;padding-top:3rem;">
+            <h2 style="font-family:Inter,sans-serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:900;color:#1a1a1a;margin-bottom:2rem;letter-spacing:-0.02em;">
+              So funktioniert die SPIEGEL Reisewelt
+            </h2>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;">
+              <div style="text-align:center;">
+                <h3 style="font-family:Inter,sans-serif;font-size:1.1rem;font-weight:700;color:#1a1a1a;margin-bottom:0.5rem;">Entdecken</h3>
+                <p style="font-family:Newsreader,serif;font-size:0.95rem;color:#666;line-height:1.7;font-style:italic;">
+                  St&ouml;bern Sie durch handverlesene Reiseangebote unserer gepr&uuml;ften Partner. Jede Reise wird von unserer Redaktion ausgew&auml;hlt.
+                </p>
               </div>
-              <h3 class="font-headline text-lg font-bold text-on-surface mb-2">Entdecken</h3>
-              <p class="font-body text-on-surface-variant text-sm italic leading-relaxed">
-                St&ouml;bern Sie durch handverlesene Reiseangebote unserer gepr&uuml;ften Partner. Jede Reise wird von unserer Redaktion ausgew&auml;hlt.
-              </p>
+              <div style="text-align:center;">
+                <h3 style="font-family:Inter,sans-serif;font-size:1.1rem;font-weight:700;color:#1a1a1a;margin-bottom:0.5rem;">Informieren</h3>
+                <p style="font-family:Newsreader,serif;font-size:0.95rem;color:#666;line-height:1.7;font-style:italic;">
+                  Lesen Sie detaillierte Reisebeschreibungen, Preise und Leistungen. Unsere Reisetrend-Artikel geben zus&auml;tzliche Orientierung.
+                </p>
+              </div>
+              <div style="text-align:center;">
+                <h3 style="font-family:Inter,sans-serif;font-size:1.1rem;font-weight:700;color:#1a1a1a;margin-bottom:0.5rem;">Buchen</h3>
+                <p style="font-family:Newsreader,serif;font-size:0.95rem;color:#666;line-height:1.7;font-style:italic;">
+                  Die Buchung erfolgt direkt beim jeweiligen Reisepartner. Sie profitieren von bew&auml;hrten Anbietern und deren vollst&auml;ndigem Service.
+                </p>
+              </div>
             </div>
-            <div class="text-center">
-              <div class="w-16 h-16 bg-[#E64415]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span class="material-symbols-outlined text-[#E64415] text-[28px]">info</span>
-              </div>
-              <h3 class="font-headline text-lg font-bold text-on-surface mb-2">Informieren</h3>
-              <p class="font-body text-on-surface-variant text-sm italic leading-relaxed">
-                Lesen Sie detaillierte Reisebeschreibungen, Preise und Leistungen. Unsere Reisetrend-Artikel geben zus&auml;tzliche Orientierung.
-              </p>
-            </div>
-            <div class="text-center">
-              <div class="w-16 h-16 bg-[#E64415]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span class="material-symbols-outlined text-[#E64415] text-[28px]">check_circle</span>
-              </div>
-              <h3 class="font-headline text-lg font-bold text-on-surface mb-2">Buchen</h3>
-              <p class="font-body text-on-surface-variant text-sm italic leading-relaxed">
-                Die Buchung erfolgt direkt beim jeweiligen Reisepartner. Sie profitieren von bew&auml;hrten Anbietern und deren vollst&auml;ndigem Service.
-              </p>
+          </div>
+
+          <!-- Affiliate Model Note -->
+          <div style="background:#faf8f5;padding:2rem;border-radius:8px;border-left:4px solid #E64415;">
+            <h3 style="font-family:Inter,sans-serif;font-size:1.15rem;font-weight:700;color:#1a1a1a;margin-bottom:0.75rem;">Unabh&auml;ngig empfohlen</h3>
+            <p style="font-family:Newsreader,serif;font-size:0.95rem;color:#666;line-height:1.7;font-style:italic;">
+              Die SPIEGEL Reisewelt arbeitet mit ausgew&auml;hlten Reisepartnern zusammen. Wenn Sie &uuml;ber unsere Seite eine Reise buchen, erh&auml;lt der SPIEGEL eine Provision vom jeweiligen Partner. Dies hat keinen Einfluss auf den Preis Ihrer Reise &ndash; Sie zahlen denselben Preis wie bei einer Direktbuchung.
+            </p>
+          </div>
+
+          <!-- FAQ Section -->
+          <div style="border-top:1px solid #e8e8e8;padding-top:3rem;">
+            <h2 style="font-family:Inter,sans-serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:900;color:#1a1a1a;margin-bottom:2rem;letter-spacing:-0.02em;">
+              H&auml;ufige Fragen
+            </h2>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <details class="group" style="border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#fff;">
+                <summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;padding:1.25rem 1.5rem;list-style:none;font-family:Inter,sans-serif;font-size:0.95rem;font-weight:700;color:#1a1a1a;">
+                  Was ist die SPIEGEL Reisewelt?
+                  <span style="font-size:14px;flex-shrink:0;color:#999;transition:transform 0.2s;" class="group-open:rotate-180">&#9660;</span>
+                </summary>
+                <div style="padding:0 1.5rem 1.25rem;">
+                  <p style="font-family:Newsreader,serif;font-size:0.95rem;color:#666;line-height:1.7;">
+                    Die SPIEGEL Reisewelt ist das offizielle Reiseportal des SPIEGEL. Wir pr&auml;sentieren kuratierte Reiseangebote von ausgew&auml;hlten Partnern wie Marco Polo, Studiosus, Genussreisen GmbH und weiteren renommierten Veranstaltern. Unser Fokus liegt auf Rundreisen, Genussreisen und redaktionellen Reisetrends.
+                  </p>
+                </div>
+              </details>
+              <details class="group" style="border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#fff;">
+                <summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;padding:1.25rem 1.5rem;list-style:none;font-family:Inter,sans-serif;font-size:0.95rem;font-weight:700;color:#1a1a1a;">
+                  Wie funktioniert die Buchung?
+                  <span style="font-size:14px;flex-shrink:0;color:#999;transition:transform 0.2s;" class="group-open:rotate-180">&#9660;</span>
+                </summary>
+                <div style="padding:0 1.5rem 1.25rem;">
+                  <p style="font-family:Newsreader,serif;font-size:0.95rem;color:#666;line-height:1.7;">
+                    Wenn Sie eine Reise gefunden haben, die Sie interessiert, klicken Sie auf den Buchungs-Button. Sie werden dann zur Website des jeweiligen Reisepartners weitergeleitet, wo Sie die Reise direkt beim Veranstalter buchen k&ouml;nnen. Die Buchung, Bezahlung und der gesamte Service laufen &uuml;ber den Partner &ndash; Sie sind dort in besten H&auml;nden.
+                  </p>
+                </div>
+              </details>
+              <details class="group" style="border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#fff;">
+                <summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;padding:1.25rem 1.5rem;list-style:none;font-family:Inter,sans-serif;font-size:0.95rem;font-weight:700;color:#1a1a1a;">
+                  Verdient der SPIEGEL an meiner Buchung?
+                  <span style="font-size:14px;flex-shrink:0;color:#999;transition:transform 0.2s;" class="group-open:rotate-180">&#9660;</span>
+                </summary>
+                <div style="padding:0 1.5rem 1.25rem;">
+                  <p style="font-family:Newsreader,serif;font-size:0.95rem;color:#666;line-height:1.7;">
+                    Ja, die SPIEGEL Reisewelt erh&auml;lt eine Vermittlungsprovision von den Reisepartnern, wenn Sie &uuml;ber unsere Seite buchen. Wichtig: Dies hat keinerlei Auswirkungen auf Ihren Reisepreis. Sie zahlen exakt denselben Betrag wie bei einer Direktbuchung beim Veranstalter. Die Provision erm&ouml;glicht es uns, die SPIEGEL Reisewelt als unabh&auml;ngiges Reiseportal zu betreiben.
+                  </p>
+                </div>
+              </details>
             </div>
           </div>
         </div>
-
-        <!-- Affiliate Model Note -->
-        <div class="bg-surface-container-low p-8 rounded-lg border-l-4 border-[#E64415]">
-          <h3 class="font-headline text-xl font-bold text-on-surface mb-3">Unabh&auml;ngig empfohlen</h3>
-          <p class="font-body text-on-surface-variant italic leading-relaxed">
-            Die SPIEGEL Reisewelt arbeitet mit ausgew&auml;hlten Reisepartnern zusammen. Wenn Sie &uuml;ber unsere Seite eine Reise buchen, erh&auml;lt der SPIEGEL eine Provision vom jeweiligen Partner. Dies hat keinen Einfluss auf den Preis Ihrer Reise &ndash; Sie zahlen denselben Preis wie bei einer Direktbuchung.
-          </p>
-        </div>
-
-        <!-- FAQ Section -->
-        <div class="border-t border-neutral-200 pt-12">
-          <h2 class="font-headline text-3xl md:text-4xl font-black tracking-tighter text-on-surface mb-8">
-            H&auml;ufige Fragen
-          </h2>
-          <div class="space-y-6">
-            <!-- FAQ 1 -->
-            <details class="group bg-white border border-neutral-100 rounded-lg overflow-hidden">
-              <summary class="flex items-center justify-between p-6 cursor-pointer">
-                <h3 class="font-headline text-lg font-bold text-on-surface">Was ist die SPIEGEL Reisewelt?</h3>
-                <span class="material-symbols-outlined text-[#E64415] text-[20px] group-open:rotate-180 transition-transform">expand_more</span>
-              </summary>
-              <div class="px-6 pb-6">
-                <p class="font-body text-on-surface-variant italic leading-relaxed">
-                  Die SPIEGEL Reisewelt ist das offizielle Reiseportal des SPIEGEL. Wir pr&auml;sentieren kuratierte Reiseangebote von ausgew&auml;hlten Partnern wie Marco Polo, Studiosus, Genussreisen GmbH und weiteren renommierten Veranstaltern. Unser Fokus liegt auf Rundreisen, Genussreisen und redaktionellen Reisetrends.
-                </p>
-              </div>
-            </details>
-
-            <!-- FAQ 2 -->
-            <details class="group bg-white border border-neutral-100 rounded-lg overflow-hidden">
-              <summary class="flex items-center justify-between p-6 cursor-pointer">
-                <h3 class="font-headline text-lg font-bold text-on-surface">Wie funktioniert die Buchung?</h3>
-                <span class="material-symbols-outlined text-[#E64415] text-[20px] group-open:rotate-180 transition-transform">expand_more</span>
-              </summary>
-              <div class="px-6 pb-6">
-                <p class="font-body text-on-surface-variant italic leading-relaxed">
-                  Wenn Sie eine Reise gefunden haben, die Sie interessiert, klicken Sie auf den Buchungs-Button. Sie werden dann zur Website des jeweiligen Reisepartners weitergeleitet, wo Sie die Reise direkt beim Veranstalter buchen k&ouml;nnen. Die Buchung, Bezahlung und der gesamte Service laufen &uuml;ber den Partner &ndash; Sie sind dort in besten H&auml;nden.
-                </p>
-              </div>
-            </details>
-
-            <!-- FAQ 3 -->
-            <details class="group bg-white border border-neutral-100 rounded-lg overflow-hidden">
-              <summary class="flex items-center justify-between p-6 cursor-pointer">
-                <h3 class="font-headline text-lg font-bold text-on-surface">Verdient der SPIEGEL an meiner Buchung?</h3>
-                <span class="material-symbols-outlined text-[#E64415] text-[20px] group-open:rotate-180 transition-transform">expand_more</span>
-              </summary>
-              <div class="px-6 pb-6">
-                <p class="font-body text-on-surface-variant italic leading-relaxed">
-                  Ja, die SPIEGEL Reisewelt erh&auml;lt eine Vermittlungsprovision von den Reisepartnern, wenn Sie &uuml;ber unsere Seite buchen. Wichtig: Dies hat keinerlei Auswirkungen auf Ihren Reisepreis. Sie zahlen exakt denselben Betrag wie bei einer Direktbuchung beim Veranstalter. Die Provision erm&ouml;glicht es uns, die SPIEGEL Reisewelt als unabh&auml;ngiges Reiseportal zu betreiben.
-                </p>
-              </div>
-            </details>
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
+    )}
   </main>
 
   <Footer />

@@ -113,6 +113,17 @@ export function getMeta(post: any, field: string): any {
   return post.acf?.[field] || post.meta?.[field] || null;
 }
 
+// ─── Page with parsed blocks ───
+export async function getPageWithBlocks(slug: string) {
+  const page = await getPageBySlug(slug);
+  if (!page) return null;
+  return {
+    ...page,
+    blocks: page.blocks || [],
+    rendered: page.content?.rendered || '',
+  };
+}
+
 // ─── Homepage data aggregator ───
 export async function getHomepageData() {
   try {
