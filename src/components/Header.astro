@@ -9,32 +9,100 @@ try {
   if (settings.logo) logoSrc = settings.logo;
   if (settings.siteTitle) siteTitle = settings.siteTitle;
 } catch {}
+
+const currentPath = Astro.url.pathname;
+
+const navItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Rundreisen', href: '/rundreisen' },
+  { label: 'Genussreisen', href: '/genussreisen' },
+  { label: 'Reisetrends', href: '/reisetrends' },
+  { label: 'Über uns', href: '/ueber-uns' },
+];
 ---
 
-<header class="fixed top-0 left-0 right-0 h-16 bg-[#E64415] z-50 flex items-center shadow-sm">
-  <div class="w-full max-w-screen-2xl mx-auto px-6 flex items-center justify-between">
-    <!-- Logo -->
-    <a href="/" class="h-6">
-      <img src={logoSrc} alt={siteTitle} class="h-full w-auto object-contain" />
-    </a>
+<!-- Partner Nav Bar (same pattern as streaming-guide.spiegel.de) -->
+<div class="sticky top-0 z-30 mb-4 spiegel-nav">
+  <div class="relative">
+    <div class="w-full rounded shadow bg-white dark:bg-neutral-900">
+      <nav role="navigation" class="border-t border-neutral-200">
+        <div class="max-w-7xl mx-auto flex items-center h-14 px-4 md:px-6">
+          <!-- Anzeige Label -->
+          <div class="bg-neutral-100 dark:bg-neutral-800 px-3 py-1.5 font-headline text-[10px] uppercase tracking-widest text-neutral-500 rounded shrink-0">
+            Anzeige
+          </div>
 
-    <!-- Desktop Nav -->
-    <nav class="hidden md:flex items-center gap-8">
-      <a href="/" class="font-headline font-bold text-white border-b-2 border-white pb-1 text-sm">Startseite</a>
-      <a href="/rundreisen" class="font-headline font-medium text-white/90 hover:text-white transition-colors text-sm">Rundreisen</a>
-      <a href="/genussreisen" class="font-headline font-medium text-white/90 hover:text-white transition-colors text-sm">Genussreisen</a>
-      <a href="/reisetrends" class="font-headline font-medium text-white/90 hover:text-white transition-colors text-sm">Reisetrends</a>
-      <a href="/ueber-uns" class="font-headline font-medium text-white/90 hover:text-white transition-colors text-sm">Über uns</a>
-    </nav>
+          <!-- Mobile: Hamburger + Menu Label -->
+          <div class="flex items-center md:hidden ml-4">
+            <button id="mobile-menu-toggle" class="flex items-center gap-2 text-neutral-900 dark:text-neutral-100" aria-label="Menü öffnen">
+              <span class="material-symbols-outlined text-[20px]">menu</span>
+              <span class="font-headline text-sm">Menü</span>
+            </button>
+          </div>
 
-    <!-- Icons -->
-    <div class="flex items-center gap-4">
-      <a href="/suche" class="text-white/90 hover:text-white transition-colors" aria-label="Suche">
-        <span class="material-symbols-outlined text-[22px]">search</span>
-      </a>
-      <button class="md:hidden text-white/90 hover:text-white transition-colors" aria-label="Menü">
-        <span class="material-symbols-outlined text-[22px]">menu</span>
-      </button>
+          <!-- Desktop Nav Links -->
+          <div class="hidden md:flex items-center flex-grow h-full ml-4">
+            {navItems.map((item) => {
+              const isActive = currentPath === item.href ||
+                (item.href !== '/' && currentPath.startsWith(item.href));
+              return (
+                <a
+                  href={item.href}
+                  class:list={[
+                    'inline-flex items-center h-full px-4 font-headline text-sm transition-colors',
+                    'hover:border-b-2 hover:border-neutral-300',
+                    isActive
+                      ? 'text-neutral-900 dark:text-white border-b-2 border-[#E64415]'
+                      : 'text-neutral-600 dark:text-neutral-300 border-b-2 border-transparent',
+                  ]}
+                >
+                  <span class="whitespace-nowrap">{item.label}</span>
+                </a>
+              );
+            })}
+          </div>
+
+          <!-- Logo (right side) -->
+          <a href="/" class="ml-auto h-5 shrink-0">
+            <img src={logoSrc} alt={siteTitle} class="h-full w-auto object-contain" />
+          </a>
+        </div>
+      </nav>
+
+      <!-- Mobile Menu (hidden by default) -->
+      <div id="mobile-menu" class="hidden md:hidden border-t border-neutral-200 bg-white dark:bg-neutral-900">
+        <ul class="py-2">
+          {navItems.map((item) => {
+            const isActive = currentPath === item.href ||
+              (item.href !== '/' && currentPath.startsWith(item.href));
+            return (
+              <li>
+                <a
+                  href={item.href}
+                  class:list={[
+                    'block px-6 py-3 font-headline text-sm transition-colors',
+                    isActive
+                      ? 'text-[#E64415] font-bold bg-neutral-50'
+                      : 'text-neutral-700 hover:bg-neutral-50 hover:text-neutral-900',
+                  ]}
+                >
+                  {item.label}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </div>
   </div>
-</header>
+</div>
+
+<script>
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+  }
+</script>

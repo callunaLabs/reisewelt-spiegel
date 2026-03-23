@@ -71,19 +71,20 @@ try {
         margin-right: -50vw;
         overflow-x: hidden;
       }
-      /* Ensure our header sits above SPIEGEL nav */
-      .reisewelt-content header {
+      /* Partner nav bar: sticky within SPIEGEL layout */
+      .reisewelt-content .spiegel-nav {
         position: sticky;
         top: 0;
-        z-index: 100;
+        z-index: 30;
       }
-      /* Override any SPIEGEL max-width on our content */
+      /* Override any SPIEGEL max-width on our content sections */
       .reisewelt-content section,
-      .reisewelt-content main,
-      .reisewelt-content footer {
+      .reisewelt-content main {
         max-width: none !important;
-        padding-left: 0 !important;
-        padding-right: 0 !important;
+      }
+      /* Reisewelt footer keeps its own padding */
+      .reisewelt-content > footer {
+        max-width: none !important;
       }
     </style>
     <div class="reisewelt-content">
