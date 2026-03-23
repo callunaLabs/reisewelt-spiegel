@@ -105,6 +105,76 @@ try {
         padding-left: 1.5rem;
         padding-right: 1.5rem;
       }
+
+      /* Font override: ensure Reisewelt fonts win over SPIEGEL globals */
+      .reisewelt-content * {
+        font-family: inherit;
+      }
+      .reisewelt-content h1,
+      .reisewelt-content h2,
+      .reisewelt-content h3,
+      .reisewelt-content h4,
+      .reisewelt-content [class*="font-headline"] {
+        font-family: "Inter", sans-serif !important;
+      }
+      .reisewelt-content p,
+      .reisewelt-content [class*="font-body"],
+      .reisewelt-content article {
+        font-family: "Newsreader", serif !important;
+      }
+
+      /* WordPress content styling */
+      .reisewelt-content .wp-content h2 {
+        font-family: "Inter", sans-serif !important;
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin: 2rem 0 1rem;
+        color: #1d1b16;
+      }
+      .reisewelt-content .wp-content h3 {
+        font-family: "Inter", sans-serif !important;
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin: 1.5rem 0 0.75rem;
+        color: #1d1b16;
+      }
+      .reisewelt-content .wp-content p {
+        font-family: "Newsreader", serif !important;
+        font-size: 1.125rem;
+        line-height: 1.8;
+        margin-bottom: 1.25rem;
+        color: #45464d;
+      }
+      .reisewelt-content .wp-content img {
+        width: 100%;
+        height: auto;
+        border-radius: 0.25rem;
+        margin: 2rem 0;
+      }
+      .reisewelt-content .wp-content ul,
+      .reisewelt-content .wp-content ol {
+        padding-left: 1.5rem;
+        margin-bottom: 1.25rem;
+      }
+      .reisewelt-content .wp-content li {
+        font-family: "Newsreader", serif !important;
+        font-size: 1.125rem;
+        line-height: 1.8;
+        margin-bottom: 0.5rem;
+      }
+      .reisewelt-content .wp-content a {
+        color: #E64415;
+        text-decoration: underline;
+      }
+      .reisewelt-content .wp-content figure {
+        margin: 2rem 0;
+      }
+      .reisewelt-content .wp-content figcaption {
+        font-family: "Inter", sans-serif !important;
+        font-size: 0.75rem;
+        color: #999;
+        margin-top: 0.5rem;
+      }
     </style>
   </head>
   <Fragment set:html={spiegelHeader} />

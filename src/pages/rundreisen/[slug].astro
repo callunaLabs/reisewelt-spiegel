@@ -153,10 +153,10 @@ const relatedTrips = fallbackTrips.filter((t) => t.slug !== slug).slice(0, 3);
             {trip.duration}
           </span>
         </div>
-        <h1 class="font-headline text-4xl md:text-6xl font-black tracking-tighter text-white leading-[0.95] max-w-3xl">
+        <h1 class="font-headline text-4xl md:text-6xl font-black tracking-tighter text-white leading-[0.95] max-w-3xl" style="font-family:Inter,sans-serif">
           {trip.title}
         </h1>
-        <p class="font-body italic text-white/80 text-lg mt-4 max-w-2xl">
+        <p class="font-body italic text-white/80 text-lg mt-4 max-w-2xl" style="font-family:Newsreader,serif">
           {trip.excerpt}
         </p>
       </div>
@@ -171,15 +171,13 @@ const relatedTrips = fallbackTrips.filter((t) => t.slug !== slug).slice(0, 3);
         <div class="lg:col-span-2 space-y-12">
           <!-- Description -->
           <div>
-            <h2 class="font-headline text-2xl font-black tracking-tight text-on-surface mb-6">Reise&uuml;bersicht</h2>
-            <p class="font-body text-on-surface-variant text-lg italic leading-relaxed">
-              {trip.description}
-            </p>
+            <h2 class="font-headline text-2xl font-black tracking-tight text-on-surface mb-6" style="font-family:Inter,sans-serif">Reise&uuml;bersicht</h2>
+            <div class="wp-content" style="font-family:Newsreader,serif;font-size:1.125rem;line-height:1.8;color:#45464d;" set:html={trip.description}></div>
           </div>
 
           <!-- Highlights -->
           <div class="border-t border-neutral-200 pt-8">
-            <h2 class="font-headline text-2xl font-black tracking-tight text-on-surface mb-6">Highlights</h2>
+            <h2 class="font-headline text-2xl font-black tracking-tight text-on-surface mb-6" style="font-family:Inter,sans-serif">Highlights</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {(Array.isArray(trip.highlights) ? trip.highlights : (trip.highlights || '').split(',')).filter(Boolean).map((highlight: string) => (
                 <div class="flex items-center gap-3">
@@ -192,7 +190,7 @@ const relatedTrips = fallbackTrips.filter((t) => t.slug !== slug).slice(0, 3);
 
           <!-- Included -->
           <div class="border-t border-neutral-200 pt-8">
-            <h2 class="font-headline text-2xl font-black tracking-tight text-on-surface mb-6">Im Preis enthalten</h2>
+            <h2 class="font-headline text-2xl font-black tracking-tight text-on-surface mb-6" style="font-family:Inter,sans-serif">Im Preis enthalten</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {(Array.isArray(trip.included) ? trip.included : (trip.included || '').split(',')).filter(Boolean).map((item: string) => (
                 <div class="flex items-center gap-3">

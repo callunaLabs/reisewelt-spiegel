@@ -103,10 +103,10 @@ const otherArticles = fallbackArticles.filter((a) => a.slug !== slug);
       <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
       <div class="absolute bottom-16 left-0 right-0 max-w-7xl mx-auto px-6">
         <span class="inline-block px-3 py-1 mb-6 bg-[#E64415] text-white text-[10px] font-label font-bold tracking-widest uppercase rounded">Reisetrend</span>
-        <h1 class="text-white font-headline font-black text-4xl md:text-6xl lg:text-7xl tracking-tighter leading-[0.95] max-w-4xl mb-4">
+        <h1 class="text-white font-headline font-black text-4xl md:text-6xl lg:text-7xl tracking-tighter leading-[0.95] max-w-4xl mb-4" style="font-family:Inter,sans-serif">
           {article.title}
         </h1>
-        <p class="font-body italic text-white/80 text-lg max-w-2xl">
+        <p class="font-body italic text-white/80 text-lg max-w-2xl" style="font-family:Newsreader,serif">
           {article.excerpt}
         </p>
       </div>
@@ -149,7 +149,7 @@ const otherArticles = fallbackArticles.filter((a) => a.slug !== slug);
 
         <!-- Article Body -->
         <div class="lg:col-span-7 space-y-8">
-          <Fragment set:html={article.content} />
+          <div class="wp-content" style="font-family:Newsreader,serif;font-size:1.125rem;line-height:1.8;color:#45464d;" set:html={article.content}></div>
         </div>
       </div>
     </article>

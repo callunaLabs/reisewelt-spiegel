@@ -41,12 +41,12 @@ const { variant = 'simple' } = Astro.props;
   <div class="border-t border-neutral-200 py-8 px-8">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
       <p class="font-body text-sm italic text-neutral-400">&copy; {new Date().getFullYear()} Reisewelt Editorial. Alle Rechte vorbehalten.</p>
-      <div class="flex gap-4">
-        <a href="#" class="w-10 h-10 rounded-full border border-neutral-200 flex items-center justify-center text-neutral-400 hover:text-[#E64415] hover:border-[#E64415] transition-all">
-          <span class="material-symbols-outlined text-sm">mail</span>
+      <div style="display:flex;gap:12px;">
+        <a href="mailto:reisewelt.service@spiegel.de" style="width:36px;height:36px;border-radius:50%;border:1px solid #e5e5e5;display:flex;align-items:center;justify-content:center;color:#999;text-decoration:none;" aria-label="E-Mail">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         </a>
-        <a href="#" class="w-10 h-10 rounded-full border border-neutral-200 flex items-center justify-center text-neutral-400 hover:text-[#E64415] hover:border-[#E64415] transition-all">
-          <span class="material-symbols-outlined text-sm">rss_feed</span>
+        <a href="https://www.spiegel.de/schlagzeilen/index.rss" style="width:36px;height:36px;border-radius:50%;border:1px solid #e5e5e5;display:flex;align-items:center;justify-content:center;color:#999;text-decoration:none;" aria-label="RSS Feed">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1" fill="currentColor"/></svg>
         </a>
       </div>
     </div>
