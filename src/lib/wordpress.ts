@@ -1,7 +1,7 @@
 // WordPress Headless CMS API Client
 // Connects to WordPress REST API for content management
 
-const WP_URL = import.meta.env.WP_URL || 'https://reisewelt-cms.replit.app';
+const WP_URL = import.meta.env.WP_URL || 'https://reisewelt-poc.calluna.ai';
 const WP_API = `${WP_URL}/wp-json/wp/v2`;
 const WP_CUSTOM = `${WP_URL}/wp-json/reisewelt/v1`;
 
