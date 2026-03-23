@@ -13,13 +13,17 @@ const {
   canonicalUrl = "https://reisewelt.spiegel.de"
 } = Astro.props;
 
-// Fetch SPIEGEL partner template at build time
+// SPIEGEL partner template — disabled until CSS conflicts are resolved
+// Set ENABLE_SPIEGEL_TEMPLATE=true in env to activate
+const enableSpiegelTemplate = import.meta.env.ENABLE_SPIEGEL_TEMPLATE === 'true';
+
 let spiegelHead = '';
 let spiegelHeader = '';
 let spiegelFooter = '';
 let useSpiegel = false;
 
 try {
+  if (!enableSpiegelTemplate) throw new Error('disabled');
   const res = await fetch('https://www.spiegel.de/assets/partner/template-noads.html');
   if (res.ok) {
     const html = await res.text();
