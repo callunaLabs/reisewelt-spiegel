@@ -13,28 +13,33 @@ const {
   canonicalUrl = "https://reisewelt.spiegel.de"
 } = Astro.props;
 
-// SPIEGEL partner template — disabled until CSS conflicts are resolved
-// Set ENABLE_SPIEGEL_TEMPLATE=true in env to activate
-const enableSpiegelTemplate = import.meta.env.ENABLE_SPIEGEL_TEMPLATE === 'true';
-
+// Fetch SPIEGEL partner template at build time
 let spiegelHead = '';
 let spiegelHeader = '';
 let spiegelFooter = '';
 let useSpiegel = false;
 
 try {
-  if (!enableSpiegelTemplate) throw new Error('disabled');
   const res = await fetch('https://www.spiegel.de/assets/partner/template-noads.html');
   if (res.ok) {
     const html = await res.text();
 
-    // Extract <head> content
+    // Extract <head> content (without SPIEGEL's main CSS to avoid conflicts)
     const headStart = html.indexOf('<head>') + 6;
     const headEnd = html.indexOf('</head>');
-    spiegelHead = html.substring(headStart, headEnd)
+    let headContent = html.substring(headStart, headEnd)
       .replace(/###TITLE###/g, `${title} | SPIEGEL Reisewelt`)
       .replace(/###DESCRIPTION###/g, description)
       .replace(/###CANONICAL_URL###/g, canonicalUrl);
+
+    // Keep SPIEGEL head but remove their main stylesheet to avoid conflicts
+    // We only want their fonts, meta, and scripts — not their layout CSS
+    headContent = headContent.replace(
+      /<link[^>]*styles\.[a-f0-9]+\.css[^>]*>/g,
+      '<!-- SPIEGEL styles removed to prevent conflicts -->'
+    );
+
+    spiegelHead = headContent;
 
     // Extract body header (from <body> to ###MAIN###)
     const bodyStart = html.indexOf('<body');
@@ -57,15 +62,13 @@ try {
 <html lang="de" class="print:text-xs">
   <head>
     <Fragment set:html={spiegelHead} />
-    <!-- Reisewelt custom styles -->
+    <!-- Reisewelt custom styles (loaded AFTER spiegel to take precedence) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Newsreader:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-  </head>
-  <Fragment set:html={spiegelHeader} />
     <style is:global>
-      /* Reisewelt Content: break out of SPIEGEL container constraints */
+      /* Isolate Reisewelt content from SPIEGEL container */
       .reisewelt-content {
         width: 100vw;
         position: relative;
@@ -75,22 +78,19 @@ try {
         margin-right: -50vw;
         overflow-x: hidden;
       }
-      /* Partner nav bar: sticky within SPIEGEL layout */
       .reisewelt-content .spiegel-nav {
         position: sticky;
         top: 0;
         z-index: 30;
       }
-      /* Override any SPIEGEL max-width on our content sections */
       .reisewelt-content section,
-      .reisewelt-content main {
-        max-width: none !important;
-      }
-      /* Reisewelt footer keeps its own padding */
+      .reisewelt-content main,
       .reisewelt-content > footer {
         max-width: none !important;
       }
     </style>
+  </head>
+  <Fragment set:html={spiegelHeader} />
     <div class="reisewelt-content">
       <slot />
     </div>
