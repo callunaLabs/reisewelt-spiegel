@@ -358,6 +358,90 @@
     save: () => null,
   });
 
+  // ═══════════════════════════════════════
+  // 11. BENTO GRID BLOCK
+  // ═══════════════════════════════════════
+  registerBlockType('reisewelt/bento-grid', {
+    title: 'Reise-Empfehlungen (Bento Grid)',
+    icon: 'grid-view',
+    category,
+    attributes: {
+      title: { type: 'string', default: 'Exklusive Reise-Empfehlungen' },
+      subtitle: { type: 'string', default: 'Handverlesene Erlebnisse für anspruchsvolle Genießer.' },
+      filters: { type: 'array', default: ['Europa', 'Asien', 'Weinreisen'] },
+      items: { type: 'array', default: [] },
+    },
+    edit: function (props) {
+      var attrs = props.attributes;
+      var setAttributes = props.setAttributes;
+      var items = attrs.items || [];
+
+      return el('div', { style: { padding: '20px', border: '2px solid #E64415', borderRadius: '8px', background: '#fafafa' } },
+        el('div', { style: { marginBottom: '16px' } },
+          el(TextControl, { label: 'Titel', value: attrs.title, onChange: function(v) { setAttributes({ title: v }); } }),
+          el(TextControl, { label: 'Untertitel', value: attrs.subtitle, onChange: function(v) { setAttributes({ subtitle: v }); } }),
+          el(TextareaControl, {
+            label: 'Filter-Tabs (eins pro Zeile)',
+            value: (attrs.filters || []).join('\n'),
+            onChange: function(v) { setAttributes({ filters: v.split('\n').filter(Boolean) }); },
+            rows: 3,
+          })
+        ),
+
+        // Items
+        el('div', { style: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' } },
+          items.map(function(item, i) {
+            return el('div', { key: i, style: { padding: '12px', background: '#fff', border: '1px solid #e5e5e5', borderRadius: '6px', position: 'relative' } },
+              el('div', { style: { display: 'flex', gap: '8px', marginBottom: '8px' } },
+                el(SelectControl, {
+                  label: 'Größe',
+                  value: item.size || 'small',
+                  onChange: function(v) { var it = [].concat(items); it[i] = Object.assign({}, it[i], { size: v }); setAttributes({ items: it }); },
+                  options: [
+                    { label: 'Klein (1x1)', value: 'small' },
+                    { label: 'Groß (2x2)', value: 'large' },
+                    { label: 'Breit (2x1)', value: 'wide' },
+                  ],
+                  __nextHasNoMarginBottom: true,
+                })
+              ),
+              el(TextControl, { label: 'Titel', value: item.title || '', onChange: function(v) { var it = [].concat(items); it[i] = Object.assign({}, it[i], { title: v }); setAttributes({ items: it }); } }),
+              el(TextControl, { label: 'Ort / Land', value: item.location || '', onChange: function(v) { var it = [].concat(items); it[i] = Object.assign({}, it[i], { location: v }); setAttributes({ items: it }); } }),
+              el(TextControl, { label: 'Preis', value: item.price || '', onChange: function(v) { var it = [].concat(items); it[i] = Object.assign({}, it[i], { price: v }); setAttributes({ items: it }); } }),
+              el(TextControl, { label: 'Beschreibung (optional)', value: item.description || '', onChange: function(v) { var it = [].concat(items); it[i] = Object.assign({}, it[i], { description: v }); setAttributes({ items: it }); } }),
+              el(TextControl, { label: 'Link', value: item.href || '', onChange: function(v) { var it = [].concat(items); it[i] = Object.assign({}, it[i], { href: v }); setAttributes({ items: it }); } }),
+              el(MediaUploadCheck, {},
+                el(MediaUpload, {
+                  onSelect: function(media) { var it = [].concat(items); it[i] = Object.assign({}, it[i], { image: media.url, imageId: media.id }); setAttributes({ items: it }); },
+                  allowedTypes: ['image'],
+                  value: item.imageId,
+                  render: function(obj) {
+                    return el('div', {},
+                      item.image ? el('img', { src: item.image, style: { width: '100%', height: '60px', objectFit: 'cover', borderRadius: '4px', marginTop: '8px' } }) : null,
+                      el(Button, { isSecondary: true, onClick: obj.open, style: { marginTop: '4px' } }, item.image ? 'Bild ändern' : '+ Bild')
+                    );
+                  }
+                })
+              ),
+              el(Button, {
+                isDestructive: true, isSmall: true,
+                style: { position: 'absolute', top: '8px', right: '8px' },
+                onClick: function() { var it = [].concat(items); it.splice(i, 1); setAttributes({ items: it }); }
+              }, '×')
+            );
+          })
+        ),
+
+        el(Button, {
+          isPrimary: true,
+          onClick: function() { setAttributes({ items: items.concat([{ title: '', location: '', price: '', image: '', href: '', size: 'small' }]) }); },
+          style: { marginTop: '12px' }
+        }, '+ Reise hinzufügen')
+      );
+    },
+    save: function() { return null; },
+  });
+
 })(
   window.wp.blocks,
   window.wp.element,

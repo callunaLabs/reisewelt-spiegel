@@ -1,7 +1,76 @@
 @import "tailwindcss" layer(reisewelt);
 
+/* ─── SPIEGEL Font-Face Declarations ─── */
+@font-face {
+  font-family: "SpiegelSlab4UICd";
+  src: url("/fonts/SpiegelSlab4UICd-ExtraBold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SpiegelSerifTextUI";
+  src: url("/fonts/SpiegelSerifTextUI-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SpiegelSerifTextUI";
+  src: url("/fonts/SpiegelSerifTextUI-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SpiegelSerifTextUI";
+  src: url("/fonts/SpiegelSerifTextUI-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SpiegelSerifTextUI";
+  src: url("/fonts/SpiegelSerifTextUI-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SpiegelSerifDisplayUI";
+  src: url("/fonts/SpiegelSerifDisplayUI-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SpiegelSans4UI";
+  src: url("/fonts/SpiegelSans4UI-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SpiegelSans4UI";
+  src: url("/fonts/SpiegelSans4UI-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SpiegelSans46";
+  src: url("/fonts/SpiegelSans4-6SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
-  --color-primary: #04122e;
+  --color-primary: #2f2d2b;
   --color-primary-container: #1a2744;
   --color-on-primary: #ffffff;
   --color-on-primary-container: #828eb1;
@@ -11,25 +80,24 @@
   --color-on-secondary-container: #6e0c00;
   --color-surface: #ffffff;
   --color-surface-dim: #f5f3f0;
-  --color-surface-container: #f8f6f2;
-  --color-surface-container-low: #faf8f5;
-  --color-surface-container-high: #f3f1ed;
-  --color-surface-container-highest: #e7e2d9;
+  --color-surface-container: #f1efed;
+  --color-surface-container-low: #f1efed;
+  --color-surface-container-high: #e9e7e5;
+  --color-surface-container-highest: #dddbd9;
   --color-surface-container-lowest: #ffffff;
-  --color-on-surface: #1d1b16;
-  --color-on-surface-variant: #45464d;
-  --color-outline: #75777e;
-  --color-outline-variant: #c5c6ce;
-  --color-inverse-surface: #32302a;
-  --color-inverse-on-surface: #f6f0e7;
+  --color-on-surface: #2f2d2b;
+  --color-on-surface-variant: #807e7c;
+  --color-outline: #989694;
+  --color-outline-variant: #bbb9b7;
+  --color-inverse-surface: #2f2d2b;
+  --color-inverse-on-surface: #f1efed;
 
-  --font-headline: "Inter", sans-serif;
-  --font-body: "Newsreader", serif;
-  --font-label: "Inter", sans-serif;
+  --font-headline: "SpiegelSlab4UICd", "Inter", sans-serif;
+  --font-body: "SpiegelSerifTextUI", "Newsreader", serif;
+  --font-label: "SpiegelSans4UI", "Inter", sans-serif;
 }
 
 @layer base {
-  /* Scope base styles to reisewelt-content only — don't touch SPIEGEL areas */
   .reisewelt-content {
     font-family: var(--font-body);
     color: var(--color-on-surface);

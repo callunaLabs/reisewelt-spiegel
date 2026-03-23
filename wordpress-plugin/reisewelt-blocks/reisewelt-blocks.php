@@ -145,6 +145,19 @@ add_action('init', function () {
             return '<div class="reisewelt-faq" data-attrs="' . esc_attr(json_encode($attrs)) . '"></div>';
         },
     ]);
+
+    // 11. Bento Grid Block (Featured Trips Grid)
+    register_block_type('reisewelt/bento-grid', [
+        'attributes' => [
+            'title'    => ['type' => 'string', 'default' => 'Exklusive Reise-Empfehlungen'],
+            'subtitle' => ['type' => 'string', 'default' => ''],
+            'items'    => ['type' => 'array', 'default' => [], 'items' => ['type' => 'object']],
+            'filters'  => ['type' => 'array', 'default' => [], 'items' => ['type' => 'string']],
+        ],
+        'render_callback' => function ($attrs) {
+            return '<div class="reisewelt-bento-grid" data-attrs="' . esc_attr(json_encode($attrs)) . '"></div>';
+        },
+    ]);
 });
 
 // ─── Enqueue Block Editor Assets ───
