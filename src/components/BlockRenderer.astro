@@ -44,7 +44,7 @@ const { blocks = [] } = Astro.props;
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {(a.items || []).map((item: string) => (
           <div class="flex items-start gap-3 p-4 bg-surface-container-low rounded">
-            <span class="material-symbols-outlined text-[#E64415] text-lg mt-0.5">check_circle</span>
+            <span class="text-[#E64415] text-lg mt-0.5"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E64415" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
             <span class="font-body text-on-surface">{item}</span>
           </div>
         ))}
@@ -90,7 +90,7 @@ const { blocks = [] } = Astro.props;
       <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
         {(a.items || []).map((item: string) => (
           <li class="flex items-center gap-3">
-            <span class="material-symbols-outlined text-green-600 text-lg">done</span>
+            <span class="text-green-600 text-lg"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span>
             <span class="font-body text-on-surface">{item}</span>
           </li>
         ))}
@@ -118,15 +118,15 @@ const { blocks = [] } = Astro.props;
         <div class="md:w-1/3">
           {a.logo && <img src={a.logo} alt={a.name} class="h-12 mb-4 object-contain" />}
           <h3 class="font-headline font-bold text-xl text-primary mb-2">{a.name}</h3>
-          {a.telefon && <p class="font-body text-sm text-on-surface-variant"><span class="material-symbols-outlined text-sm align-middle mr-1">phone</span>{a.telefon}</p>}
-          {a.email && <p class="font-body text-sm text-on-surface-variant"><span class="material-symbols-outlined text-sm align-middle mr-1">mail</span>{a.email}</p>}
+          {a.telefon && <p class="font-body text-sm text-on-surface-variant"><span class="text-sm align-middle mr-1">&#9742;</span>{a.telefon}</p>}
+          {a.email && <p class="font-body text-sm text-on-surface-variant"><span class="text-sm align-middle mr-1">&#9993;</span>{a.email}</p>}
           {a.website && <a href={a.website} target="_blank" class="font-headline text-sm text-[#E64415] hover:underline">{a.website}</a>}
         </div>
         {(a.usps || []).length > 0 && (
           <div class="md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-4">
             {(a.usps || []).map((usp: string) => (
               <div class="flex items-start gap-3">
-                <span class="material-symbols-outlined text-[#E64415] mt-0.5">verified</span>
+                <span class="text-[#E64415] mt-0.5"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E64415" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
                 <span class="font-body text-on-surface">{usp}</span>
               </div>
             ))}
@@ -170,7 +170,7 @@ const { blocks = [] } = Astro.props;
           <details class="group border border-outline-variant/30 rounded overflow-hidden">
             <summary class="flex items-center justify-between px-6 py-4 cursor-pointer font-headline font-bold text-primary hover:bg-surface-container-low transition-colors">
               {item.frage}
-              <span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+              <span class="text-on-surface-variant group-open:rotate-180 transition-transform">&#9660;</span>
             </summary>
             <div class="px-6 pb-4 font-body text-on-surface-variant leading-relaxed">{item.antwort}</div>
           </details>

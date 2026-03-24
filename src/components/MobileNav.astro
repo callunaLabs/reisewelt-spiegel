@@ -1,23 +1,31 @@
 ---
 ---
 
-<nav class="fixed bottom-0 left-0 right-0 z-50 md:hidden glass-panel border-t border-outline-variant/20">
-  <div class="flex items-center justify-around h-16">
-    <a href="/" class="flex flex-col items-center gap-0.5 text-on-surface/70 hover:text-secondary transition-colors">
-      <span class="material-symbols-outlined text-[22px]">explore</span>
-      <span class="font-label text-[10px] font-semibold">Entdecken</span>
+<nav style="position:fixed;bottom:0;left:0;right:0;z-index:50;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid #e5e5e5;display:none;" class="rw-mobile-nav">
+  <div style="display:flex;align-items:center;justify-content:space-around;height:60px;">
+    <a href="/" style="display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:#666;font-family:Inter,SpiegelSans4UI,sans-serif;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      <span style="font-size:10px;font-weight:600;">Entdecken</span>
     </a>
-    <a href="/rundreisen" class="flex flex-col items-center gap-0.5 text-on-surface/70 hover:text-secondary transition-colors">
-      <span class="material-symbols-outlined text-[22px]">luggage</span>
-      <span class="font-label text-[10px] font-semibold">Rundreisen</span>
+    <a href="/rundreisen" style="display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:#666;font-family:Inter,SpiegelSans4UI,sans-serif;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 20V4m0 0l4 4M6 4L2 8"/><path d="M18 4v16m0 0l4-4m-4 4l-4-4"/></svg>
+      <span style="font-size:10px;font-weight:600;">Rundreisen</span>
     </a>
-    <a href="/genussreisen" class="flex flex-col items-center gap-0.5 text-on-surface/70 hover:text-secondary transition-colors">
-      <span class="material-symbols-outlined text-[22px]">restaurant</span>
-      <span class="font-label text-[10px] font-semibold">Genuss</span>
+    <a href="/genussreisen" style="display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:#666;font-family:Inter,SpiegelSans4UI,sans-serif;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2l1 6h16l1-6"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></svg>
+      <span style="font-size:10px;font-weight:600;">Genuss</span>
     </a>
-    <a href="/suche" class="flex flex-col items-center gap-0.5 text-on-surface/70 hover:text-secondary transition-colors">
-      <span class="material-symbols-outlined text-[22px]">search</span>
-      <span class="font-label text-[10px] font-semibold">Suche</span>
+    <a href="/suche" style="display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:#666;font-family:Inter,SpiegelSans4UI,sans-serif;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <span style="font-size:10px;font-weight:600;">Suche</span>
     </a>
   </div>
 </nav>
+
+<style>
+  @media (max-width: 767px) {
+    .rw-mobile-nav {
+      display: block !important;
+    }
+  }
+</style>

@@ -18,7 +18,7 @@ const { items } = Astro.props;
     </li>
     {items.map((item, i) => (
       <li class="flex items-center gap-2">
-        <span class="material-symbols-outlined text-outline-variant text-[14px]">chevron_right</span>
+        <span class="text-outline-variant text-[14px]">&rsaquo;</span>
         {item.href && i < items.length - 1 ? (
           <a href={item.href} class="text-on-surface-variant hover:text-[#E64415] transition-colors">{item.label}</a>
         ) : (
